@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>helloalexap</title>
+    <!-- 引入 Google Fonts 细体字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: #0f0c09;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
+
+        /* Hero 容器 */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            overflow: hidden;
+        }
+
+        /* 背景纹理（微妙颗粒感） */
+        .hero::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 10px 15px, rgba(255,255,255,0.3), transparent 1px),
+                radial-gradient(1px 1px at 30px 50px, rgba(255,255,255,0.2), transparent 1px),
+                radial-gradient(1px 1px at 60px 20px, rgba(255,255,255,0.25), transparent 1px);
+            background-repeat: repeat;
+            background-size: 100px 100px;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 内容容器 */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        /* 左侧文字区域 */
+        .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        /* 标签 - 古铜色 */
+        .hero-label {
+            font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: #8B7355;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.3s forwards, glow-label 5.2s ease-in-out 1s infinite;
+            text-shadow: 
+                0 0 6px rgba(139, 115, 85, 0.35),
+                0 0 12px rgba(160, 82, 45, 0.15);
+        }
+
+        /* 主标题 - 暗金色，瘦金体风格 */
+        .hero-title {
+            font-family: 'Cinzel', 'Bodoni Moda', 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 3.8vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            color: #9D8556;
+            text-shadow: 
+                0 0 8px rgba(157, 133, 86, 0.4),
+                0 0 16px rgba(157, 133, 86, 0.35),
+                0 0 24px rgba(184, 134, 11, 0.25),
+                0 0 32px rgba(160, 82, 45, 0.2),
+                0 0 48px rgba(157, 133, 86, 0.12);
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.4s forwards, glow-title 5.5s ease-in-out 1.2s infinite;
+            filter: drop-shadow(0 0 10px rgba(157, 133, 86, 0.35)) drop-shadow(0 0 20px rgba(184, 134, 11, 0.2));
+        }
+
+        /* 描述文本 - 略微偏亮的古铜色 */
+        .hero-description {
+            font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
+            font-weight: 300;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            color: #9A7B5B;
+            max-width: 90%;
+            text-shadow: 
+                0 0 8px rgba(157, 133, 86, 0.3),
+                0 0 16px rgba(160, 82, 45, 0.15),
+                0 0 24px rgba(157, 133, 86, 0.1);
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.5s forwards, glow-description 6s ease-in-out 1.5s infinite;
+            filter: drop-shadow(0 0 6px rgba(157, 133, 86, 0.18));
+        }
+
+        .hero-description + .hero-description {
+            margin-top: 0.6rem;
+        }
+
+        /* 发光动画 - 标签（轻微） */
+        @keyframes glow-label {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 
+                    0 0 6px rgba(139, 115, 85, 0.35),
+                    0 0 12px rgba(160, 82, 45, 0.15);
+            }
+            50% {
+                opacity: 1;
+                text-shadow: 
+                    0 0 10px rgba(139, 115, 85, 0.5),
+                    0 0 20px rgba(160, 82, 45, 0.25),
+                    0 0 30px rgba(157, 133, 86, 0.1);
+            }
+        }
+
+        /* 发光动画 - 标题（强化版） */
+        @keyframes glow-title {
+            0%, 100% {
+                text-shadow: 
+                    0 0 8px rgba(157, 133, 86, 0.4),
+                    0 0 16px rgba(157, 133, 86, 0.35),
+                    0 0 24px rgba(184, 134, 11, 0.25),
+                    0 0 32px rgba(160, 82, 45, 0.2),
+                    0 0 48px rgba(157, 133, 86, 0.12);
+                filter: drop-shadow(0 0 10px rgba(157, 133, 86, 0.35)) drop-shadow(0 0 20px rgba(184, 134, 11, 0.2));
+            }
+            50% {
+                text-shadow: 
+                    0 0 12px rgba(157, 133, 86, 0.6),
+                    0 0 24px rgba(157, 133, 86, 0.55),
+                    0 0 36px rgba(184, 134, 11, 0.45),
+                    0 0 48px rgba(160, 82, 45, 0.35),
+                    0 0 64px rgba(157, 133, 86, 0.22);
+                filter: drop-shadow(0 0 16px rgba(157, 133, 86, 0.55)) drop-shadow(0 0 32px rgba(184, 134, 11, 0.35));
+            }
+        }
+
+        /* 发光动画 - 描述（增强版） */
+        @keyframes glow-description {
+            0%, 100% {
+                text-shadow: 
+                    0 0 8px rgba(157, 133, 86, 0.3),
+                    0 0 16px rgba(160, 82, 45, 0.15),
+                    0 0 24px rgba(157, 133, 86, 0.1);
+                filter: drop-shadow(0 0 6px rgba(157, 133, 86, 0.18));
+            }
+            50% {
+                text-shadow: 
+                    0 0 12px rgba(157, 133, 86, 0.48),
+                    0 0 24px rgba(160, 82, 45, 0.28),
+                    0 0 36px rgba(157, 133, 86, 0.18);
+                filter: drop-shadow(0 0 10px rgba(157, 133, 86, 0.32));
+            }
+        }
+
+        /* 右侧图片区域 */
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 550px;
+            opacity: 0;
+            animation: fade-in 1.2s ease-out 0.5s forwards;
+        }
+
+        .artwork {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: 
+                saturate(0.88)
+                contrast(1.18)
+                sepia(0.22)
+                brightness(0.88);
+            transition: filter 0.3s ease;
+        }
+
+        .artwork:hover {
+            filter: 
+                saturate(0.88)
+                contrast(1.18)
+                sepia(0.22)
+                brightness(0.95);
+        }
+
+        /* SVG 蒙板 - 径向渐变 */
+        .mask-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 底部文字区域 */
+        .hero-footer {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 40px;
+            z-index: 3;
+        }
+
+        .footer-text {
+            font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            color: #8B7355;
+            opacity: 0;
+            animation: fade-in-up 1s ease-out 0.8s forwards, glow-footer 6.5s ease-in-out 1.6s infinite;
+            text-shadow: 
+                0 0 6px rgba(139, 115, 85, 0.28),
+                0 0 12px rgba(160, 82, 45, 0.12);
+        }
+
+        .footer-text-en {
+            font-style: italic;
+        }
+
+        .footer-text-zh {
+            font-family: 'Bodoni Moda', 'Noto Serif CJK SC', 'Songti SC', serif;
+            margin-top: 8px;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+        }
+
+        /* 底部文字发光（最弱） */
+        @keyframes glow-footer {
+            0%, 100% {
+                text-shadow: 
+                    0 0 6px rgba(139, 115, 85, 0.28),
+                    0 0 12px rgba(160, 82, 45, 0.12);
+            }
+            50% {
+                text-shadow: 
+                    0 0 10px rgba(139, 115, 85, 0.42),
+                    0 0 20px rgba(160, 82, 45, 0.18),
+                    0 0 30px rgba(157, 133, 86, 0.08);
+            }
+        }
+
+        /* 基础淡入动画 */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-image {
+                height: 450px;
+            }
+
+            .hero-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 24px;
+                min-height: auto;
+                padding-bottom: 200px;
+            }
+
+            .hero-content {
+                gap: 40px;
+            }
+
+            .hero-image {
+                height: 350px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+                letter-spacing: 0.01em;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+            }
+
+            .hero-footer {
+                bottom: 40px;
+                padding: 0 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 30px 16px;
+                padding-bottom: 180px;
+            }
+
+            .hero-image {
+                height: 280px;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+                letter-spacing: 0.01em;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                max-width: 100%;
+            }
+
+            .hero-footer {
+                padding: 0 16px;
+            }
+        }
+
+        /* 防止文本选中 */
+        .artwork {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <!-- 左侧：文字 -->
+            <div class="hero-text">
+                <div>
+                    <div class="hero-label">Independent Creator</div>
+                    <h1 class="hero-title">
+                        Tools & Projects
+                    </h1>
+                </div>
+                <p class="hero-description">
+                    Crafting thoughtful digital experiences through independent tools and creative projects.
+                </p>
+                <p class="hero-description">
+                    A blend of design, technology, and artistic vision.
+                </p>
+            </div>
+
+            <!-- 右侧：图片 -->
+            <div class="hero-image">
+                <img src="Michelangelo_-_Creation_of_Adam__cropped_.jpg" alt="Creation of Adam" class="artwork" id="artwork">
+                <svg class="mask-overlay" id="maskLayer">
+                    <defs>
+                        <radialGradient id="brownMask" cx="50%" cy="45%" r="60%">
+                            <stop offset="0%" style="stop-color:#0f0c09;stop-opacity:0.08" />
+                            <stop offset="35%" style="stop-color:#2d2420;stop-opacity:0.25" />
+                            <stop offset="65%" style="stop-color:#1a1410;stop-opacity:0.45" />
+                            <stop offset="100%" style="stop-color:#0f0c09;stop-opacity:0.75" />
+                        </radialGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#brownMask)"></rect>
+                </svg>
+            </div>
+        </div>
+
+        <!-- 底部文字 -->
+        <div class="hero-footer">
+            <div>
+                <div class="footer-text footer-text-en">
+                    Independent tools and projects.
+                </div>
+                <div class="footer-text footer-text-zh">
+                    独立工具与项目
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 鼠标跟踪效果（蒙板光晕轻微跟随）
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            const gradient = document.getElementById('brownMask');
+            if (gradient) {
+                gradient.setAttribute('cx', 50 + (x - 50) * 0.08 + '%');
+                gradient.setAttribute('cy', 45 + (y - 50) * 0.08 + '%');
+            }
+        });
+
+        // 平滑加载
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
