@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Composteur du futur</title>
+<meta name="description" content="把法语简单将来时和条件式拆成词干、r 铰链、词尾三类颜色块：拼装台、矩阵、五个不规则家族与练习。">
+<meta property="og:title" content="Composteur du futur">
+<meta property="og:description" content="把法语简单将来时和条件式拆成词干、r 铰链、词尾三类颜色块：拼装台、矩阵、五个不规则家族与练习。">
+<meta property="og:type" content="website">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}
+.sitenav{display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);margin-bottom:-28px}
+.sitenav a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}.sitenav a:hover{color:var(--ink)}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a printer's composing stick — morphemes are metal sorts set side by side on a line; colour = which module a block belongs to */
+:root{
+  --bg:#ECEFF3; --surface:#F8FAFC; --ink:#151E2A; --muted:#5A6777; --line:#D2D9E1;
+  --stem:#2A55C2; --hinge:#D99A00; --on-hinge:#1E1600; --fut:#0F7E66; --cond:#A62E5D; --nous:#6C7A8C; --aux:#7A6A52;
+  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body:"IBM Plex Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141A; --surface:#181E27; --ink:#E2E7EE; --muted:#93A0B1; --line:#2A3341;
+    --stem:#7E9DF2; --hinge:#F0B53A; --on-hinge:#1E1600; --fut:#45C3A2; --cond:#E6719F; --nous:#8E9BAD; --aux:#C2AE8E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141A; --surface:#181E27; --ink:#E2E7EE; --muted:#93A0B1; --line:#2A3341;
+  --stem:#7E9DF2; --hinge:#F0B53A; --on-hinge:#1E1600; --fut:#45C3A2; --cond:#E6719F; --nous:#8E9BAD; --aux:#C2AE8E;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 64px}
+.wrap{max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.3rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,3.4vw,2rem);line-height:1.15}
+h3{font-size:1rem;font-weight:600}
+p{margin:0;max-width:66ch}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.06rem;color:var(--ink)}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+section{display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:22px}
+.fr{font-family:var(--display);font-style:italic;font-size:1.05em}
+
+/* ── tiles ── */
+.t{--c:var(--stem);font-family:var(--mono);font-size:.95em;display:inline-block;padding:.1em .38em .16em;border-radius:3px;line-height:1.35;
+   background:color-mix(in oklab,var(--c) 15%,var(--surface));box-shadow:inset 0 -3px 0 var(--c);color:var(--ink);white-space:nowrap;vertical-align:baseline}
+.t+.t{margin-left:2px}
+.t.s{--c:var(--stem)}
+.t.i{--c:var(--stem);background-image:repeating-linear-gradient(135deg,color-mix(in oklab,var(--stem) 30%,transparent) 0 1.5px,transparent 1.5px 6px)}
+.t.r{background:var(--hinge);color:var(--on-hinge);box-shadow:none;font-weight:600}
+.t.d{background:transparent;box-shadow:none;outline:1.5px dashed var(--hinge);outline-offset:-2px;font-weight:600}
+.t.f{--c:var(--fut)}
+.t.c{--c:var(--cond)}
+.t.n{--c:var(--nous)}
+.t.a{--c:var(--aux)}
+.t.x{background:transparent;box-shadow:none;color:var(--muted);text-decoration:line-through;text-decoration-thickness:1.5px;padding-inline:.1em}
+.t.big{font-size:1.25rem;padding:.25em .6em .3em}
+
+/* ── formula ── */
+.formula{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono)}
+.eq .op{color:var(--muted);font-size:1.1rem}
+.eq-name{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+.eq-name.f{color:var(--fut)} .eq-name.c{color:var(--cond)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.84rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.rule{font-size:.92rem}
+.rule b{font-weight:600}
+
+/* ── composer ── */
+.composer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start}
+@media (max-width:820px){.composer{grid-template-columns:1fr}}
+.fam{display:flex;flex-direction:column;gap:6px}
+.fam-label{font-size:.78rem;color:var(--muted);font-family:var(--mono);letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--body);font-size:.88rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 11px;cursor:pointer}
+.chip:hover{border-color:var(--stem)}
+.chip[aria-pressed="true"]{background:var(--stem);border-color:var(--stem);color:var(--surface)}
+.chip:focus-visible,.seg button:focus-visible,.opt:focus-visible,.btn:focus-visible{outline:2px solid var(--hinge);outline-offset:2px}
+.picker{display:flex;flex-direction:column;gap:14px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);align-self:flex-start}
+.seg button{font:inherit;font-size:.9rem;border:0;background:transparent;color:var(--ink);padding:7px 14px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"][data-mode="f"]{background:var(--fut);color:var(--surface)}
+.seg button[aria-pressed="true"][data-mode="c"]{background:var(--cond);color:var(--surface)}
+.stick{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column}
+.stick-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.stick-head .fr{font-size:1.5rem}
+.row{display:grid;grid-template-columns:4.6em minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border-bottom:0}
+.row .pr{color:var(--muted);font-size:.9rem}
+.row .full{font-family:var(--display);font-size:1.12rem;text-align:right;overflow-wrap:anywhere}
+@media (max-width:460px){.row{grid-template-columns:3.6em minmax(0,1fr)}.row .full{grid-column:2;text-align:left;font-size:1rem}}
+.swap{animation:swap .32s ease}
+@keyframes swap{from{transform:translateY(-5px);opacity:.25}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.swap{animation:none}}
+.note{font-size:.86rem;color:var(--muted);border-left:2px solid var(--hinge);padding-left:10px}
+
+/* derivation */
+.deriv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.dcol{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);transition:opacity .2s}
+.dcol.dim{opacity:.45}
+.dcol h3{font-family:var(--mono);font-size:.8rem;font-weight:600;letter-spacing:.04em}
+.drow{display:grid;grid-template-columns:3.4em minmax(0,1fr) auto;gap:8px;align-items:center;font-size:.92rem}
+.drow .arrow{color:var(--muted);font-family:var(--mono)}
+
+/* matrix */
+.mx-wrap{overflow-x:auto}
+.mx{display:grid;grid-template-columns:minmax(120px,.8fr) minmax(200px,1fr) minmax(200px,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;min-width:560px}
+.mx>div{background:var(--surface);padding:14px;display:flex;flex-direction:column;gap:6px}
+.mx .hd{font-size:.84rem;color:var(--muted)}
+.mx .hd b{color:var(--ink);font-weight:600;display:block;font-size:.92rem}
+.mx .tense{font-family:var(--display);font-size:1.15rem}
+.mx .tense.f{color:var(--fut)} .mx .tense.c{color:var(--cond)} .mx .tense.n{color:var(--nous)}
+.mx .empty{background:repeating-linear-gradient(135deg,var(--surface) 0 8px,color-mix(in oklab,var(--line) 55%,var(--surface)) 8px 9px)}
+.ex{font-size:.95rem}
+
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.pair{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.pair .lab{font-size:.8rem;color:var(--muted)}
+.ipa{font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+
+/* families */
+.fams{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:16px}
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.fcard .tag{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--muted)}
+.fcard h3{font-family:var(--display);font-weight:500;font-size:1.3rem}
+.flist{display:flex;flex-direction:column;gap:5px;font-size:.92rem}
+.flist div{display:grid;grid-template-columns:6.6em minmax(0,1fr);gap:8px;align-items:center}
+.flist .inf{font-family:var(--display);font-style:italic}
+.aside{font-size:.85rem;color:var(--muted)}
+
+/* combos */
+.combos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.combo{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.combo .frm{font-family:var(--mono);font-size:.84rem;color:var(--muted);overflow-wrap:anywhere}
+.combo .sent{font-size:1rem;line-height:2}
+
+/* latin */
+.lat{display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.4fr);gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.lrow:last-child{border-bottom:0}
+.lrow .src{font-family:var(--display);font-style:italic;font-size:1.05rem}
+@media (max-width:640px){.lrow{grid-template-columns:1fr;gap:4px}}
+
+/* practice */
+.prac{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:16px}
+.prompt{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline}
+.prompt .fr{font-size:1.6rem}
+.badge{font-family:var(--mono);font-size:.78rem;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.badge.f{color:var(--fut)} .badge.c{color:var(--cond)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.opts-label{font-size:.8rem;color:var(--muted);width:100%}
+.opt{font:inherit;border:1px solid var(--line);background:transparent;border-radius:6px;padding:6px 8px;cursor:pointer;color:var(--ink)}
+.opt[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.opt.ok{border-color:var(--fut);box-shadow:0 0 0 2px var(--fut)}
+.opt.bad{border-color:var(--cond);box-shadow:0 0 0 2px var(--cond)}
+.result{min-height:2.2em;font-size:1rem}
+.result .full{font-family:var(--display);font-size:1.25rem}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-size:.9rem;background:var(--ink);color:var(--surface);border:0;border-radius:6px;padding:8px 16px;cursor:pointer}
+.score{font-family:var(--mono);font-size:.84rem;color:var(--muted);font-variant-numeric:tabular-nums}
+footer{font-size:.84rem;color:var(--muted);border-top:1px solid var(--line);padding-top:18px}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<nav class="sitenav"><a href="/">helloalexap</a><span>/</span><a href="/french/">Le verbe en blocs</a></nav>
+
+
+<header style="display:flex;flex-direction:column;gap:14px">
+  <span class="eyebrow">Learning Lab · Français · 动词系统</span>
+  <h1>Composteur du futur</h1>
+  <p class="lede">简单将来时不是一张要背的表，而是几块零件的拼装：一个词干，一个 <span class="t r">r</span> 铰链，一组从 <span class="fr">avoir</span> 借来的词尾。把词尾那一块换掉，同一个词干就变成条件式。不规则只发生在词干那一块，词尾永远规则。</p>
+</header>
+
+<!-- ───────── 1. formula ───────── -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">01 · 主公式</span>
+    <h2>两条公式，共用一个词干</h2>
+  </div>
+  <div class="formula">
+    <div class="card">
+      <span class="eq-name f">Futur simple</span>
+      <div class="eq"><span class="t s big">词干</span><span class="t r big">r</span><span class="op">+</span><span class="t f big">词尾 A</span></div>
+      <div class="eq mk">[s|parle][r|r][f|ai] · [s|fini][r|r][f|ons] · [s|prend][r|r][f|ez]</div>
+      <p class="rule"><b>词尾 A</b> = <span class="fr">avoir</span> 现在时去掉 <span class="t x">av</span>：<span class="mk">[f|ai] [f|as] [f|a] [f|ons] [f|ez] [f|ont]</span></p>
+    </div>
+    <div class="card">
+      <span class="eq-name c">Conditionnel présent</span>
+      <div class="eq"><span class="t s big">词干</span><span class="t r big">r</span><span class="op">+</span><span class="t c big">词尾 B</span></div>
+      <div class="eq mk">[s|parle][r|r][c|ais] · [s|fini][r|r][c|ions] · [s|prend][r|r][c|iez]</div>
+      <p class="rule"><b>词尾 B</b> = <span class="fr">avoir</span> 未完成过去时去掉 <span class="t x">av</span>：<span class="mk">[c|ais] [c|ais] [c|ait] [c|ions] [c|iez] [c|aient]</span>，也就是 imparfait 的词尾。</p>
+    </div>
+  </div>
+  <div class="card">
+    <p class="rule"><b>规则词干一句话：</b>把不定式切到最后一个 r 为止。<span class="fr">parler</span> → <span class="mk">[s|parle][r|r]</span>，<span class="fr">finir</span> → <span class="mk">[s|fini][r|r]</span>，<span class="fr">prendre</span> → <span class="mk">[s|prend][r|r]</span>（-re 动词就是把最后的 e 切掉）。铰链 r 其实就是不定式自己的 r。</p>
+    <p class="rule"><b>铁律：</b>所有将来时和条件式的词干都以 r 结尾，包括全部不规则词干，没有例外。看到 <span class="mk">[r|r]</span> + <span class="mk">[f|ai]</span>/<span class="mk">[c|ais]</span> 这个组合，就是这两个时态。</p>
+    <div class="legend">
+      <span><span class="t s">ab</span> 词干（规则）</span>
+      <span><span class="t i">ab</span> 词干（变形）</span>
+      <span><span class="t r">r</span> 铰链</span>
+      <span><span class="t d">d</span> 桥接音</span>
+      <span><span class="t f">ai</span> 词尾 A · 将来</span>
+      <span><span class="t c">ais</span> 词尾 B · 条件 / 未完成</span>
+      <span><span class="t n">parl</span> nous 词干</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 2. composer ───────── -->
+<section id="composer">
+  <div class="sec-head">
+    <span class="eyebrow">02 · 拼装台</span>
+    <h2>选一个动词，再换词尾模块</h2>
+    <p class="muted">词干一动不动，只有最右边那块在换。这就是“一个不规则词干背一次，用十二次”的意思。</p>
+  </div>
+  <div class="composer">
+    <div class="picker" id="picker"></div>
+    <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+      <div class="seg" role="group" aria-label="词尾模块">
+        <button type="button" id="mode-f" data-mode="f" aria-pressed="true">词尾 A · futur</button>
+        <button type="button" id="mode-c" data-mode="c" aria-pressed="false">词尾 B · conditionnel</button>
+      </div>
+      <div class="stick">
+        <div class="stick-head"><span class="fr" id="vname">parler</span><span class="small muted" id="vfam"></span></div>
+        <div id="rows"></div>
+      </div>
+      <p class="note" id="vnote"></p>
+    </div>
+  </div>
+
+  <div class="deriv">
+    <div class="dcol" id="d-f">
+      <h3 style="color:var(--fut)">avoir · présent → 词尾 A</h3>
+      <div class="drow"><span class="muted">j’</span><span class="mk">[f|ai]</span><span class="arrow">ai</span></div>
+      <div class="drow"><span class="muted">tu</span><span class="mk">[f|as]</span><span class="arrow">as</span></div>
+      <div class="drow"><span class="muted">il</span><span class="mk">[f|a]</span><span class="arrow">a</span></div>
+      <div class="drow"><span class="muted">nous</span><span class="mk">[x|av][f|ons]</span><span class="arrow">ons</span></div>
+      <div class="drow"><span class="muted">vous</span><span class="mk">[x|av][f|ez]</span><span class="arrow">ez</span></div>
+      <div class="drow"><span class="muted">ils</span><span class="mk">[f|ont]</span><span class="arrow">ont</span></div>
+    </div>
+    <div class="dcol dim" id="d-c">
+      <h3 style="color:var(--cond)">avoir · imparfait → 词尾 B</h3>
+      <div class="drow"><span class="muted">j’</span><span class="mk">[x|av][c|ais]</span><span class="arrow">ais</span></div>
+      <div class="drow"><span class="muted">tu</span><span class="mk">[x|av][c|ais]</span><span class="arrow">ais</span></div>
+      <div class="drow"><span class="muted">il</span><span class="mk">[x|av][c|ait]</span><span class="arrow">ait</span></div>
+      <div class="drow"><span class="muted">nous</span><span class="mk">[x|av][c|ions]</span><span class="arrow">ions</span></div>
+      <div class="drow"><span class="muted">vous</span><span class="mk">[x|av][c|iez]</span><span class="arrow">iez</span></div>
+      <div class="drow"><span class="muted">ils</span><span class="mk">[x|av][c|aient]</span><span class="arrow">aient</span></div>
+    </div>
+  </div>
+  <p class="muted small">同一个生成器：拿 <span class="fr">avoir</span> 的某个时态，削掉 <span class="t x">av</span>，剩下的就是词尾。现在时有四个人称本来就没有 av，所以只削 nous / vous；未完成过去时六个全削。</p>
+</section>
+
+<!-- ───────── 3. matrix ───────── -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">03 · 矩阵</span>
+    <h2>两个维度，四个格子</h2>
+    <p class="muted">把“词干”和“词尾”当成两根独立的轴，三个时态落在同一张表里，第四格是空的。</p>
+  </div>
+  <div class="mx-wrap">
+    <div class="mx">
+      <div class="hd"></div>
+      <div class="hd"><b>词尾 A</b>avoir 现在时 − av</div>
+      <div class="hd"><b>词尾 B</b>avoir 未完成 − av</div>
+
+      <div class="hd"><b>R 词干</b>不定式切到 r</div>
+      <div><span class="tense f">futur simple</span><span class="ex mk">je [s|parle][r|r][f|ai]</span><span class="ex mk">nous [s|fini][r|r][f|ons]</span></div>
+      <div><span class="tense c">conditionnel</span><span class="ex mk">je [s|parle][r|r][c|ais]</span><span class="ex mk">nous [s|fini][r|r][c|ions]</span></div>
+
+      <div class="hd"><b>nous 词干</b>nous 现在时 − ons</div>
+      <div class="empty"><span class="tense n">无此时态</span><span class="small muted">但 -er 动词 passé simple 的单数恰好借住在这里：<span class="mk">je [n|parl][f|ai]</span>、tu parlas、il parla。来源不同，只是撞形。</span></div>
+      <div><span class="tense n">imparfait</span><span class="ex mk">je [n|parl][c|ais]</span><span class="ex mk">nous [n|finiss][c|ions]</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:8px">同一个 je，四种形式：r 和 s 各是一个开关</h3>
+  <div class="pairs">
+    <div class="pair"><span class="lab">无 r · 无 s — passé simple</span><span class="mk">[n|parl][f|ai]</span><span class="ipa">[paʁ.le]</span></div>
+    <div class="pair"><span class="lab">无 r · 有 s — imparfait</span><span class="mk">[n|parl][c|ais]</span><span class="ipa">[paʁ.lɛ]</span></div>
+    <div class="pair"><span class="lab">有 r · 无 s — futur</span><span class="mk">[s|parle][r|r][f|ai]</span><span class="ipa">[paʁ.lə.ʁe]</span></div>
+    <div class="pair"><span class="lab">有 r · 有 s — conditionnel</span><span class="mk">[s|parle][r|r][c|ais]</span><span class="ipa">[paʁ.lə.ʁɛ]</span></div>
+  </div>
+  <p class="muted small">这四格和上面的矩阵是同一张表，只是缩到了 je 一个人称。词尾 -ai [e] 与 -ais [ɛ] 在不少人的口语里已经合并，所以说话时真正承重的是铰链 r。双 r 动词还多一组听得出的对立：<span class="fr">je courais</span> [kuʁɛ] / <span class="fr">je courrais</span> [kuʁʁɛ]。</p>
+</section>
+
+<!-- ───────── 4. families ───────── -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">04 · 不规则词干</span>
+    <h2>五个家族，按形状记</h2>
+    <p class="muted">不规则全部集中在词干主体，铰链 r 和词尾都不变。按“变形方式”分组，比按字母表背更容易成块。</p>
+  </div>
+  <div class="fams">
+    <div class="fcard">
+      <span class="tag">家族 A · 短根</span>
+      <h3>整块替换</h3>
+      <div class="flist">
+        <div><span class="inf">être</span><span class="mk">[i|se][r|r]</span></div>
+        <div><span class="inf">avoir</span><span class="mk">[i|au][r|r]</span></div>
+        <div><span class="inf">savoir</span><span class="mk">[i|sau][r|r]</span></div>
+        <div><span class="inf">faire</span><span class="mk">[i|fe][r|r]</span></div>
+        <div><span class="inf">aller</span><span class="mk">[i|i][r|r]</span></div>
+      </div>
+      <p class="aside">只能整块背，但数量少。avoir / savoir 押韵：aur / saur。aller 的 ir 来自拉丁语 īre。</p>
+    </div>
+
+    <div class="fcard">
+      <span class="tag">家族 B · -oir → -vr</span>
+      <h3>删掉 oi，留下 v</h3>
+      <div class="flist">
+        <div><span class="inf">devoir</span><span class="mk">[i|dev][r|r]</span></div>
+        <div><span class="inf">recevoir</span><span class="mk">[i|recev][r|r]</span></div>
+        <div><span class="inf">apercevoir</span><span class="mk">[i|apercev][r|r]</span></div>
+        <div><span class="inf">pleuvoir</span><span class="mk">[i|pleuv][r|r]</span> <span class="aside">il pleuvra</span></div>
+      </div>
+      <p class="aside">所有 -cevoir 都走这条。同为 -oir 的 voir、pouvoir 去了家族 C，savoir 去了家族 A。</p>
+    </div>
+
+    <div class="fcard">
+      <span class="tag">家族 C · 双 r</span>
+      <h3>词干坍缩成 rr</h3>
+      <div class="flist">
+        <div><span class="inf">pouvoir</span><span class="mk">[i|pour][r|r]</span></div>
+        <div><span class="inf">voir</span><span class="mk">[i|ver][r|r]</span></div>
+        <div><span class="inf">envoyer</span><span class="mk">[i|enver][r|r]</span></div>
+        <div><span class="inf">courir</span><span class="mk">[i|cour][r|r]</span></div>
+        <div><span class="inf">mourir</span><span class="mk">[i|mour][r|r]</span></div>
+        <div><span class="inf">acquérir</span><span class="mk">[i|acquer][r|r]</span></div>
+      </div>
+      <p class="aside">voir / envoyer 押同一个 verr。courir、mourir 只是丢掉了 i，于是词干的 r 和铰链 r 贴在一起，读音上能听到拉长的 r。</p>
+    </div>
+
+    <div class="fcard">
+      <span class="tag">家族 D · d 桥</span>
+      <h3>n / l 撞上 r，中间长出 d</h3>
+      <div class="flist">
+        <div><span class="inf">venir</span><span class="mk">[i|vien][d|d][r|r]</span></div>
+        <div><span class="inf">tenir</span><span class="mk">[i|tien][d|d][r|r]</span></div>
+        <div><span class="inf">vouloir</span><span class="mk">[i|vou][d|d][r|r]</span></div>
+        <div><span class="inf">valoir</span><span class="mk">[i|vau][d|d][r|r]</span></div>
+        <div><span class="inf">falloir</span><span class="mk">[i|fau][d|d][r|r]</span> <span class="aside">il faudra</span></div>
+      </div>
+      <p class="aside">n+r、l+r 发音不顺，古法语在中间插入 d（l 同时元音化成 u）。这块零件在动词之外也存在：<span class="fr">cinerem → cendre</span>、<span class="fr">generum → gendre</span>、<span class="fr">minor → moindre</span>；m+r 则插 b：<span class="fr">numerum → nombre</span>、<span class="fr">camera → chambre</span>。所有 -venir、-tenir 的派生词（devenir, obtenir, retenir…）都继承 iendr。</p>
+    </div>
+
+    <div class="fcard">
+      <span class="tag">家族 E · je 现在时 + r</span>
+      <h3>拼写变化的 -er 动词</h3>
+      <div class="flist">
+        <div><span class="inf">acheter</span><span class="mk">j’achète → [i|achète][r|r]</span></div>
+        <div><span class="inf">lever</span><span class="mk">je lève → [i|lève][r|r]</span></div>
+        <div><span class="inf">appeler</span><span class="mk">j’appelle → [i|appelle][r|r]</span></div>
+        <div><span class="inf">jeter</span><span class="mk">je jette → [i|jette][r|r]</span></div>
+        <div><span class="inf">employer</span><span class="mk">j’emploie → [i|emploie][r|r]</span></div>
+        <div><span class="inf">cueillir</span><span class="mk">je cueille → [i|cueille][r|r]</span></div>
+      </div>
+      <p class="aside">规则：取 je 的现在时形式，后面接 r。payer、essayer 两种都可以（paierai / payerai）。cueillir 是一个借用 -er 模式的 -ir 动词。例外：<span class="fr">préférer</span> 虽然是 je préfère，传统写法仍是 préférerai，1990 年拼写修订也接受 préfèrerai。</p>
+    </div>
+
+    <div class="fcard" style="background:transparent;border-style:dashed">
+      <span class="tag">记忆策略</span>
+      <h3>一个词干，十二个格子</h3>
+      <p class="aside" style="color:var(--ink)">每个不规则词干只要记一次（例如 <span class="mk">[i|vien][d|d][r|r]</span>），它会同时出现在将来时 6 个人称和条件式 6 个人称里。</p>
+      <p class="aside">检验方法：说出 <span class="fr">je ___rai</span> 和 <span class="fr">je ___rais</span>，如果两者的词干不一样，一定是哪里错了。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 5. combos ───────── -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">05 · 插槽</span>
+    <h2>这些块还能插到哪里</h2>
+    <p class="muted">同样的零件在句法层面继续组合。词干表示“之后会发生”，词尾表示“从哪个时间点看”：词尾 A 站在现在，词尾 B 站在过去。</p>
+  </div>
+  <div class="combos">
+    <div class="combo">
+      <h3>si + présent → futur</h3>
+      <span class="frm">真实条件</span>
+      <p class="sent mk">S’il fait beau, nous [s|sorti][r|r][f|ons].</p>
+    </div>
+    <div class="combo">
+      <h3>si + imparfait → conditionnel</h3>
+      <span class="frm">假设条件 · 同一组词尾 B 出现在逗号两边</span>
+      <p class="sent mk">S’il [n|fais][c|ait] beau, nous [s|sorti][r|r][c|ions].</p>
+    </div>
+    <div class="combo">
+      <h3>quand / dès que + futur</h3>
+      <span class="frm">法语在时间从句里也用将来时，中文和英语不这样做</span>
+      <p class="sent mk">Quand tu [s|arrive][r|r][f|as], appelle-moi.</p>
+    </div>
+    <div class="combo">
+      <h3>futur dans le passé</h3>
+      <span class="frm">主句移到过去 → 词干不动，词尾 A 换成 B</span>
+      <p class="sent mk">Il dit qu’il [i|vien][d|d][r|r][f|a].</p>
+      <p class="sent mk">Il a dit qu’il [i|vien][d|d][r|r][c|ait].</p>
+    </div>
+    <div class="combo">
+      <h3>复合时态：整套系统插进助动词槽</h3>
+      <span class="frm">[avoir / être 的将来或条件] + participe passé</span>
+      <p class="sent mk">Quand j’[i|au][r|r][f|ai] [a|fini], je partirai. <span class="small muted">futur antérieur</span></p>
+      <p class="sent mk">Si j’avais su, je [i|se][r|r][c|ais] [a|venu(e)]. <span class="small muted">conditionnel passé</span></p>
+    </div>
+    <div class="combo">
+      <h3>礼貌用法</h3>
+      <span class="frm">条件式把请求从“现在”挪远一步</span>
+      <p class="sent mk">Je [i|vou][d|d][r|r][c|ais] un café.</p>
+      <p class="sent mk">[i|Pour][r|r][c|iez]-vous m’aider ?</p>
+    </div>
+    <div class="combo">
+      <h3>对照：futur proche</h3>
+      <span class="frm">aller（现在时）+ 不定式 · 同样的原料，没有焊死</span>
+      <p class="sent">Je vais <span class="t s">parler</span>. <span class="small muted">比较：</span><span class="mk">je [s|parle][r|r][f|ai]</span></p>
+      <p class="aside">futur proche 是“助动词 + 完整不定式”，两块分开放；futur simple 在历史上也是“不定式 + avoir”，只是两块已经焊在一起，见下一节。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 6. latin ───────── -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">06 · 接缝</span>
+    <h2>这条接缝从拉丁语来</h2>
+    <p class="muted">古典拉丁语的将来时 <span class="fr">cantābō</span> 在口语里消失了，取而代之的是“不定式 + habeō（我有 / 我必须）”，后来两块焊成一个词。</p>
+  </div>
+  <div class="lat">
+    <div class="lrow"><span class="src">cantāre + habeō</span><span class="mk">[s|chante][r|r][f|ai]</span><span class="small muted">“我有要唱的” → “我将唱”。词尾 A 就是 avoir 现在时。</span></div>
+    <div class="lrow"><span class="src">cantāre + habēbam</span><span class="mk">[s|chante][r|r][c|ais]</span><span class="small muted">同一结构，助动词换成未完成过去时，就是条件式。</span></div>
+    <div class="lrow"><span class="src">西班牙语</span><span>cantaré / cantaría</span><span class="small muted">同一套拼装。条件式词尾 -ía 同样是 imperfecto 的词尾。</span></div>
+    <div class="lrow"><span class="src">意大利语</span><span>canterò / canterei</span><span class="small muted">条件式第二块借的是完成体 *hebui（ebbi），所以同一个槽装了不同的零件。</span></div>
+    <div class="lrow"><span class="src">葡萄牙语</span><span>dar-te-ei · dar-te-ia</span><span class="small muted">代词至今还能插进不定式和词尾之间（mesóclise），等于把接缝撬开给你看。</span></div>
+  </div>
+</section>
+
+<!-- ───────── 7. practice ───────── -->
+<section id="practice">
+  <div class="sec-head">
+    <span class="eyebrow">07 · 练习</span>
+    <h2>自己拼一次</h2>
+    <p class="muted">先选词干块，再选词尾块。两块都选好就会显示结果。</p>
+  </div>
+  <div class="prac">
+    <div class="prompt" id="q-prompt"></div>
+    <div class="opts" id="q-stems"></div>
+    <div class="opts" id="q-ends"></div>
+    <div class="result" id="q-result" aria-live="polite"></div>
+    <div class="bar"><button type="button" class="btn" id="q-next">下一题</button><span class="score" id="q-score">0 / 0</span></div>
+  </div>
+</section>
+
+<footer>
+  <span style="display:block;margin-bottom:6px">配对页面：<a href="/french/decomposeur/">Décomposeur</a>（拆的方向）· 纸卡与练习手册：<a href="/french/cartes-du-composteur.pdf">Cartes du Composteur（PDF）</a></span>
+  拼装顺序：词干（规则或五个家族之一） → 铰链 r → 词尾 A 或 B。可以继续往这个系统里加零件：subjonctif、passé simple 的完整词尾、futur antérieur 的一致规则，都能放进同一张矩阵。
+</footer>
+</div>
+
+<script>
+(function(){
+  const KIND = {s:'s',i:'i',r:'r',d:'d',f:'f',c:'c',n:'n',a:'a',x:'x'};
+  function esc(s){return s.replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));}
+  function tile(k,txt){return '<span class="t '+k+'">'+esc(txt)+'</span>';}
+  function mk(str){return str.replace(/\[([a-z])\|([^\]]+)\]/g,(m,k,t)=>KIND[k]?tile(k,t):m);}
+  document.querySelectorAll('.mk').forEach(el=>{el.innerHTML=mk(el.innerHTML);});
+
+  const E = {f:['ai','as','a','ons','ez','ont'], c:['ais','ais','ait','ions','iez','aient']};
+  const P = ['je','tu','il / elle','nous','vous','ils / elles'];
+  const FAM = {
+    reg:{label:'规则', note:'规则动词：不定式切到最后一个 r。-er、-ir 直接用不定式，-re 去掉末尾的 e。'},
+    A:{label:'家族 A · 短根', note:'短根：整块替换，只能直接记。avoir / savoir → aur / saur 押韵。'},
+    B:{label:'家族 B · -oir → vr', note:'-oir → vr：删掉 oi，保留 v，再接铰链 r。'},
+    C:{label:'家族 C · 双 r', note:'双 r：词干收缩后自己的 r 和铰链 r 相邻。条件式和未完成过去时靠 rr 区分：courrais / courais。'},
+    D:{label:'家族 D · d 桥', note:'d 桥：n 或 l 后面直接接 r 发音不顺，中间插入 d；l 同时变成 u。'},
+    E:{label:'家族 E · je 现在时 + r', note:'je 现在时 + r：拼写变化的 -er 动词，取 je 的现在时形式再接 r。'}
+  };
+  const V = [
+    {k:'parler',f:'reg',s:[['parle','s']],alt:['parl','parle']},
+    {k:'finir',f:'reg',s:[['fini','s']],alt:['finiss','fin']},
+    {k:'prendre',f:'reg',s:[['prend','s']],alt:['prendre','pren']},
+    {k:'partir',f:'reg',s:[['parti','s']],alt:['part','partr']},
+    {k:'être',f:'A',s:[['se','i']],alt:['êtr','étr']},
+    {k:'avoir',f:'A',s:[['au','i']],alt:['avoir','avr']},
+    {k:'savoir',f:'A',s:[['sau','i']],alt:['savoir','savr']},
+    {k:'faire',f:'A',s:[['fe','i']],alt:['fair','fais']},
+    {k:'aller',f:'A',s:[['i','i']],alt:['aller','all']},
+    {k:'devoir',f:'B',s:[['dev','i']],alt:['devoir','doivr']},
+    {k:'recevoir',f:'B',s:[['recev','i']],alt:['recevoir','reçoivr']},
+    {k:'pleuvoir',f:'B',s:[['pleuv','i']],alt:['pleuvoir','pleur'],imp:true},
+    {k:'pouvoir',f:'C',s:[['pour','i']],alt:['pouvoir','pouvr']},
+    {k:'voir',f:'C',s:[['ver','i']],alt:['voir','voier']},
+    {k:'envoyer',f:'C',s:[['enver','i']],alt:['envoyer','envoier']},
+    {k:'courir',f:'C',s:[['cour','i']],alt:['courir','cour']},
+    {k:'mourir',f:'C',s:[['mour','i']],alt:['mourir','meurr']},
+    {k:'venir',f:'D',s:[['vien','i'],['d','d']],alt:['venir','vienr']},
+    {k:'tenir',f:'D',s:[['tien','i'],['d','d']],alt:['tenir','tienr']},
+    {k:'vouloir',f:'D',s:[['vou','i'],['d','d']],alt:['vouloir','veulr']},
+    {k:'valoir',f:'D',s:[['vau','i'],['d','d']],alt:['valoir','valr']},
+    {k:'falloir',f:'D',s:[['fau','i'],['d','d']],alt:['falloir','fallr'],imp:true},
+    {k:'acheter',f:'E',s:[['achète','i']],alt:['acheter','achètr']},
+    {k:'lever',f:'E',s:[['lève','i']],alt:['lever','levr']},
+    {k:'appeler',f:'E',s:[['appelle','i']],alt:['appeler','appelr']},
+    {k:'jeter',f:'E',s:[['jette','i']],alt:['jeter','jèter']},
+    {k:'employer',f:'E',s:[['emploie','i']],alt:['employer','emploir']},
+    {k:'cueillir',f:'E',s:[['cueille','i']],alt:['cueillir','cueillr']}
+  ];
+  const stemStr = v => v.s.map(x=>x[0]).join('') + 'r';
+  const stemTiles = v => v.s.map(x=>tile(x[1],x[0])).join('') + tile('r','r');
+  const vowel = ch => /[aeiouéèêâîôûhy]/i.test(ch);
+  function pron(p, form, imp){
+    if(imp) return 'il';
+    if(p===0) return vowel(form[0]) ? 'j’' : 'je';
+    return ['je','tu','il','nous','vous','ils'][p];
+  }
+  function fullForm(v,p,m){
+    const form = stemStr(v) + E[m][p];
+    const pr = pron(p,form,v.imp);
+    return pr.endsWith('’') ? pr+form : pr+' '+form;
+  }
+
+  // ── composer ──
+  let cur = 'parler', mode = 'f';
+  try{ const s = JSON.parse(localStorage.getItem('cdf-state')||'{}'); if(s.v && V.some(x=>x.k===s.v)) cur=s.v; if(s.m==='c'||s.m==='f') mode=s.m; }catch(e){}
+  const picker = document.getElementById('picker');
+  Object.keys(FAM).forEach(fk=>{
+    const g = document.createElement('div'); g.className='fam';
+    g.innerHTML = '<span class="fam-label">'+FAM[fk].label+'</span><div class="chips"></div>';
+    const chips = g.querySelector('.chips');
+    V.filter(v=>v.f===fk).forEach(v=>{
+      const b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=v.k; b.dataset.v=v.k;
+      b.addEventListener('click',()=>{cur=v.k; render(false);});
+      chips.appendChild(b);
+    });
+    picker.appendChild(g);
+  });
+  const btnF=document.getElementById('mode-f'), btnC=document.getElementById('mode-c');
+  btnF.addEventListener('click',()=>{if(mode!=='f'){mode='f';render(true);}});
+  btnC.addEventListener('click',()=>{if(mode!=='c'){mode='c';render(true);}});
+
+  function render(swapped){
+    const v = V.find(x=>x.k===cur);
+    document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed', c.dataset.v===cur?'true':'false'));
+    btnF.setAttribute('aria-pressed', mode==='f'); btnC.setAttribute('aria-pressed', mode==='c');
+    document.getElementById('d-f').classList.toggle('dim', mode!=='f');
+    document.getElementById('d-c').classList.toggle('dim', mode!=='c');
+    document.getElementById('vname').textContent = v.k;
+    document.getElementById('vfam').textContent = FAM[v.f].label + ' · 词干 ' + stemStr(v);
+    document.getElementById('vnote').textContent = FAM[v.f].note + (v.imp ? ' 这是无人称动词，只有 il 一种形式。' : '');
+    const persons = v.imp ? [2] : [0,1,2,3,4,5];
+    document.getElementById('rows').innerHTML = persons.map(p=>{
+      const form = stemStr(v)+E[mode][p];
+      const pr = v.imp ? 'il' : (p===0 && vowel(form[0]) ? 'j’' : P[p]);
+      return '<div class="row"><span class="pr">'+pr+'</span><span class="build">'+stemTiles(v)+'<span class="'+(swapped?'swap ':'')+'t '+mode+'">'+E[mode][p]+'</span></span><span class="full">'+esc(fullForm(v,p,mode))+'</span></div>';
+    }).join('');
+    try{ localStorage.setItem('cdf-state', JSON.stringify({v:cur,m:mode})); }catch(e){}
+  }
+  render(false);
+
+  // ── practice ──
+  const shuffle = a => { const b=a.slice(); for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]];} return b; };
+  let q=null, pickS=null, pickE=null, done=false, right=0, total=0;
+  const elP=document.getElementById('q-prompt'), elS=document.getElementById('q-stems'), elE=document.getElementById('q-ends'), elR=document.getElementById('q-result'), elSc=document.getElementById('q-score');
+  function newQ(){
+    const v = V[Math.floor(Math.random()*V.length)];
+    const p = v.imp ? 2 : Math.floor(Math.random()*6);
+    const m = Math.random()<.5 ? 'f':'c';
+    const om = m==='f'?'c':'f';
+    const correctE = E[m][p];
+    const pool = [...new Set(E.f.concat(E.c))].filter(e=>e!==correctE && e!==E[om][p]);
+    const ends = shuffle([correctE, E[om][p]].concat(shuffle(pool).slice(0,2)));
+    const stems = shuffle([stemStr(v)].concat(v.alt.filter(a=>a!==stemStr(v))));
+    q={v,p,m,stems,ends,correctS:stemStr(v),correctE}; pickS=null; pickE=null; done=false;
+    const who = v.imp ? 'il（无人称）' : ['je','tu','il / elle','nous','vous','ils / elles'][p];
+    elP.innerHTML = '<span class="fr">'+esc(v.k)+'</span><span class="muted">'+who+'</span><span class="badge '+m+'">'+(m==='f'?'futur simple':'conditionnel présent')+'</span>';
+    elS.innerHTML = '<span class="opts-label">词干块</span>' + stems.map(s=>'<button type="button" class="opt" data-s="'+esc(s)+'">'+tile('s',s.slice(0,-1)||s)+(s.endsWith('r')?tile('r','r'):'')+'</button>').join('');
+    // show stems that do not end in r as a single block (they are wrong by the iron rule)
+    elS.querySelectorAll('.opt').forEach(b=>{
+      const s=b.dataset.s; if(!s.endsWith('r')) b.innerHTML=tile('n',s);
+      b.addEventListener('click',()=>{ if(done) return; pickS=s; mark(); check(); });
+    });
+    elE.innerHTML = '<span class="opts-label">词尾块</span>' + ends.map(e=>'<button type="button" class="opt" data-e="'+e+'">'+tile(E.f.includes(e)&&!E.c.includes(e)?'f':'c',e)+'</button>').join('');
+    elE.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{ if(done) return; pickE=b.dataset.e; mark(); check(); }));
+    elR.innerHTML='';
+  }
+  function mark(){
+    elS.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed', b.dataset.s===pickS));
+    elE.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed', b.dataset.e===pickE));
+  }
+  function check(){
+    if(pickS===null||pickE===null) return;
+    done=true; total++;
+    const okS = pickS===q.correctS, okE = pickE===q.correctE;
+    if(okS&&okE) right++;
+    elS.querySelectorAll('.opt').forEach(b=>{ if(b.dataset.s===q.correctS) b.classList.add('ok'); else if(b.dataset.s===pickS) b.classList.add('bad'); });
+    elE.querySelectorAll('.opt').forEach(b=>{ if(b.dataset.e===q.correctE) b.classList.add('ok'); else if(b.dataset.e===pickE) b.classList.add('bad'); });
+    const form = fullForm(q.v,q.p,q.m);
+    let msg = (okS&&okE) ? '对。' : (!okS && !okE ? '词干和词尾都要换。' : (!okS ? '词干不对。' : '词尾不对。'));
+    if(!okS) msg += ' ' + FAM[q.v.f].note;
+    elR.innerHTML = '<span class="full">'+esc(form)+'</span> <span class="small muted">'+esc(msg)+'</span>';
+    elSc.textContent = right+' / '+total;
+  }
+  document.getElementById('q-next').addEventListener('click',newQ);
+  newQ();
+})();
+</script>
+
+</body>
+</html>
