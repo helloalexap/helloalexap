@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>French Learning Lab</title>
+<meta name="description" content="French Learning Lab：把法语动词变位拆成可以拼装、拆解、重新排列的块。两张互动练习页和一套可打印的卡片。">
+<meta property="og:title" content="French Learning Lab">
+<meta property="og:description" content="French conjugation, taken apart into blocks you can assemble, decompose and rearrange.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+Garamond:wght@300;400;500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* helloalexap night room; three doors, one per direction of practice: assemble, decompose, arrange */
+:root{
+  --bg:#0f0c09; --panel:#14100c; --panel-hi:#1b1510; --line:#2a221b;
+  --bronze:#8B7355; --gold:#9D8556; --text:#9A7B5B; --bright:#c8b48a;
+  --stem:#7E9DF2; --hinge:#F0B53A; --cond:#E6719F;
+  --cinzel:"Cinzel","Bodoni Moda","Cormorant Garamond",serif;
+  --bodoni:"Bodoni Moda","Cormorant Garamond",serif;
+  --zh:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC",sans-serif;
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--bodoni);overflow-x:hidden}
+.page{position:relative;padding:120px 40px 72px}
+.site-nav{position:absolute;top:40px;left:40px;display:flex;gap:28px;align-items:baseline;flex-wrap:wrap}
+.site-nav a{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-decoration:none;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s;text-shadow:0 0 6px rgba(139,115,85,.35)}
+.site-nav a:hover,.site-nav a:focus-visible{color:var(--gold);border-bottom-color:rgba(157,133,86,.5);outline:none}
+.site-nav a[aria-current="page"]{color:var(--gold);border-bottom-color:rgba(157,133,86,.35)}
+.content{max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:52px}
+header{display:flex;flex-direction:column;gap:20px;max-width:700px}
+.label{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-shadow:0 0 6px rgba(139,115,85,.35)}
+h1{font-family:var(--cinzel);font-weight:400;font-size:clamp(2.2rem,3.8vw,2.8rem);line-height:1.2;letter-spacing:.02em;color:var(--gold);
+   text-shadow:0 0 8px rgba(157,133,86,.4),0 0 16px rgba(157,133,86,.3),0 0 28px rgba(184,134,11,.18)}
+.set{display:flex;flex-direction:column;gap:22px}
+.set-head{display:flex;flex-direction:column;gap:12px;max-width:700px;border-top:1px solid var(--line);padding-top:28px}
+h2{font-family:var(--bodoni);font-style:italic;font-weight:400;font-size:clamp(1.6rem,3vw,2.1rem);color:var(--bright);line-height:1.15}
+.desc{font-size:1rem;font-weight:300;line-height:1.8;color:var(--text)}
+.desc.zh{font-family:var(--zh);font-size:.92rem;line-height:1.85}
+.blocks{display:flex;gap:6px;align-items:center;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:1rem;margin-top:4px}
+.t{padding:.12em .42em .18em;border-radius:3px;color:#e8e2d8;background:color-mix(in oklab,var(--c) 18%,var(--bg));box-shadow:inset 0 -3px 0 var(--c)}
+.t.r{background:var(--hinge);color:#1e1600;box-shadow:none;font-weight:600}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.door{background:var(--panel);padding:28px 26px 26px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit;transition:background .3s}
+.door:hover,.door:focus-visible{background:var(--panel-hi);outline:none}
+.door:focus-visible{box-shadow:inset 0 0 0 1px var(--gold)}
+.verb{font-size:.72rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+.door h3{font-family:var(--cinzel);font-weight:400;font-size:1.3rem;letter-spacing:.03em;color:var(--gold);line-height:1.25;text-shadow:0 0 8px rgba(157,133,86,.25)}
+.door p{font-family:var(--zh);font-size:.9rem;line-height:1.8;color:var(--text)}
+.go{margin-top:auto;padding-top:12px;font-size:.95rem;color:var(--bright)}
+.go span{display:inline-block;color:var(--bronze);transition:transform .3s}
+.door:hover .go span{transform:translateX(5px)}
+.note{font-family:var(--zh);font-size:.9rem;color:var(--bronze);max-width:640px}
+footer{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;font-size:.8rem;font-weight:300;letter-spacing:.12em;color:var(--bronze)}
+footer a{color:var(--bronze);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--gold)}
+.fade{opacity:0;animation:fade-in 1s ease-out forwards}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}
+@keyframes fade-in{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;animation:none}.door,.go span{transition:none}}
+@media (max-width:768px){.page{padding:96px 24px 56px}.site-nav{top:32px;left:24px;gap:18px}}
+@media (max-width:480px){.page{padding:110px 16px 48px}.site-nav{left:16px;right:16px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <nav class="site-nav fade" aria-label="Site">
+    <a href="https://helloalexap.com/">helloalexap</a>
+    <a href="../">Learning Lab</a>
+    <a href="./" aria-current="page">French</a>
+  </nav>
+
+  <div class="content">
+    <header>
+      <div class="label fade d1">Learning Lab · Français</div>
+      <h1 class="fade d2">French Learning Lab</h1>
+    </header>
+
+    <section class="set fade d3">
+      <div class="set-head">
+        <h2>Le verbe en blocs</h2>
+        <p class="desc">French conjugation, taken apart into blocks you can assemble, decompose and rearrange.</p>
+        <p class="desc zh">把法语动词变位拆成可以拼装、拆解、重新排列的块。重点不在单个的词，而在语法结构这一层：同一个词干、同一组词尾，会在好几个时态里反复出现。</p>
+        <div class="blocks" aria-label="parle + r + ais">
+          <span class="t" style="--c:var(--stem)">parle</span><span class="t r">r</span><span class="t" style="--c:var(--cond)">ais</span>
+        </div>
+      </div>
+
+      <div class="doors">
+        <a class="door" href="composteur/">
+          <span class="verb">Assembler · 拼</span>
+          <h3>Composteur du futur</h3>
+          <p>简单将来时与条件式：一个词干，一个 r 铰链，两组借自 avoir 的词尾。含拼装台、五个不规则家族和拼装练习。</p>
+          <span class="go">打开 <span>→</span></span>
+        </a>
+        <a class="door" href="decomposeur/">
+          <span class="verb">Décomposer · 拆</span>
+          <h3>Décomposeur</h3>
+          <p>从右往左读：人称 → 时态标记 → 词干。含计时识别训练、共享模块地图和九种同形陷阱。</p>
+          <span class="go">打开 <span>→</span></span>
+        </a>
+        <a class="door" href="cartes-du-composteur.pdf">
+          <span class="verb">Arranger · 排</span>
+          <h3>Cartes du Composteur</h3>
+          <p>50 张可打印卡片和一本练习手册（A4 PDF）。卡片负责结构，网页负责速度。打印时选 100% 实际大小。</p>
+          <span class="go">下载 PDF <span>↓</span></span>
+        </a>
+      </div>
+
+      <p class="note">这三样是一套：写的时候从左往右拼，读的时候从右往左拆，摆卡片的时候自己决定结构。</p>
+    </section>
+
+    <footer>
+      <span><a href="../">← Learning Lab</a></span>
+      <span>Exploratory tools for learning · 探索式学习工具</span>
+    </footer>
+  </div>
+</main>
+</body>
+</html>

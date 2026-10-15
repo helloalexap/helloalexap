@@ -380,6 +380,60 @@
             }
         }
 
+        /* 左上角菜单栏：与左下角页脚对称（同为 40px 边距），字体与标签一致 */
+        .site-nav {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            z-index: 4;
+            display: flex;
+            gap: 28px;
+            align-items: baseline;
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.2s forwards;
+        }
+
+        .site-nav a {
+            font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #8B7355;
+            text-decoration: none;
+            padding-bottom: 4px;
+            border-bottom: 1px solid transparent;
+            text-shadow:
+                0 0 6px rgba(139, 115, 85, 0.35),
+                0 0 12px rgba(160, 82, 45, 0.15);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            color: #9D8556;
+            border-bottom-color: rgba(157, 133, 86, 0.5);
+            outline: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hero { padding-top: 110px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 96px; }
+            .site-nav { top: 32px; left: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding-top: 88px; }
+            .site-nav { left: 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .site-nav { opacity: 1; animation: none; }
+        }
+
         /* 防止文本选中 */
         .artwork {
             user-select: none;
@@ -389,6 +443,10 @@
 </head>
 <body>
     <section class="hero">
+        <!-- 左上角菜单栏 -->
+        <nav class="site-nav" aria-label="Site">
+            <a href="https://edu.helloalexap.com/">Learning Lab</a>
+        </nav>
         <div class="hero-content">
             <!-- 左侧：文字 -->
             <div class="hero-text">
