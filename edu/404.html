@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Not found · Learning Lab</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,300;0,400;1,300&family=Cormorant+Garamond:wght@300;400&family=Cinzel:wght@400&display=swap" rel="stylesheet">
+<style>
+/* Same night room as the Learning Lab homepage */
+:root{
+  --bg:#0f0c09; --line:#2a221b;
+  --bronze:#8B7355; --gold:#9D8556; --text:#9A7B5B;
+  --cinzel:"Cinzel","Bodoni Moda","Cormorant Garamond",serif;
+  --bodoni:"Bodoni Moda","Cormorant Garamond",serif;
+  --zh:"Bodoni Moda","Noto Serif CJK SC","Songti SC",serif;
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--bodoni);overflow-x:hidden}
+.page{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 180px}
+.site-nav{position:absolute;top:40px;left:40px;display:flex;gap:28px;align-items:baseline}
+.site-nav a{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-decoration:none;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s;text-shadow:0 0 6px rgba(139,115,85,.35)}
+.site-nav a:hover,.site-nav a:focus-visible{color:var(--gold);border-bottom-color:rgba(157,133,86,.5);outline:none}
+.content{width:100%;max-width:1400px;margin:0 auto}
+.intro{display:flex;flex-direction:column;gap:22px;max-width:640px}
+.label{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-shadow:0 0 6px rgba(139,115,85,.35)}
+h1{font-family:var(--cinzel);font-weight:400;font-size:clamp(2.2rem,3.8vw,2.8rem);line-height:1.2;letter-spacing:.02em;color:var(--gold);
+   text-shadow:0 0 8px rgba(157,133,86,.4),0 0 16px rgba(157,133,86,.3),0 0 28px rgba(184,134,11,.18)}
+.desc{font-size:clamp(.9rem,1.2vw,1rem);font-weight:300;line-height:1.8;letter-spacing:.02em;color:var(--text);text-shadow:0 0 8px rgba(157,133,86,.25)}
+.desc.zh{font-family:var(--zh);letter-spacing:.08em}
+.back{margin-top:18px;align-self:flex-start;font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-decoration:none;padding:14px 0 4px;border-top:1px solid var(--line);transition:color .3s}
+.back:hover,.back:focus-visible{color:var(--gold);outline:none}
+.fade{opacity:0;animation:fade-in 1s ease-out forwards}
+.d1{animation-delay:.2s}.d2{animation-delay:.35s}.d3{animation-delay:.5s}
+@keyframes fade-in{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;animation:none}}
+@media (max-width:768px){.page{padding:96px 24px 180px}.site-nav{top:32px;left:24px}}
+@media (max-width:480px){.page{padding:88px 16px 170px}.site-nav{left:16px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <nav class="site-nav fade" aria-label="Site">
+    <a href="https://helloalexap.com/">helloalexap</a>
+    <a href="https://edu.helloalexap.com/">Learning Lab</a>
+  </nav>
+
+  <div class="content">
+    <div class="intro">
+      <div class="label fade d1">404</div>
+      <h1 class="fade d2">Page not found</h1>
+      <p class="desc fade d3">This page doesn't exist, or has moved.</p>
+      <p class="desc zh fade d3">这一页不存在，或者已经移走了。</p>
+      <a class="back fade d3" href="https://edu.helloalexap.com/">← Back to Learning Lab</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
