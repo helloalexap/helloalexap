@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>棋盘读谱台 · Learning Lab</title>
+<meta name="description" content="chess.com 10 分钟快棋复盘合辑（2025.12 – 2026.09）。每一步同时给出棋盘和记谱，标出攻击与守卫。">
+<meta property="og:title" content="棋盘读谱台">
+<meta property="og:description" content="Rapid chess games reviewed move by move: board and notation side by side, with attacks and guards drawn in.">
+<meta property="og:type" content="website">
+<style>
+/* Layout: a public review notebook — what I found (static), then the reading desk (board left, translation right), then the two primers. */
+:root{
+  --bg:#eef0ec; --panel:#f9faf7; --ink:#1d2421; --muted:#5d6a64; --line:#d3d9d3;
+  --sq-l:#e6e2d3; --sq-d:#7f9a86; --sq-ink-l:#6f7d72; --sq-ink-d:#eef2ea;
+  --move:#d99a2b; --threat:#c8402f; --good:#2f8a4e; --guard:#3a6ea5; --path:#7d6aa8;
+  --chip-piece:#3a6ea5; --chip-x:#b8860b; --chip-sq:#2f8a4e; --chip-chk:#c8402f; --chip-dim:#8a958f;
+  --f-display:"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","Noto Serif SC",serif; --f-body:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif; --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151a18; --panel:#1d2421; --ink:#e7ece8; --muted:#9aa7a0; --line:#2f3934;
+  --sq-l:#c9c4b2; --sq-d:#5f7a68; --sq-ink-l:#5d6a60; --sq-ink-d:#e2e8df;
+  --move:#e8ad45; --threat:#ef6a55; --good:#4fbf74; --guard:#6ea3dc; --path:#a896d6;
+  --chip-piece:#6ea3dc; --chip-x:#e0b23e; --chip-sq:#4fbf74; --chip-chk:#ef6a55; --chip-dim:#7f8c86; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151a18; --panel:#1d2421; --ink:#e7ece8; --muted:#9aa7a0; --line:#2f3934;
+  --sq-l:#c9c4b2; --sq-d:#5f7a68; --sq-ink-l:#5d6a60; --sq-ink-d:#e2e8df;
+  --move:#e8ad45; --threat:#ef6a55; --good:#4fbf74; --guard:#6ea3dc; --path:#a896d6;
+  --chip-piece:#6ea3dc; --chip-x:#e0b23e; --chip-sq:#4fbf74; --chip-chk:#ef6a55; --chip-dim:#7f8c86; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:28px}
+h1{font-family:var(--f-display);font-size:1.75rem;line-height:1.25;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:1.2rem;margin:0 0 6px;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:6px 0 0}
+.games{display:flex;flex-wrap:wrap;gap:8px}
+.gbtn{font:inherit;font-size:.9rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.gbtn small{color:var(--muted);font-size:.75rem}
+.gbtn[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.gbtn[aria-pressed="true"] small{color:var(--bg);opacity:.75}
+.gbtn:focus-visible,.ctl:focus-visible,.mv:focus-visible,.sq:focus-visible{outline:2px solid var(--move);outline-offset:2px}
+.desk{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:760px){.desk{grid-template-columns:minmax(0,1fr)}}
+.boardbox{display:grid;gap:10px}
+.board-frame{display:grid;grid-template-columns:18px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 18px;gap:2px;max-width:100%}
+.ranks,.files{display:flex;font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.ranks{flex-direction:column}.ranks span,.files span{flex:1;display:grid;place-items:center}
+.files{grid-column:2}
+.board{position:relative;aspect-ratio:1;max-width:100%;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);border-radius:4px;overflow:hidden;box-shadow:0 1px 0 var(--line)}
+.sq{position:relative;display:grid;place-items:center;line-height:1;user-select:none}
+.sq.l{background:var(--sq-l)}.sq.d{background:var(--sq-d)}
+.sq.from::after,.sq.to::after{content:"";position:absolute;inset:0;background:var(--move);opacity:.32}
+.sq.to::after{opacity:.45}
+.sq.mk{box-shadow:inset 0 0 0 3px var(--threat)}
+.sq .nm{position:absolute;left:3px;top:1px;font-family:var(--f-mono);font-size:.62rem;font-weight:700;line-height:1.2;padding:0 3px;border-radius:3px;background:var(--panel);color:var(--ink);z-index:2}
+.pc{position:relative;z-index:1;width:88%;height:88%;display:block}
+svg.arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.controls{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ctl{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer;min-width:40px}
+.ctl.key{border-color:var(--move);color:var(--ink)}
+.ctl[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ctl:disabled{opacity:.4;cursor:default}
+.plyinfo{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);margin-left:auto}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.side{display:grid;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.eyebrow{font-size:.72rem;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:2px 0 10px}
+.chip{display:grid;justify-items:center;gap:2px;border-radius:6px;padding:4px 8px 3px;border:1.5px solid currentColor;min-width:34px}
+.chip b{font-family:var(--f-mono);font-size:1.15rem;line-height:1.2}
+.chip span{font-size:.68rem;line-height:1.2}
+.c-piece{color:var(--chip-piece)}.c-x{color:var(--chip-x)}.c-sq{color:var(--chip-sq)}.c-chk{color:var(--chip-chk)}.c-dim{color:var(--chip-dim);border-style:dashed}
+.sentence{margin:0;font-size:1rem}
+.note{margin:0;font-size:.98rem}
+.note.key{font-weight:500}
+.goodline{margin:10px 0 0;padding:8px 10px;border-radius:6px;border:1px dashed var(--good);color:var(--ink);font-size:.92rem}
+.goodline b{color:var(--good)}
+.empty{color:var(--muted);margin:0;font-size:.92rem}
+.mvlist{display:grid;grid-template-columns:auto 1fr 1fr;gap:2px 6px;font-family:var(--f-mono);font-size:.9rem;align-items:center}
+.mvlist .no{color:var(--muted);font-size:.8rem;text-align:right;padding-right:4px}
+.mv{font:inherit;text-align:left;border:0;background:none;color:var(--ink);padding:3px 6px;border-radius:4px;cursor:pointer;position:relative}
+.mv.cur{background:var(--move);color:#1b1f1d}
+.mv.bad{text-decoration:underline wavy var(--threat) 1.5px;text-underline-offset:4px}
+.mv.pun{color:var(--threat);font-weight:700}
+.mv.cur.pun{color:#1b1f1d}
+.mv.gd{color:var(--good);font-weight:700}
+.mv.cur.gd{color:#1b1f1d}
+.mv.k::before{content:"";position:absolute;left:-2px;top:50%;width:5px;height:5px;border-radius:50%;background:var(--move);transform:translateY(-50%)}
+.section{display:grid;gap:12px}
+.skel{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ex{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.ex .card p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
+.drill{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:640px){.drill{grid-template-columns:minmax(0,1fr)}}
+.drill .board{cursor:pointer}
+.drill .sq{font-size:.8rem}
+.drill .sq.hit::after{content:"";position:absolute;inset:0;background:var(--good);opacity:.55}
+.drill .sq.miss::after{content:"";position:absolute;inset:0;background:var(--threat);opacity:.55}
+.drill .sq.ans{box-shadow:inset 0 0 0 3px var(--good)}
+.target{font-family:var(--f-mono);font-size:2.4rem;font-weight:700;line-height:1;margin:4px 0 8px}
+.stat{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.toggle{display:flex;gap:6px;flex-wrap:wrap}
+p{max-width:65ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.wrap{max-width:1040px;margin:0 auto;display:grid;gap:40px}
+.sitenav{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted)}
+.sitenav a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line)}.sitenav a:hover{color:var(--ink)}
+header{display:grid;gap:10px}
+h1{font-size:2.1rem}
+.meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;margin:4px 0 0}
+.two-q{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:14px 16px;display:grid;gap:6px;max-width:65ch}
+.two-q ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.findings{display:grid}
+.finding{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:20px;align-items:start;padding:20px 0;border-top:1px solid var(--line)}
+.finding:last-child{border-bottom:1px solid var(--line)}
+@media (max-width:640px){.finding{grid-template-columns:minmax(0,1fr)}.finding figure{max-width:340px}}
+.finding figure{margin:0;display:grid;gap:6px}
+.finding figure img{width:100%;height:auto;border-radius:4px;display:block}
+.finding figcaption{font-size:.78rem;color:var(--muted);line-height:1.5}
+.finding h3{font-family:var(--f-display);font-size:1.15rem;margin:0 0 6px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.finding h3 .n{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);font-weight:400}
+.finding p{margin:0 0 8px}
+.finding .fix{font-size:.92rem}
+.finding .fix b{color:var(--good)}
+.open{display:inline-block;font-size:.85rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:4px 10px;background:var(--panel)}
+.open:hover,.open:focus-visible{border-color:var(--ink)}
+.gbtn{flex-direction:column;align-items:flex-start;gap:0;border-radius:8px;padding:6px 12px;text-align:left}
+.res{font-family:var(--f-mono)}
+footer{border-top:1px solid var(--line);padding-top:14px;font-size:.8rem;color:var(--muted);display:grid;gap:4px}
+footer p{margin:0}
+#desk{scroll-margin-top:12px}
+.mvlist{position:relative;max-height:340px;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="p-bB" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 36c3.39-.97 10.11.43 13.5-2 3.39 2.43 10.11 1.03 13.5 2 0 0 1.65.54 3 2-.68.97-1.65.99-3 .5-3.39-.97-10.11.46-13.5-1-3.39 1.46-10.11.03-13.5 1-1.354.49-2.323.47-3-.5 1.354-1.94 3-2 3-2zm6-4c2.5 2.5 12.5 2.5 15 0 .5-1.5 0-2 0-2 0-2.5-2.5-4-2.5-4 5.5-1.5 6-11.5-5-15.5-11 4-10.5 14-5 15.5 0 0-2.5 1.5-2.5 4 0 0-.5.5 0 2zM25 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 1 1 5 0z" fill="#000" stroke-linecap="butt"/><path d="M17.5 26h10M15 30h15m-7.5-14.5v5M20 18h5" stroke="#fff" stroke-linejoin="miter"/></g></symbol><symbol id="p-bK" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 11.63V6" stroke-linejoin="miter"/><path d="M22.5 25s4.5-7.5 3-10.5c0 0-1-2.5-3-2.5s-3 2.5-3 2.5c-1.5 3 3 10.5 3 10.5" fill="#000" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M11.5 37c5.5 3.5 15.5 3.5 21 0v-7s9-4.5 6-10.5c-4-6.5-13.5-3.5-16 4V27v-3.5c-3.5-7.5-13-10.5-16-4-3 6 5 10 5 10V37z" fill="#000"/><path d="M20 8h5" stroke-linejoin="miter"/><path d="M32 29.5s8.5-4 6.03-9.65C34.15 14 25 18 22.5 24.5l.01 2.1-.01-2.1C20 18 9.906 14 6.997 19.85c-2.497 5.65 4.853 9 4.853 9M11.5 30c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0" stroke="#fff"/></g></symbol><symbol id="p-bN" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18" style="fill:#000000; stroke:#000000;"/><path d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10" style="fill:#000000; stroke:#000000;"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" style="fill:#ececec; stroke:#ececec;"/><path d="M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z" transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)" style="fill:#ececec; stroke:#ececec;"/><path d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z " style="fill:#ececec; stroke:none;"/></g></symbol><symbol id="p-bP" viewBox="0 0 45 45"><g><path d="M22.5 9c-2.21 0-4 1.79-4 4 0 .89.29 1.71.78 2.38C17.33 16.5 16 18.59 16 21c0 2.03.94 3.84 2.41 5.03-3 1.06-7.41 5.55-7.41 13.47h23c0-7.92-4.41-12.41-7.41-13.47 1.47-1.19 2.41-3 2.41-5.03 0-2.41-1.33-4.5-3.28-5.62.49-.67.78-1.49.78-2.38 0-2.21-1.79-4-4-4z" fill="#000" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></g></symbol><symbol id="p-bQ" viewBox="0 0 45 45"><g fill="#000" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g fill="#000" stroke="none"><circle cx="6" cy="12" r="2.75"/><circle cx="14" cy="9" r="2.75"/><circle cx="22.5" cy="8" r="2.75"/><circle cx="31" cy="9" r="2.75"/><circle cx="39" cy="12" r="2.75"/></g><path d="M9 26c8.5-1.5 21-1.5 27 0l2.5-12.5L31 25l-.3-14.1-5.2 13.6-3-14.5-3 14.5-5.2-13.6L14 25 6.5 13.5 9 26zM9 26c0 2 1.5 2 2.5 4 1 1.5 1 1 .5 3.5-1.5 1-1.5 2.5-1.5 2.5-1.5 1.5.5 2.5.5 2.5 6.5 1 16.5 1 23 0 0 0 1.5-1 0-2.5 0 0 .5-1.5-1-2.5-.5-2.5-.5-2 .5-3.5 1-2 2.5-2 2.5-4-8.5-1.5-18.5-1.5-27 0z" stroke-linecap="butt"/><path d="M11 38.5a35 35 1 0 0 23 0" fill="none" stroke-linecap="butt"/><path d="M11 29a35 35 1 0 1 23 0M12.5 31.5h20M11.5 34.5a35 35 1 0 0 22 0M10.5 37.5a35 35 1 0 0 24 0" fill="none" stroke="#fff"/></g></symbol><symbol id="p-bR" viewBox="0 0 45 45"><g fill="#000" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39h27v-3H9v3zM12.5 32l1.5-2.5h17l1.5 2.5h-20zM12 36v-4h21v4H12z" stroke-linecap="butt"/><path d="M14 29.5v-13h17v13H14z" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M14 16.5L11 14h23l-3 2.5H14zM11 14V9h4v2h5V9h5v2h5V9h4v5H11z" stroke-linecap="butt"/><path d="M12 35.5h21M13 31.5h19M14 29.5h17M14 16.5h17M11 14h23" fill="none" stroke="#fff" stroke-width="1" stroke-linejoin="miter"/></g></symbol><symbol id="p-wB" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g fill="#fff" stroke-linecap="butt"><path d="M9 36c3.39-.97 10.11.43 13.5-2 3.39 2.43 10.11 1.03 13.5 2 0 0 1.65.54 3 2-.68.97-1.65.99-3 .5-3.39-.97-10.11.46-13.5-1-3.39 1.46-10.11.03-13.5 1-1.354.49-2.323.47-3-.5 1.354-1.94 3-2 3-2zM15 32c2.5 2.5 12.5 2.5 15 0 .5-1.5 0-2 0-2 0-2.5-2.5-4-2.5-4 5.5-1.5 6-11.5-5-15.5-11 4-10.5 14-5 15.5 0 0-2.5 1.5-2.5 4 0 0-.5.5 0 2zM25 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 1 1 5 0z"/></g><path d="M17.5 26h10M15 30h15m-7.5-14.5v5M20 18h5" stroke-linejoin="miter"/></g></symbol><symbol id="p-wK" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 11.63V6M20 8h5" stroke-linejoin="miter"/><path d="M22.5 25s4.5-7.5 3-10.5c0 0-1-2.5-3-2.5s-3 2.5-3 2.5c-1.5 3 3 10.5 3 10.5" fill="#fff" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M11.5 37c5.5 3.5 15.5 3.5 21 0v-7s9-4.5 6-10.5c-4-6.5-13.5-3.5-16 4V27v-3.5c-3.5-7.5-13-10.5-16-4-3 6 5 10 5 10V37z" fill="#fff"/><path d="M11.5 30c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0"/></g></symbol><symbol id="p-wN" viewBox="0 0 45 45"><g fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18" style="fill:#ffffff; stroke:#000000;"/><path d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10" style="fill:#ffffff; stroke:#000000;"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" style="fill:#000000; stroke:#000000;"/><path d="M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z" transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)" style="fill:#000000; stroke:#000000;"/></g></symbol><symbol id="p-wP" viewBox="0 0 45 45"><g><path d="M22.5 9c-2.21 0-4 1.79-4 4 0 .89.29 1.71.78 2.38C17.33 16.5 16 18.59 16 21c0 2.03.94 3.84 2.41 5.03-3 1.06-7.41 5.55-7.41 13.47h23c0-7.92-4.41-12.41-7.41-13.47 1.47-1.19 2.41-3 2.41-5.03 0-2.41-1.33-4.5-3.28-5.62.49-.67.78-1.49.78-2.38 0-2.21-1.79-4-4-4z" fill="#fff" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></g></symbol><symbol id="p-wQ" viewBox="0 0 45 45"><g fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12a2 2 0 1 1-4 0 2 2 0 1 1 4 0zM24.5 7.5a2 2 0 1 1-4 0 2 2 0 1 1 4 0zM41 12a2 2 0 1 1-4 0 2 2 0 1 1 4 0zM16 8.5a2 2 0 1 1-4 0 2 2 0 1 1 4 0zM33 9a2 2 0 1 1-4 0 2 2 0 1 1 4 0z"/><path d="M9 26c8.5-1.5 21-1.5 27 0l2-12-7 11V11l-5.5 13.5-3-15-3 15-5.5-14V25L7 14l2 12zM9 26c0 2 1.5 2 2.5 4 1 1.5 1 1 .5 3.5-1.5 1-1.5 2.5-1.5 2.5-1.5 1.5.5 2.5.5 2.5 6.5 1 16.5 1 23 0 0 0 1.5-1 0-2.5 0 0 .5-1.5-1-2.5-.5-2.5-.5-2 .5-3.5 1-2 2.5-2 2.5-4-8.5-1.5-18.5-1.5-27 0z" stroke-linecap="butt"/><path d="M11.5 30c3.5-1 18.5-1 22 0M12 33.5c6-1 15-1 21 0" fill="none"/></g></symbol><symbol id="p-wR" viewBox="0 0 45 45"><g fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39h27v-3H9v3zM12 36v-4h21v4H12zM11 14V9h4v2h5V9h5v2h5V9h4v5" stroke-linecap="butt"/><path d="M34 14l-3 3H14l-3-3"/><path d="M31 17v12.5H14V17" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M31 29.5l1.5 2.5h-20l1.5-2.5"/><path d="M11 14h23" fill="none" stroke-linejoin="miter"/></g></symbol></svg>
+<div class="wrap">
+  <nav class="sitenav" aria-label="Site"><a href="https://helloalexap.com/">helloalexap</a><span>/</span><a href="../">Learning Lab</a><span>/</span><span>Chess</span></nav>
+  <header>
+    <p class="eyebrow">CHESS · 复盘合辑</p>
+    <h1>棋盘读谱台</h1>
+    <p class="lede">chess.com 10 分钟快棋复盘合辑。每一步同时给出棋盘和记谱，标出攻击与守卫。</p>
+    <p class="meta"><span>第一辑</span><span>2025.12 – 2026.09</span><span>21 盘负局</span><span>引擎 Stockfish 17.1</span></p>
+  </header>
+
+  <section class="section" aria-labelledby="h-find">
+    <div>
+      <h2 id="h-find">五类反复出现的失误</h2>
+      <p class="lede">由引擎找出每盘负局的转折点，按棋形归类，共五类。前四类出现在开局：f2、f7 只有王保护，c2、c7 只有后保护，是开局时最薄弱的四个格子。第五类出现在取得领先之后。</p>
+    </div>
+    <div class="findings">
+      <article class="finding">
+        <figure><img src="img/f2-twin.svg" alt="棋盘：黑后在 f6、黑象在 c5，两条线都指向白方的 f2" width="390" height="390"><figcaption>执白。3…Qf6 之后，白方走。</figcaption></figure>
+        <div>
+          <h3>f2 / f7 双瞄<span class="n">3 盘被将杀</span></h3>
+          <p>后与一个象或马同时瞄准 f2（执黑时为 f7），该格只有王保护。三盘均在此被将杀，最短的一盘只有 4 个回合。三盘中出错的那一步，都与 f2 无关。</p>
+          <p class="fix"><b>应法</b>　挡住其中一条线，给 f2 加一个守卫，或者赶走一个攻击者。只剩一个攻击者时，它吃 f2，王就能吃回。</p>
+          <a class="open" href="#f2-a">在读谱台里打开 →</a>
+        </div>
+      </article>
+      <article class="finding">
+        <figure><img src="img/qh5-double.svg" alt="棋盘：白后在 h5，同时攻击黑方 e5 的兵和 f7" width="390" height="390"><figcaption>执黑。1.e4 e5 2.Qh5 之后，黑方走。</figcaption></figure>
+        <div>
+          <h3>Qh5 捉双<span class="n">出现 4 次，4 次丢兵</span></h3>
+          <p>白方第二步出后到 h5，同时攻击无人保护的 e5 兵和 f7。这一步没有对称的应着。其中两盘以 2…g6 赶后，同时打开了 e5 至 h8 的斜线，随后 h8 车被吃。</p>
+          <p class="fix"><b>应法</b>　2…Nc6，用马守住 e5。</p>
+          <a class="open" href="#qh5">在读谱台里打开 →</a>
+        </div>
+      </article>
+      <article class="finding">
+        <figure><img src="img/c2-fork.svg" alt="棋盘：黑马在 d4，跳到 c2 就能同时攻击白王 e1 和白车 a1" width="390" height="390"><figcaption>执白。7…Nd4 之后，白方走。</figcaption></figure>
+        <div>
+          <h3>c2 / c7 马叉<span class="n">进攻得手 9 次</span></h3>
+          <p>马跳进 c2，同时将军并攻击 a1 的车。同一棋形，己方作为进攻方得手 9 次，作为防守方却接连失手。c2 开局时只靠后保护，后被兑换或离开 d1 之后，这一格即无人看守。</p>
+          <p class="fix"><b>应法</b>　对方的马到达 b4 或 d4 时，给 c2 补一个守卫，或让王和车离开 e1、a1，例如长易位。</p>
+          <a class="open" href="#c2">在读谱台里打开 →</a>
+        </div>
+      </article>
+      <article class="finding">
+        <figure><img src="img/count-guards.svg" alt="棋盘：黑方 d5 的兵同时被 f6 的马和 d6 的后守着" width="390" height="390"><figcaption>执白。8…Bd7 之后，白方走。</figcaption></figure>
+        <div>
+          <h3>数守卫<span class="n">4 盘</span></h3>
+          <p>吃子之前，先数该格的守卫。四盘中，后或马吃进有保护的格子，随即被吃回。前三类失误的关键也在这里：f2、e5、c2 各由谁保护。</p>
+          <p class="fix"><b>应法</b>　攻击该格的子多于守卫时再吃。</p>
+          <a class="open" href="#guard">在读谱台里打开 →</a>
+        </div>
+      </article>
+      <article class="finding">
+        <figure><img src="img/lead.svg" alt="棋盘：白后在 g7，正在攻击黑方 h8 的车" width="390" height="390"><figcaption>执黑，刚赢得一个车。11.Qxg7 之后，黑方走。</figcaption></figure>
+        <div>
+          <h3>领先时收<span class="n">21 盘中 10 盘</span></h3>
+          <p>21 盘负局中，有 10 盘曾领先三分以上（约一个轻子），随后一步失去优势。其中 6 次，对方的威胁已经在棋盘上而未被处理。威胁未必来自上一步：其中一盘，一条斜线持续开放了五个回合。</p>
+          <p class="fix"><b>应法</b>　领先之后，每一步先看对方在攻击哪个子，再数守卫；两步相当时，选择兑子。</p>
+          <a class="open" href="#lead-a">在读谱台里打开 →</a>
+        </div>
+      </article>
+    </div>
+    <div class="two-q">
+      <p class="eyebrow">落子前检查</p>
+      <ol><li>对方哪个子距离己方的 f2 或 c2（执黑时为 f7 或 c7）只差一步？</li><li>这一步是否移走了该格唯一的守卫？</li></ol>
+    </div>
+  </section>
+
+  <section class="section" id="desk" aria-labelledby="h-desk">
+    <div>
+      <h2 id="h-desk">读谱台</h2>
+      <p class="lede">十盘对局，默认停在关键局面。按 ▶ 逐步推进，或在步骤列表中点选任意一步。棋盘标出相关格子的名称，箭头表示攻击与守卫；右侧将该步记谱拆开并译成中文。十盘中一盘为胜局（c7 马叉），一盘为和局。</p>
+    </div>
+
+<nav class="games" id="games" aria-label="选择对局"></nav>
+
+  <section class="desk">
+    <div class="boardbox">
+      <div class="board-frame">
+        <div class="ranks" id="ranks"></div>
+        <div class="board" id="board" role="img" aria-label="棋盘"></div>
+        <div class="files" id="files"></div>
+      </div>
+      <div class="controls">
+        <button class="ctl" id="b-start" aria-label="回到开局">⏮</button>
+        <button class="ctl" id="b-prev" aria-label="上一步">◀</button>
+        <button class="ctl" id="b-next" aria-label="下一步">▶</button>
+        <button class="ctl" id="b-end" aria-label="到最后">⏭</button>
+        <button class="ctl key" id="b-key">关键局面</button>
+        <span class="plyinfo" id="plyinfo"></span>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--move)"></i>刚走的一步</span>
+        <span><i style="background:var(--threat)"></i>威胁</span>
+        <span><i style="background:var(--guard)"></i>守卫</span>
+        <span><i style="background:var(--good)"></i>正确应法</span>
+        <span><i style="background:var(--path)"></i>打开的线</span>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <p class="eyebrow" id="mv-eyebrow">这一步</p>
+        <div class="chips" id="chips"></div>
+        <p class="sentence" id="sentence"></p>
+      </div>
+      <div class="card" id="notecard">
+        <p class="eyebrow">发生了什么</p>
+        <div id="note"></div>
+      </div>
+      <div class="card">
+        <p class="eyebrow">整盘的步骤 · 点任何一步跳过去</p>
+        <div class="mvlist" id="mvlist"></div>
+      </div>
+    </div>
+  </section>
+
+    </section>
+
+<section class="section">
+    <div>
+      <h2>一步棋怎么读</h2>
+      <p class="lede">每一步记录都由同样的几个部分组成：哪个子，吃没吃，到哪一格，有没有将军。从右往左读最快：先看最后一个符号，看到 <b>#</b> 就是将杀，看到 <b>+</b> 就是将军。</p>
+    </div>
+    <div class="skel">
+      <div class="chip c-piece"><b>N</b><span>哪个子</span></div>
+      <div class="chip c-x"><b>x</b><span>吃</span></div>
+      <div class="chip c-sq"><b>f2</b><span>到哪一格</span></div>
+      <div class="chip c-chk"><b>#</b><span>将杀 / + 将军</span></div>
+    </div>
+    <div class="ex">
+      <div class="card"><div class="chips"><div class="chip c-piece"><b>K</b><span>王</span></div><div class="chip c-piece"><b>Q</b><span>后</span></div><div class="chip c-piece"><b>R</b><span>车</span></div><div class="chip c-piece"><b>B</b><span>象</span></div><div class="chip c-piece"><b>N</b><span>马</span></div></div><p>兵没有字母。只写格子的那一步，就是兵在走：e4 = 兵走到 e4。</p></div>
+      <div class="card"><div class="chips"><div class="chip c-dim"><b>d</b><span>从 d 列来</span></div><div class="chip c-x"><b>x</b><span>吃</span></div><div class="chip c-sq"><b>e5</b><span>到 e5</span></div></div><p>dxe5：兵吃子时，前面写它原来所在的列。d 列的兵吃掉 e5 的子。</p></div>
+      <div class="card"><div class="chips"><div class="chip c-piece"><b>O-O</b><span>短易位</span></div><div class="chip c-piece"><b>O-O-O</b><span>长易位</span></div></div><p>王和车一起换位。三个 O 是往后翼（a 那边）长易位。</p></div>
+    </div>
+    <p class="lede">格子名字是棋盘的坐标，从白方这一边数：列 a 到 h 从左往右，行 1 到 8 从下往上。执黑时棋盘会翻过来，左下角变成 h8。回合写作 <b>3.</b> 是白方的一步，<b>3…</b> 是黑方的一步。</p>
+  </section>
+
+  <section class="section">
+    <div>
+      <h2>认格子</h2>
+      <p class="lede">只练这些对局中反复出现的格子。点出题目给出的格子，答错时会显示正确位置。</p>
+    </div>
+    <div class="drill">
+      <div class="board-frame">
+        <div class="ranks" id="d-ranks"></div>
+        <div class="board" id="dboard" aria-label="练习棋盘"></div>
+        <div class="files" id="d-files"></div>
+      </div>
+      <div class="card">
+        <p class="eyebrow">点出这一格</p>
+        <div class="target" id="d-target">f2</div>
+        <p class="sentence" id="d-hint"></p>
+        <p class="stat" id="d-stat">0 / 0</p>
+        <div class="toggle">
+          <button class="ctl" id="d-white" aria-pressed="true">从白方看</button>
+          <button class="ctl" id="d-black" aria-pressed="false">从黑方看</button>
+          <button class="ctl" id="d-labels" aria-pressed="false">显示坐标</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>对手的用户名已经隐去，换成字母和大致等级分；「电脑」是 chess.com 上的电脑对手。着法评估由 Stockfish 17.1 计算，深度 16 到 18。</p>
+    <p>棋子图形：Colin M. L. Burnett（cburnett，BSD 许可）。第一辑 · 2026 年 10 月。</p>
+  </footer>
+</div>
+<script>
+
+const GAMES=[{"id":"f2-a","col":"W","block":"f2 双瞄","opp":"对手 A · 约 290","date":"2026.01","res":"负","key":6,"plies":[{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxe5","f":"f3","t":"e5","p":"N","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Bc5","f":"f8","t":"c5","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qf6","f":"d8","t":"f6","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc4","f":"e5","t":"c4","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxf2#","f":"f6","t":"f2","p":"Q","w":false,"cap":"P","chk":true,"mate":true,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB1R","rnbqkbnr/pppp1ppp/8/4p3/8/5N2/PPPPPPPP/RNBQKB1R","rnbqkbnr/pppp1ppp/8/4N3/8/8/PPPPPPPP/RNBQKB1R","rnbqk1nr/pppp1ppp/8/2b1N3/8/8/PPPPPPPP/RNBQKB1R","rnbqk1nr/pppp1ppp/8/2b1N3/8/2N5/PPPPPPPP/R1BQKB1R","rnb1k1nr/pppp1ppp/5q2/2b1N3/8/2N5/PPPPPPPP/R1BQKB1R","rnb1k1nr/pppp1ppp/5q2/2b5/2N5/2N5/PPPPPPPP/R1BQKB1R","rnb1k1nr/pppp1ppp/8/2b5/2N5/2N5/PPPPPqPP/R1BQKB1R"]},{"id":"f2-b","col":"W","block":"f2 双瞄","opp":"电脑 Ella","date":"2026.09","res":"负","key":10,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf6","f":"g8","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e4","f":"e2","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"dxe5","f":"d4","t":"e5","p":"P","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Qe7","f":"d8","t":"e7","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f4","f":"f2","t":"f4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxe4","f":"f6","t":"e4","p":"N","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"c4","f":"c2","t":"c4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qc5","f":"e7","t":"c5","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"b3","f":"b2","t":"b3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qf2#","f":"c5","t":"f2","p":"Q","w":false,"cap":"","chk":true,"mate":true,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkb1r/pppppppp/5n2/8/3PP3/8/PPP2PPP/RNBQKBNR","rnbqkb1r/pppp1ppp/5n2/4p3/3PP3/8/PPP2PPP/RNBQKBNR","rnbqkb1r/pppp1ppp/5n2/4P3/4P3/8/PPP2PPP/RNBQKBNR","rnb1kb1r/ppppqppp/5n2/4P3/4P3/8/PPP2PPP/RNBQKBNR","rnb1kb1r/ppppqppp/5n2/4P3/4PP2/8/PPP3PP/RNBQKBNR","rnb1kb1r/ppppqppp/8/4P3/4nP2/8/PPP3PP/RNBQKBNR","rnb1kb1r/ppppqppp/8/4P3/2P1nP2/8/PP4PP/RNBQKBNR","rnb1kb1r/pppp1ppp/8/2q1P3/2P1nP2/8/PP4PP/RNBQKBNR","rnb1kb1r/pppp1ppp/8/2q1P3/2P1nP2/1P6/P5PP/RNBQKBNR","rnb1kb1r/pppp1ppp/8/4P3/2P1nP2/1P6/P4qPP/RNBQKBNR"]},{"id":"f7","col":"B","block":"f7 双瞄","opp":"对手 B · 约 280","date":"2025.12","res":"负","key":9,"plies":[{"san":"e4","f":"e2","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bc4","f":"f1","t":"c4","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf6","f":"g8","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"exd4","f":"e5","t":"d4","p":"P","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Bg5","f":"c1","t":"g5","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"h6","f":"h7","t":"h6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bh4","f":"g5","t":"h4","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxe4","f":"f6","t":"e4","p":"N","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Qh5","f":"d1","t":"h5","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"g5","f":"g7","t":"g5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxf7#","f":"h5","t":"f7","p":"Q","w":true,"cap":"P","chk":true,"mate":true,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR","rnbqkb1r/pppp1ppp/5n2/4p3/2B1P3/8/PPPP1PPP/RNBQK1NR","rnbqkb1r/pppp1ppp/5n2/4p3/2BPP3/8/PPP2PPP/RNBQK1NR","rnbqkb1r/pppp1ppp/5n2/8/2BpP3/8/PPP2PPP/RNBQK1NR","rnbqkb1r/pppp1ppp/5n2/6B1/2BpP3/8/PPP2PPP/RN1QK1NR","rnbqkb1r/pppp1pp1/5n1p/6B1/2BpP3/8/PPP2PPP/RN1QK1NR","rnbqkb1r/pppp1pp1/5n1p/8/2BpP2B/8/PPP2PPP/RN1QK1NR","rnbqkb1r/pppp1pp1/7p/8/2Bpn2B/8/PPP2PPP/RN1QK1NR","rnbqkb1r/pppp1pp1/7p/7Q/2Bpn2B/8/PPP2PPP/RN2K1NR","rnbqkb1r/pppp1p2/7p/6pQ/2Bpn2B/8/PPP2PPP/RN2K1NR","rnbqkb1r/pppp1Q2/7p/6p1/2Bpn2B/8/PPP2PPP/RN2K1NR"]},{"id":"qh5","col":"B","block":"Qh5 捉双","opp":"对手 C · 约 270","date":"2026.03","res":"负","key":3,"plies":[{"san":"e4","f":"e2","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qh5","f":"d1","t":"h5","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"g6","f":"g7","t":"g6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxe5+","f":"h5","t":"e5","p":"Q","w":true,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Be7","f":"f8","t":"e7","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxh8","f":"e5","t":"h8","p":"Q","w":true,"cap":"R","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR","rnbqkbnr/pppp1p1p/6p1/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR","rnbqkbnr/pppp1p1p/6p1/4Q3/4P3/8/PPPP1PPP/RNB1KBNR","rnbqk1nr/ppppbp1p/6p1/4Q3/4P3/8/PPPP1PPP/RNB1KBNR","rnbqk1nQ/ppppbp1p/6p1/8/4P3/8/PPPP1PPP/RNB1KBNR"]},{"id":"c2","col":"W","block":"c2 马叉","opp":"对手 D · 约 250","date":"2025.12","res":"和","key":14,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d6","f":"d7","t":"d6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e4","f":"e2","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc6","f":"b8","t":"c6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"dxe5","f":"d4","t":"e5","p":"P","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"dxe5","f":"d6","t":"e5","p":"P","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Qxd8+","f":"d1","t":"d8","p":"Q","w":true,"cap":"Q","chk":true,"mate":false,"cas":""},{"san":"Kxd8","f":"e8","t":"d8","p":"K","w":false,"cap":"Q","chk":false,"mate":false,"cas":""},{"san":"Bg5+","f":"c1","t":"g5","p":"B","w":true,"cap":"","chk":true,"mate":false,"cas":""},{"san":"f6","f":"f7","t":"f6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bh4","f":"g5","t":"h4","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nd4","f":"c6","t":"d4","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxc2+","f":"d4","t":"c2","p":"N","w":false,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Kd1","f":"e1","t":"d1","p":"K","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxa1","f":"c2","t":"a1","p":"N","w":false,"cap":"R","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/3p4/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/3p4/8/3PP3/8/PPP2PPP/RNBQKBNR","r1bqkbnr/ppp1pppp/2np4/8/3PP3/8/PPP2PPP/RNBQKBNR","r1bqkbnr/ppp1pppp/2np4/8/3PP3/2N5/PPP2PPP/R1BQKBNR","r1bqkbnr/ppp2ppp/2np4/4p3/3PP3/2N5/PPP2PPP/R1BQKBNR","r1bqkbnr/ppp2ppp/2np4/4P3/4P3/2N5/PPP2PPP/R1BQKBNR","r1bqkbnr/ppp2ppp/2n5/4p3/4P3/2N5/PPP2PPP/R1BQKBNR","r1bQkbnr/ppp2ppp/2n5/4p3/4P3/2N5/PPP2PPP/R1B1KBNR","r1bk1bnr/ppp2ppp/2n5/4p3/4P3/2N5/PPP2PPP/R1B1KBNR","r1bk1bnr/ppp2ppp/2n5/4p1B1/4P3/2N5/PPP2PPP/R3KBNR","r1bk1bnr/ppp3pp/2n2p2/4p1B1/4P3/2N5/PPP2PPP/R3KBNR","r1bk1bnr/ppp3pp/2n2p2/4p3/4P2B/2N5/PPP2PPP/R3KBNR","r1bk1bnr/ppp3pp/5p2/4p3/3nP2B/2N5/PPP2PPP/R3KBNR","r1bk1bnr/ppp3pp/5p2/4p3/3nP2B/2N2N2/PPP2PPP/R3KB1R","r1bk1bnr/ppp3pp/5p2/4p3/4P2B/2N2N2/PPn2PPP/R3KB1R","r1bk1bnr/ppp3pp/5p2/4p3/4P2B/2N2N2/PPn2PPP/R2K1B1R","r1bk1bnr/ppp3pp/5p2/4p3/4P2B/2N2N2/PP3PPP/n2K1B1R"]},{"id":"c7","col":"W","block":"c7 马叉 · 己方进攻","opp":"对手 E · 约 260","date":"2025.12","res":"胜","key":13,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc6","f":"b8","t":"c6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d5","f":"d7","t":"d5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bg4","f":"c8","t":"g4","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ng5","f":"f3","t":"g5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f6","f":"f7","t":"f6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ne6","f":"g5","t":"e6","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qd6","f":"d8","t":"d6","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf4","f":"e6","t":"f4","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e6","f":"e7","t":"e6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nb5","f":"c3","t":"b5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qc5","f":"d6","t":"c5","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxc7+","f":"b5","t":"c7","p":"N","w":true,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Kd7","f":"e8","t":"d7","p":"K","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxa8","f":"c7","t":"a8","p":"N","w":true,"cap":"R","chk":false,"mate":false,"cas":""},{"san":"g5","f":"g7","t":"g5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nh5","f":"f4","t":"h5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ke7","f":"d7","t":"e7","p":"K","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"dxc5","f":"d4","t":"c5","p":"P","w":true,"cap":"Q","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","r1bqkbnr/pppppppp/2n5/8/3P4/8/PPP1PPPP/RNBQKBNR","r1bqkbnr/pppppppp/2n5/8/3P4/2N5/PPP1PPPP/R1BQKBNR","r1bqkbnr/ppp1pppp/2n5/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR","r1bqkbnr/ppp1pppp/2n5/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","r2qkbnr/ppp1pppp/2n5/3p4/3P2b1/2N2N2/PPP1PPPP/R1BQKB1R","r2qkbnr/ppp1pppp/2n5/3p2N1/3P2b1/2N5/PPP1PPPP/R1BQKB1R","r2qkbnr/ppp1p1pp/2n2p2/3p2N1/3P2b1/2N5/PPP1PPPP/R1BQKB1R","r2qkbnr/ppp1p1pp/2n1Np2/3p4/3P2b1/2N5/PPP1PPPP/R1BQKB1R","r3kbnr/ppp1p1pp/2nqNp2/3p4/3P2b1/2N5/PPP1PPPP/R1BQKB1R","r3kbnr/ppp1p1pp/2nq1p2/3p4/3P1Nb1/2N5/PPP1PPPP/R1BQKB1R","r3kbnr/ppp3pp/2nqpp2/3p4/3P1Nb1/2N5/PPP1PPPP/R1BQKB1R","r3kbnr/ppp3pp/2nqpp2/1N1p4/3P1Nb1/8/PPP1PPPP/R1BQKB1R","r3kbnr/ppp3pp/2n1pp2/1Nqp4/3P1Nb1/8/PPP1PPPP/R1BQKB1R","r3kbnr/ppN3pp/2n1pp2/2qp4/3P1Nb1/8/PPP1PPPP/R1BQKB1R","r4bnr/ppNk2pp/2n1pp2/2qp4/3P1Nb1/8/PPP1PPPP/R1BQKB1R","N4bnr/pp1k2pp/2n1pp2/2qp4/3P1Nb1/8/PPP1PPPP/R1BQKB1R","N4bnr/pp1k3p/2n1pp2/2qp2p1/3P1Nb1/8/PPP1PPPP/R1BQKB1R","N4bnr/pp1k3p/2n1pp2/2qp2pN/3P2b1/8/PPP1PPPP/R1BQKB1R","N4bnr/pp2k2p/2n1pp2/2qp2pN/3P2b1/8/PPP1PPPP/R1BQKB1R","N4bnr/pp2k2p/2n1pp2/2Pp2pN/6b1/8/PPP1PPPP/R1BQKB1R"]},{"id":"guard","col":"W","block":"数守卫","opp":"电脑 Nina","date":"2026.09","res":"负","key":16,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d5","f":"d7","t":"d5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf6","f":"g8","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e6","f":"e7","t":"e6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e3","f":"e2","t":"e3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qd6","f":"d8","t":"d6","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qd3","f":"d1","t":"d3","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nbd7","f":"b8","t":"d7","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"a4","f":"a2","t":"a4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e6","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"dxe5","f":"d4","t":"e5","p":"P","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nxe5","f":"d7","t":"e5","p":"N","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nxe5","f":"f3","t":"e5","p":"N","w":true,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"Bd7","f":"c8","t":"d7","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxd5","f":"d3","t":"d5","p":"Q","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nxd5","f":"f6","t":"d5","p":"N","w":false,"cap":"Q","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/8/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R","rnbqkb1r/ppp1pppp/5n2/3p4/3P4/5N2/PPP1PPPP/RNBQKB1R","rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N1PN2/PPP2PPP/R1BQKB1R","rnb1kb1r/ppp2ppp/3qpn2/3p4/3P4/2N1PN2/PPP2PPP/R1BQKB1R","rnb1kb1r/ppp2ppp/3qpn2/3p4/3P4/2NQPN2/PPP2PPP/R1B1KB1R","r1b1kb1r/pppn1ppp/3qpn2/3p4/3P4/2NQPN2/PPP2PPP/R1B1KB1R","r1b1kb1r/pppn1ppp/3qpn2/3p4/P2P4/2NQPN2/1PP2PPP/R1B1KB1R","r1b1kb1r/pppn1ppp/3q1n2/3pp3/P2P4/2NQPN2/1PP2PPP/R1B1KB1R","r1b1kb1r/pppn1ppp/3q1n2/3pP3/P7/2NQPN2/1PP2PPP/R1B1KB1R","r1b1kb1r/ppp2ppp/3q1n2/3pn3/P7/2NQPN2/1PP2PPP/R1B1KB1R","r1b1kb1r/ppp2ppp/3q1n2/3pN3/P7/2NQP3/1PP2PPP/R1B1KB1R","r3kb1r/pppb1ppp/3q1n2/3pN3/P7/2NQP3/1PP2PPP/R1B1KB1R","r3kb1r/pppb1ppp/3q1n2/3QN3/P7/2N1P3/1PP2PPP/R1B1KB1R","r3kb1r/pppb1ppp/3q4/3nN3/P7/2N1P3/1PP2PPP/R1B1KB1R"]},{"id":"lead-a","col":"B","block":"领先时收","opp":"对手 F · 约 290","date":"2025.12","res":"负","key":21,"plies":[{"san":"e4","f":"e2","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qh5","f":"d1","t":"h5","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf6","f":"g8","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxe5+","f":"h5","t":"e5","p":"Q","w":true,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Be7","f":"f8","t":"e7","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc6","f":"b8","t":"c6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qb5","f":"e5","t":"b5","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"a6","f":"a7","t":"a6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qc4","f":"b5","t":"c4","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"b5","f":"b7","t":"b5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qd3","f":"c4","t":"d3","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nb4","f":"c6","t":"b4","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qg3","f":"d3","t":"g3","p":"Q","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"c5","f":"c7","t":"c5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"a3","f":"a2","t":"a3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxc2+","f":"b4","t":"c2","p":"N","w":false,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Ke2","f":"e1","t":"e2","p":"K","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxa1","f":"c2","t":"a1","p":"N","w":false,"cap":"R","chk":false,"mate":false,"cas":""},{"san":"Qxg7","f":"g3","t":"g7","p":"Q","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"d6","f":"d7","t":"d6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qxh8+","f":"g7","t":"h8","p":"Q","w":true,"cap":"R","chk":true,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR","rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR","rnbqkb1r/pppp1ppp/5n2/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR","rnbqkb1r/pppp1ppp/5n2/4Q3/4P3/8/PPPP1PPP/RNB1KBNR","rnbqk2r/ppppbppp/5n2/4Q3/4P3/8/PPPP1PPP/RNB1KBNR","rnbqk2r/ppppbppp/5n2/4Q3/4P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/ppppbppp/2n2n2/4Q3/4P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/ppppbppp/2n2n2/1Q6/4P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/1pppbppp/p1n2n2/1Q6/4P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/1pppbppp/p1n2n2/8/2Q1P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/2ppbppp/p1n2n2/1p6/2Q1P3/2N5/PPPP1PPP/R1B1KBNR","r1bqk2r/2ppbppp/p1n2n2/1p6/4P3/2NQ4/PPPP1PPP/R1B1KBNR","r1bqk2r/2ppbppp/p4n2/1p6/1n2P3/2NQ4/PPPP1PPP/R1B1KBNR","r1bqk2r/2ppbppp/p4n2/1p6/1n2P3/2N3Q1/PPPP1PPP/R1B1KBNR","r1bqk2r/3pbppp/p4n2/1pp5/1n2P3/2N3Q1/PPPP1PPP/R1B1KBNR","r1bqk2r/3pbppp/p4n2/1pp5/1n2P3/P1N3Q1/1PPP1PPP/R1B1KBNR","r1bqk2r/3pbppp/p4n2/1pp5/4P3/P1N3Q1/1PnP1PPP/R1B1KBNR","r1bqk2r/3pbppp/p4n2/1pp5/4P3/P1N3Q1/1PnPKPPP/R1B2BNR","r1bqk2r/3pbppp/p4n2/1pp5/4P3/P1N3Q1/1P1PKPPP/n1B2BNR","r1bqk2r/3pbpQp/p4n2/1pp5/4P3/P1N5/1P1PKPPP/n1B2BNR","r1bqk2r/4bpQp/p2p1n2/1pp5/4P3/P1N5/1P1PKPPP/n1B2BNR","r1bqk2Q/4bp1p/p2p1n2/1pp5/4P3/P1N5/1P1PKPPP/n1B2BNR"]},{"id":"lead-b","col":"W","block":"领先时收","opp":"对手 G · 约 250","date":"2026.01","res":"负","key":60,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc6","f":"b8","t":"c6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d5","f":"d7","t":"d5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf6","f":"g8","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ng5","f":"f3","t":"g5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e5","f":"e7","t":"e5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"dxe5","f":"d4","t":"e5","p":"P","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nxe5","f":"c6","t":"e5","p":"N","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nb5","f":"c3","t":"b5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bb4+","f":"f8","t":"b4","p":"B","w":false,"cap":"","chk":true,"mate":false,"cas":""},{"san":"c3","f":"c2","t":"c3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ba5","f":"b4","t":"a5","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e3","f":"e2","t":"e3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"O-O","f":"e8","t":"g8","p":"K","w":false,"cap":"","chk":false,"mate":false,"cas":"short"},{"san":"f4","f":"f2","t":"f4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc4","f":"e5","t":"c4","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bxc4","f":"f1","t":"c4","p":"B","w":true,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"dxc4","f":"d5","t":"c4","p":"P","w":false,"cap":"B","chk":false,"mate":false,"cas":""},{"san":"Qxd8","f":"d1","t":"d8","p":"Q","w":true,"cap":"Q","chk":false,"mate":false,"cas":""},{"san":"Rxd8","f":"f8","t":"d8","p":"R","w":false,"cap":"Q","chk":false,"mate":false,"cas":""},{"san":"Nxc7","f":"b5","t":"c7","p":"N","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Rb8","f":"a8","t":"b8","p":"R","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nb5","f":"c7","t":"b5","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"a6","f":"a7","t":"a6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"O-O","f":"e1","t":"g1","p":"K","w":true,"cap":"","chk":false,"mate":false,"cas":"short"},{"san":"axb5","f":"a6","t":"b5","p":"P","w":false,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"e4","f":"e3","t":"e4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxe4","f":"f6","t":"e4","p":"N","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Be3","f":"c1","t":"e3","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nd2","f":"e4","t":"d2","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bxd2","f":"e3","t":"d2","p":"B","w":true,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"Rxd2","f":"d8","t":"d2","p":"R","w":false,"cap":"B","chk":false,"mate":false,"cas":""},{"san":"Ne4","f":"g5","t":"e4","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bg4","f":"c8","t":"g4","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxd2","f":"e4","t":"d2","p":"N","w":true,"cap":"R","chk":false,"mate":false,"cas":""},{"san":"Kf8","f":"g8","t":"f8","p":"K","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Rae1","f":"a1","t":"e1","p":"R","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bb6+","f":"a5","t":"b6","p":"B","w":false,"cap":"","chk":true,"mate":false,"cas":""},{"san":"Kh1","f":"g1","t":"h1","p":"K","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bd7","f":"g4","t":"d7","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ne4","f":"d2","t":"e4","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Re8","f":"b8","t":"e8","p":"R","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"b4","f":"b2","t":"b4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bc6","f":"d7","t":"c6","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nd6","f":"e4","t":"d6","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Rxe1","f":"e8","t":"e1","p":"R","w":false,"cap":"R","chk":false,"mate":false,"cas":""},{"san":"Rxe1","f":"f1","t":"e1","p":"R","w":true,"cap":"R","chk":false,"mate":false,"cas":""},{"san":"Bf2","f":"b6","t":"f2","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Re2","f":"e1","t":"e2","p":"R","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bb6","f":"f2","t":"b6","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc8","f":"d6","t":"c8","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"g5","f":"g7","t":"g5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxb6","f":"c8","t":"b6","p":"N","w":true,"cap":"B","chk":false,"mate":false,"cas":""},{"san":"gxf4","f":"g5","t":"f4","p":"P","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Nc8","f":"b6","t":"c8","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f3","f":"f4","t":"f3","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"gxf3","f":"g2","t":"f3","p":"P","w":true,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Bxf3+","f":"c6","t":"f3","p":"B","w":false,"cap":"P","chk":true,"mate":false,"cas":""},{"san":"Kg1","f":"h1","t":"g1","p":"K","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bxe2","f":"f3","t":"e2","p":"B","w":false,"cap":"R","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","r1bqkbnr/pppppppp/2n5/8/3P4/8/PPP1PPPP/RNBQKBNR","r1bqkbnr/pppppppp/2n5/8/3P4/2N5/PPP1PPPP/R1BQKBNR","r1bqkbnr/ppp1pppp/2n5/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR","r1bqkbnr/ppp1pppp/2n5/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp1pppp/2n2n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp1pppp/2n2n2/3p2N1/3P4/2N5/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp2ppp/2n2n2/3pp1N1/3P4/2N5/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp2ppp/2n2n2/3pP1N1/8/2N5/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp2ppp/5n2/3pn1N1/8/2N5/PPP1PPPP/R1BQKB1R","r1bqkb1r/ppp2ppp/5n2/1N1pn1N1/8/8/PPP1PPPP/R1BQKB1R","r1bqk2r/ppp2ppp/5n2/1N1pn1N1/1b6/8/PPP1PPPP/R1BQKB1R","r1bqk2r/ppp2ppp/5n2/1N1pn1N1/1b6/2P5/PP2PPPP/R1BQKB1R","r1bqk2r/ppp2ppp/5n2/bN1pn1N1/8/2P5/PP2PPPP/R1BQKB1R","r1bqk2r/ppp2ppp/5n2/bN1pn1N1/8/2P1P3/PP3PPP/R1BQKB1R","r1bq1rk1/ppp2ppp/5n2/bN1pn1N1/8/2P1P3/PP3PPP/R1BQKB1R","r1bq1rk1/ppp2ppp/5n2/bN1pn1N1/5P2/2P1P3/PP4PP/R1BQKB1R","r1bq1rk1/ppp2ppp/5n2/bN1p2N1/2n2P2/2P1P3/PP4PP/R1BQKB1R","r1bq1rk1/ppp2ppp/5n2/bN1p2N1/2B2P2/2P1P3/PP4PP/R1BQK2R","r1bq1rk1/ppp2ppp/5n2/bN4N1/2p2P2/2P1P3/PP4PP/R1BQK2R","r1bQ1rk1/ppp2ppp/5n2/bN4N1/2p2P2/2P1P3/PP4PP/R1B1K2R","r1br2k1/ppp2ppp/5n2/bN4N1/2p2P2/2P1P3/PP4PP/R1B1K2R","r1br2k1/ppN2ppp/5n2/b5N1/2p2P2/2P1P3/PP4PP/R1B1K2R","1rbr2k1/ppN2ppp/5n2/b5N1/2p2P2/2P1P3/PP4PP/R1B1K2R","1rbr2k1/pp3ppp/5n2/bN4N1/2p2P2/2P1P3/PP4PP/R1B1K2R","1rbr2k1/1p3ppp/p4n2/bN4N1/2p2P2/2P1P3/PP4PP/R1B1K2R","1rbr2k1/1p3ppp/p4n2/bN4N1/2p2P2/2P1P3/PP4PP/R1B2RK1","1rbr2k1/1p3ppp/5n2/bp4N1/2p2P2/2P1P3/PP4PP/R1B2RK1","1rbr2k1/1p3ppp/5n2/bp4N1/2p1PP2/2P5/PP4PP/R1B2RK1","1rbr2k1/1p3ppp/8/bp4N1/2p1nP2/2P5/PP4PP/R1B2RK1","1rbr2k1/1p3ppp/8/bp4N1/2p1nP2/2P1B3/PP4PP/R4RK1","1rbr2k1/1p3ppp/8/bp4N1/2p2P2/2P1B3/PP1n2PP/R4RK1","1rbr2k1/1p3ppp/8/bp4N1/2p2P2/2P5/PP1B2PP/R4RK1","1rb3k1/1p3ppp/8/bp4N1/2p2P2/2P5/PP1r2PP/R4RK1","1rb3k1/1p3ppp/8/bp6/2p1NP2/2P5/PP1r2PP/R4RK1","1r4k1/1p3ppp/8/bp6/2p1NPb1/2P5/PP1r2PP/R4RK1","1r4k1/1p3ppp/8/bp6/2p2Pb1/2P5/PP1N2PP/R4RK1","1r3k2/1p3ppp/8/bp6/2p2Pb1/2P5/PP1N2PP/R4RK1","1r3k2/1p3ppp/8/bp6/2p2Pb1/2P5/PP1N2PP/4RRK1","1r3k2/1p3ppp/1b6/1p6/2p2Pb1/2P5/PP1N2PP/4RRK1","1r3k2/1p3ppp/1b6/1p6/2p2Pb1/2P5/PP1N2PP/4RR1K","1r3k2/1p1b1ppp/1b6/1p6/2p2P2/2P5/PP1N2PP/4RR1K","1r3k2/1p1b1ppp/1b6/1p6/2p1NP2/2P5/PP4PP/4RR1K","4rk2/1p1b1ppp/1b6/1p6/2p1NP2/2P5/PP4PP/4RR1K","4rk2/1p1b1ppp/1b6/1p6/1Pp1NP2/2P5/P5PP/4RR1K","4rk2/1p3ppp/1bb5/1p6/1Pp1NP2/2P5/P5PP/4RR1K","4rk2/1p3ppp/1bbN4/1p6/1Pp2P2/2P5/P5PP/4RR1K","5k2/1p3ppp/1bbN4/1p6/1Pp2P2/2P5/P5PP/4rR1K","5k2/1p3ppp/1bbN4/1p6/1Pp2P2/2P5/P5PP/4R2K","5k2/1p3ppp/2bN4/1p6/1Pp2P2/2P5/P4bPP/4R2K","5k2/1p3ppp/2bN4/1p6/1Pp2P2/2P5/P3RbPP/7K","5k2/1p3ppp/1bbN4/1p6/1Pp2P2/2P5/P3R1PP/7K","2N2k2/1p3ppp/1bb5/1p6/1Pp2P2/2P5/P3R1PP/7K","2N2k2/1p3p1p/1bb5/1p4p1/1Pp2P2/2P5/P3R1PP/7K","5k2/1p3p1p/1Nb5/1p4p1/1Pp2P2/2P5/P3R1PP/7K","5k2/1p3p1p/1Nb5/1p6/1Pp2p2/2P5/P3R1PP/7K","2N2k2/1p3p1p/2b5/1p6/1Pp2p2/2P5/P3R1PP/7K","2N2k2/1p3p1p/2b5/1p6/1Pp5/2P2p2/P3R1PP/7K","2N2k2/1p3p1p/2b5/1p6/1Pp5/2P2P2/P3R2P/7K","2N2k2/1p3p1p/8/1p6/1Pp5/2P2b2/P3R2P/7K","2N2k2/1p3p1p/8/1p6/1Pp5/2P2b2/P3R2P/6K1","2N2k2/1p3p1p/8/1p6/1Pp5/2P5/P3b2P/6K1"]},{"id":"lead-c","col":"W","block":"领先时收","opp":"对手 H · 约 300","date":"2025.12","res":"负","key":32,"plies":[{"san":"d4","f":"d2","t":"d4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"d5","f":"d7","t":"d5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nc3","f":"b1","t":"c3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Be6","f":"c8","t":"e6","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nf3","f":"g1","t":"f3","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"c6","f":"c7","t":"c6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"b4","f":"b2","t":"b4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f6","f":"f7","t":"f6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"g4","f":"g2","t":"g4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qb6","f":"d8","t":"b6","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Rb1","f":"a1","t":"b1","p":"R","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bxg4","f":"e6","t":"g4","p":"B","w":false,"cap":"P","chk":false,"mate":false,"cas":""},{"san":"Ng1","f":"f3","t":"g1","p":"N","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nd7","f":"b8","t":"d7","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"h3","f":"h2","t":"h3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bh5","f":"g4","t":"h5","p":"B","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"h4","f":"h3","t":"h4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qc7","f":"b6","t":"c7","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f4","f":"f2","t":"f4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"f5","f":"f6","t":"f5","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bh3","f":"f1","t":"h3","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e6","f":"e7","t":"e6","p":"P","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"a4","f":"a2","t":"a4","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qb6","f":"c7","t":"b6","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"e3","f":"e2","t":"e3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ndf6","f":"d7","t":"f6","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ba3","f":"c1","t":"a3","p":"B","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Ne4","f":"f6","t":"e4","p":"N","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Nxe4","f":"c3","t":"e4","p":"N","w":true,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"dxe4","f":"d5","t":"e4","p":"P","w":false,"cap":"N","chk":false,"mate":false,"cas":""},{"san":"a5","f":"a4","t":"a5","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Qb5","f":"b6","t":"b5","p":"Q","w":false,"cap":"","chk":false,"mate":false,"cas":""},{"san":"c3","f":"c2","t":"c3","p":"P","w":true,"cap":"","chk":false,"mate":false,"cas":""},{"san":"Bxd1","f":"h5","t":"d1","p":"B","w":false,"cap":"Q","chk":false,"mate":false,"cas":""}],"pos":["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR","rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR","rnbqkbnr/ppp1pppp/8/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR","rn1qkbnr/ppp1pppp/4b3/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR","rn1qkbnr/ppp1pppp/4b3/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","rn1qkbnr/pp2pppp/2p1b3/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R","rn1qkbnr/pp2pppp/2p1b3/3p4/1P1P4/2N2N2/P1P1PPPP/R1BQKB1R","rn1qkbnr/pp2p1pp/2p1bp2/3p4/1P1P4/2N2N2/P1P1PPPP/R1BQKB1R","rn1qkbnr/pp2p1pp/2p1bp2/3p4/1P1P2P1/2N2N2/P1P1PP1P/R1BQKB1R","rn2kbnr/pp2p1pp/1qp1bp2/3p4/1P1P2P1/2N2N2/P1P1PP1P/R1BQKB1R","rn2kbnr/pp2p1pp/1qp1bp2/3p4/1P1P2P1/2N2N2/P1P1PP1P/1RBQKB1R","rn2kbnr/pp2p1pp/1qp2p2/3p4/1P1P2b1/2N2N2/P1P1PP1P/1RBQKB1R","rn2kbnr/pp2p1pp/1qp2p2/3p4/1P1P2b1/2N5/P1P1PP1P/1RBQKBNR","r3kbnr/pp1np1pp/1qp2p2/3p4/1P1P2b1/2N5/P1P1PP1P/1RBQKBNR","r3kbnr/pp1np1pp/1qp2p2/3p4/1P1P2b1/2N4P/P1P1PP2/1RBQKBNR","r3kbnr/pp1np1pp/1qp2p2/3p3b/1P1P4/2N4P/P1P1PP2/1RBQKBNR","r3kbnr/pp1np1pp/1qp2p2/3p3b/1P1P3P/2N5/P1P1PP2/1RBQKBNR","r3kbnr/ppqnp1pp/2p2p2/3p3b/1P1P3P/2N5/P1P1PP2/1RBQKBNR","r3kbnr/ppqnp1pp/2p2p2/3p3b/1P1P1P1P/2N5/P1P1P3/1RBQKBNR","r3kbnr/ppqnp1pp/2p5/3p1p1b/1P1P1P1P/2N5/P1P1P3/1RBQKBNR","r3kbnr/ppqnp1pp/2p5/3p1p1b/1P1P1P1P/2N4B/P1P1P3/1RBQK1NR","r3kbnr/ppqn2pp/2p1p3/3p1p1b/1P1P1P1P/2N4B/P1P1P3/1RBQK1NR","r3kbnr/ppqn2pp/2p1p3/3p1p1b/PP1P1P1P/2N4B/2P1P3/1RBQK1NR","r3kbnr/pp1n2pp/1qp1p3/3p1p1b/PP1P1P1P/2N4B/2P1P3/1RBQK1NR","r3kbnr/pp1n2pp/1qp1p3/3p1p1b/PP1P1P1P/2N1P2B/2P5/1RBQK1NR","r3kbnr/pp4pp/1qp1pn2/3p1p1b/PP1P1P1P/2N1P2B/2P5/1RBQK1NR","r3kbnr/pp4pp/1qp1pn2/3p1p1b/PP1P1P1P/B1N1P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/1qp1p3/3p1p1b/PP1PnP1P/B1N1P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/1qp1p3/3p1p1b/PP1PNP1P/B3P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/1qp1p3/5p1b/PP1PpP1P/B3P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/1qp1p3/P4p1b/1P1PpP1P/B3P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/2p1p3/Pq3p1b/1P1PpP1P/B3P2B/2P5/1R1QK1NR","r3kbnr/pp4pp/2p1p3/Pq3p1b/1P1PpP1P/B1P1P2B/8/1R1QK1NR","r3kbnr/pp4pp/2p1p3/Pq3p2/1P1PpP1P/B1P1P2B/8/1R1bK1NR"]}];
+const NOTES={
+"f2-a":{bad:[7],pun:[8],n:{
+3:{t:"白马离开 f3，去吃 e5 兵。原来 f3 的马挡在 f2 前面，现在 f2 前面空了。",mk:["f3","f2"]},
+4:{t:"黑象出到 c5。它沿斜线 c5–d4–e3–f2 指向 f2。",a:[["c5","f2","threat"]]},
+6:{t:"关键局面。黑后到 f6，和 c5 的象一起瞄准 f2。f2 只有白王在守：两个攻击者，一个守卫。",a:[["f6","f2","threat"],["c5","f2","threat"],["d2","d4","good"]],g:"正确应法：d4（兵从 d2 到 d4）。兵挡在象的斜线上，同时赶象。只剩后一个攻击者，后吃 f2 时，白王能吃回它。"},
+7:{t:"白方走了 Nc4，马在别处做事，f2 没人管。",mk:["f2"],a:[["f6","f2","threat"],["c5","f2","threat"]]},
+8:{t:"Qxf2#：后吃 f2 兵。c5 的象保护着后，王吃不回，也跑不掉。将杀。",a:[["c5","f2","threat"]]}}},
+"f2-b":{bad:[11],pun:[12],n:{
+7:{t:"白方的 f 兵从 f2 走到 f4。王旁边的 f2 成了空格，只有王守着它。",mk:["f2"]},
+8:{t:"黑马吃掉 e4 的兵，停在 e4。从这里它能跳到 f2。",a:[["e4","f2","threat"]]},
+10:{t:"关键局面。黑后到 c5，斜线 c5–d4–e3–f2 全空；e4 的马也盯着 f2。",a:[["c5","f2","threat"],["e4","f2","threat"],["d1","e2","good"]],g:"正确应法：Qe2（后从 d1 到 e2）。后守住 f2，同时攻击 e4 的马。"},
+11:{t:"白方挺了 b3 兵。f2 依然没人守。",mk:["f2"],a:[["c5","f2","threat"],["e4","f2","threat"]]},
+12:{t:"Qf2#：后跳进 f2，有 e4 的马保护。将杀。",a:[["e4","f2","threat"]]}}},
+"f7":{bad:[10,12],pun:[13],n:{
+3:{t:"白象出到 c4，斜线指向 f7。",a:[["c4","f7","threat"]]},
+9:{t:"关键局面。黑方 f6 的马同时在做两件事：一是挡在 h4 象和 d8 后之间（斜线 h4–g5–f6–e7–d8）；二是守着 h5，不让白后跳进来。",a:[["h4","d8","path"],["f6","h5","guard"],["b8","c6","good"]],g:"正确应法：Nc6（马从 b8 到 c6），先出别的子。f6 的马留在原地。"},
+10:{t:"黑马离开 f6，去吃 e4 兵。两件事同时丢了：d8 的后直接暴露给 h4 的象，h5 也空了出来。",a:[["h4","d8","threat"]],mk:["h5"]},
+11:{t:"白方没有吃黑后，而是走 Qh5。后和 c4 的象一起瞄准 f7，f7 只有王在守。",a:[["h5","f7","threat"],["c4","f7","threat"]]},
+12:{t:"黑方挺 g5 去赶 h4 的象。f7 依然没人守。",a:[["h5","f7","threat"],["c4","f7","threat"]]},
+13:{t:"Qxf7#：后吃 f7，有 c4 的象保护。将杀。",a:[["c4","f7","threat"]]}}},
+"qh5":{bad:[4],pun:[5,7],n:{
+3:{t:"关键局面。白后出到 h5，同时攻击两个点：没人守的 e5 兵，和 f7。",a:[["h5","e5","threat"],["h5","f7","threat"],["b8","c6","good"]],g:"正确应法：Nc6（马从 b8 到 c6），守住 e5。这一步无法对称照走：黑方没有对称的位置可以放后。"},
+4:{t:"黑方挺 g6 赶后。可是 g 兵离开 g7 之后，斜线 e5–f6–g7–h8 也打开了。",mk:["g7"],a:[["e5","h8","path"]]},
+5:{t:"Qxe5+：后吃 e5 兵并将军（e 线直通黑王），同时沿斜线瞄准 h8 的车。一步打两个目标，这就是捉双。",a:[["e5","e8","threat"],["e5","h8","threat"]]},
+6:{t:"黑方用象挡住将军。h8 的车还在被瞄着。",a:[["e5","h8","threat"]]},
+7:{t:"后吃掉 h8 的车。",mk:["h8"]}}},
+"c2":{bad:[15],pun:[16,18],n:{
+10:{t:"后已经换掉了。开局时守着 c2 的，就是白后。现在 c2 没有守卫。",mk:["c2"]},
+14:{t:"关键局面。黑马到 d4，离 c2 只差一跳。马一旦到 c2，就能同时攻击白方 e1 的王和 a1 的车。",a:[["d4","c2","threat"],["c2","e1","fork"],["c2","a1","fork"],["e1","c1","good"]],g:"正确应法：长易位 O-O-O。王到 c1 守住 c2，车也离开了 a1。"},
+15:{t:"白方出马到 f3。c2 依然空着。",a:[["d4","c2","threat"]]},
+16:{t:"Nxc2+：马吃 c2 兵，将军，同时攻击 a1 的车。",a:[["c2","e1","threat"],["c2","a1","threat"]]},
+17:{t:"王只能躲开，车保不住了。",a:[["c2","a1","threat"]]},
+18:{t:"黑马吃掉 a1 的车。"}}},
+"c7":{bad:[],pun:[],good:[15,17,21],n:{
+10:{t:"黑后到 d6。注意：它守着 c7（d6 和 c7 斜着相邻）。",a:[["d6","c7","guard"]]},
+13:{t:"关键局面，这一盘由白方进攻。白马到 b5，离 c7 一跳。c7 现在只靠 d6 的黑后守着。",a:[["b5","c7","good"],["d6","c7","guard"]],g:"同一棋形，方向相反。"},
+14:{t:"黑后离开 d6 走到 c5，c7 失去了唯一的守卫。另外，c5 的后还被白方 d4 的兵攻击着。",mk:["c7"],a:[["b5","c7","good"],["d4","c5","good"]]},
+15:{t:"Nxc7+：马吃 c7 兵，将军，同时攻击 a8 的车。",a:[["c7","e8","good"],["c7","a8","good"]]},
+17:{t:"白马吃掉 a8 的车。"},
+21:{t:"兵吃掉 c5 的后，对手认输。"}}},
+"guard":{bad:[17],pun:[18],n:{
+16:{t:"关键局面。d5 的黑兵看起来可以吃，但有两个子在守它：f6 的马和 d6 的后。",a:[["f6","d5","guard"],["d6","d5","guard"],["e5","d7","good"]],g:"正确应法：Nxd7（马从 e5 吃 d7 的象）。"},
+17:{t:"白后吃了 d5 兵。",a:[["f6","d5","threat"],["d6","d5","threat"]]},
+18:{t:"f6 的马吃回白后。吃子之前，先数一数谁在守这个格子。"}}}
+};
+Object.assign(NOTES,{
+"lead-a":{bad:[22],pun:[23],good:[18,20],n:{
+3:{t:"又是 2.Qh5，和「Qh5 捉双」那盘一样。",a:[["h5","e5","threat"],["h5","f7","threat"]]},
+4:{t:"2…Nf6：放弃 e5 兵，换来出子更快。引擎认为可以接受。"},
+14:{t:"黑马到 b4，离 c2 一跳。这一次由黑方使用 c2 马叉。",a:[["b4","c2","good"]]},
+18:{t:"Nxc2+：马吃 c2 兵，将军，同时打 a1 的车。",a:[["c2","e1","good"],["c2","a1","good"]]},
+20:{t:"黑方吃掉 a1 的车，取得领先。注意：a1 这个角落里的马，自己也很难再出来。",mk:["a1"]},
+21:{t:"关键局面。黑方刚赢了一个车。白后吃了 g7 的兵。先问：它这一步在攻击什么？答案是 h8 的车。",a:[["g7","h8","threat"],["h8","g8","good"]],g:"正确应法：Rg8（车从 h8 到 g8）。车躲开了，同时反过来攻击白后。"},
+22:{t:"黑方走了 d6，没处理 h8 的车。",a:[["g7","h8","threat"]]},
+23:{t:"Qxh8+：后吃车，将军。刚赢来的车，一步就还了回去。"}}},
+"lead-b":{bad:[23,61],pun:[24,62],n:{
+23:{t:"这一步犯的是「数守卫」：c7 有 a5 的象守着。",a:[["a5","c7","guard"]]},
+24:{t:"象吃回白马。",a:[]},
+55:{t:"Nxb6：马吃掉 b6 的象。白方现在多一个车，明显领先。"},
+58:{t:"黑兵推到 f3，攻击白方的 g2 兵。"},
+59:{t:"白方用 g 兵吃掉 f3 的兵，g2 空了出来。现在 c6 的黑象瞄着 f3，而 f3 后面就是白方 h1 的王。",a:[["c6","f3","threat"]],mk:["g2"]},
+60:{t:"关键局面。黑象吃 f3 的兵并将军。这一步同时打了两个目标：h1 的王和 e2 的车。",a:[["f3","h1","threat"],["f3","e2","threat"],["e2","g2","good"]],g:"正确应法：Rg2（车从 e2 到 g2）。车挡在将军的线上，同时离开了被打的格子，王就在旁边保护它。"},
+61:{t:"王躲开了将军，车还留在 e2。",a:[["f3","e2","threat"]]},
+62:{t:"象吃掉 e2 的车，领先没了。"}}},
+"lead-c":{bad:[25,27,29,31,33],pun:[34],n:{
+16:{t:"黑象退到 h5。从 h5 到 d1 有一条斜线，现在被白方 e2 的兵挡着。",a:[["h5","d1","path"]],mk:["e2"]},
+25:{t:"白方挺了 e3，e2 空了。h5 的象和 d1 的后之间，斜线打开了。",a:[["h5","d1","threat"]]},
+27:{t:"白后还在这条斜线上。双方都没注意到。",a:[["h5","d1","threat"]]},
+32:{t:"关键局面。黑后刚走到 b5。真正的威胁不在这一步，而在第 13 回合就打开的那条长线：h5 的象瞄着白方 d1 的后。",a:[["h5","d1","threat"],["d1","h5","good"]],g:"正确应法：Qxh5+（后从 d1 吃 h5 的象，将军）。同一条线是双向的：象能吃白后，白后也能先吃掉象。"},
+33:{t:"白方挺了 c3，后还在斜线上。",a:[["h5","d1","threat"]]},
+34:{t:"象吃掉了白后。这条线开了整整五个回合。"}}}
+});
+
+const PN={K:"王",Q:"后",R:"车",B:"象",N:"马",P:"兵"};
+const FILES="abcdefgh";
+let gi=0, ply=0;
+const $=id=>document.getElementById(id);
+
+function expand(fen){const rows=fen.split("/");const m={};rows.forEach((r,ri)=>{let f=0;for(const ch of r){if(/\d/.test(ch)){f+=+ch}else{m[FILES[f]+(8-ri)]=ch;f++}}});return m}
+function order(col){const sq=[];for(let r=0;r<8;r++)for(let f=0;f<8;f++){const file=col==="W"?f:7-f,rank=col==="W"?8-r:r+1;sq.push(FILES[file]+rank)}return sq}
+function xy(s,col){const f=FILES.indexOf(s[0]),r=+s[1]-1;const x=col==="W"?f:7-f,y=col==="W"?7-r:r;return[(x+.5)*100,(y+.5)*100]}
+function edges(col,rid,fid){const fs=col==="W"?FILES:[...FILES].reverse().join("");$(fid).innerHTML=[...fs].map(c=>`<span>${c}</span>`).join("");const rs=col==="W"?[8,7,6,5,4,3,2,1]:[1,2,3,4,5,6,7,8];$(rid).innerHTML=rs.map(n=>`<span>${n}</span>`).join("")}
+
+function renderGames(){$("games").innerHTML=GAMES.map((g,i)=>`<button class="gbtn" aria-pressed="${i===gi}" data-i="${i}">${g.block}<small>${g.col==="W"?"执白":"执黑"} · ${g.opp} · ${g.date} · <span class="res">${g.res}</span></small></button>`).join("");
+  document.querySelectorAll(".gbtn").forEach(b=>b.onclick=()=>{gi=+b.dataset.i;ply=GAMES[gi].key;try{localStorage.setItem("chess-g",gi)}catch(e){}renderGames();render()})}
+
+function arrowSVG(list,col){
+  const C={move:"var(--move)",threat:"var(--threat)",good:"var(--good)",guard:"var(--guard)",path:"var(--path)",fork:"var(--threat)"};
+  let defs="",lines="";
+  Object.keys(C).forEach(k=>defs+=`<marker id="h-${k}" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${C[k]}"/></marker>`);
+  list.forEach(([a,b,k])=>{const[x1,y1]=xy(a,col),[x2,y2]=xy(b,col);const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1;const s=24,e=34;
+    const dash=(k==="good"||k==="fork")?' stroke-dasharray="14 10"':(k==="path"?' stroke-dasharray="4 9"':"");
+    lines+=`<line x1="${x1+dx/L*s}" y1="${y1+dy/L*s}" x2="${x2-dx/L*e}" y2="${y2-dy/L*e}" stroke="${C[k]}" stroke-width="${k==="move"?11:13}" stroke-linecap="round" opacity="${k==="move"?.75:.9}"${dash} marker-end="url(#h-${k})"/>`});
+  return `<svg class="arrows" viewBox="0 0 800 800" aria-hidden="true"><defs>${defs}</defs>${lines}</svg>`}
+
+function decode(p){
+  const s=p.san;let chips=[];
+  if(p.cas){chips.push(["c-piece",p.cas==="long"?"O-O-O":"O-O",p.cas==="long"?"长易位":"短易位"])}
+  else{const m=s.match(/^([KQRBN])?([a-h]?[1-8]?)?(x)?([a-h][1-8])(=[QRBN])?([+#])?$/);
+    if(m){if(m[1])chips.push(["c-piece",m[1],PN[m[1]]]);else if(!m[2])chips.push(["c-dim","·","兵（无字母）"]);
+      if(m[2])chips.push(["c-dim",m[2],m[1]?"区分是哪个子":"从 "+m[2]+" 列来的兵"]);
+      if(m[3])chips.push(["c-x","x","吃"]);chips.push(["c-sq",m[4],"到 "+m[4]]);
+      if(m[5])chips.push(["c-piece",m[5],"升变"]);if(m[6])chips.push(["c-chk",m[6],m[6]==="#"?"将杀":"将军"])}}
+  const side=p.w?"白方":"黑方",opp=p.w?"黑方":"白方";
+  let t;if(p.cas){const r=p.w?"1":"8";t=p.cas==="long"?`${side}长易位：王从 e${r} 到 c${r}，车从 a${r} 到 d${r}。`:`${side}短易位：王从 e${r} 到 g${r}，车从 h${r} 到 f${r}。`}
+  else{t=`${side}的${PN[p.p]}从 ${p.f} 走到 ${p.t}`;if(p.cap)t+=`，吃掉${opp}的${PN[p.cap]}`;t+=p.mate?"。将杀，棋局结束。":p.chk?"，将军。":"。"}
+  return{chips,t}}
+
+function render(){
+  const g=GAMES[gi],col=g.col,N=NOTES[g.id]||{n:{}};
+  edges(col,"ranks","files");
+  const m=expand(g.pos[ply]);const last=ply>0?g.plies[ply-1]:null;const note=N.n[ply];
+  const named=new Set();if(last){named.add(last.f);named.add(last.t)}
+  const arrows=[];if(note&&note.a)note.a.forEach(a=>{arrows.push(a);named.add(a[0]);named.add(a[1])});
+  const marks=new Set(note&&note.mk||[]);marks.forEach(s=>named.add(s));
+  let h="";order(col).forEach(sq=>{const fi=FILES.indexOf(sq[0]),ri=+sq[1];const dark=(fi+ri)%2===1;
+    const pc=m[sq];let cls="sq "+(dark?"d":"l");if(last&&sq===last.f)cls+=" from";if(last&&sq===last.t)cls+=" to";if(marks.has(sq))cls+=" mk";
+    h+=`<div class="${cls}" data-sq="${sq}">${named.has(sq)?`<span class="nm">${sq}</span>`:""}${pc?`<svg class="pc" viewBox="0 0 45 45" aria-hidden="true"><use href="#p-${pc===pc.toUpperCase()?"w":"b"}${pc.toUpperCase()}"/></svg>`:""}</div>`});
+  if(last&&!(note&&note.a&&note.a.some(a=>a[0]===last.f&&a[1]===last.t)))arrows.unshift([last.f,last.t,"move"]);
+  $("board").innerHTML=h+arrowSVG(arrows,col);
+  // move decode
+  if(last){const d=decode(last);const no=Math.ceil(ply/2);$("mv-eyebrow").textContent=`这一步 · 第 ${no} 回合${last.w?"白方":"黑方"} · ${last.w===(col==="W")?"己方":"对方"}`;
+    $("chips").innerHTML=d.chips.map(c=>`<div class="chip ${c[0]}"><b>${c[1]}</b><span>${c[2]}</span></div>`).join("");$("sentence").textContent=d.t}
+  else{$("mv-eyebrow").textContent="这一步";$("chips").innerHTML="";$("sentence").textContent=`开局位置。己方${col==="W"?"执白，白子在下方":"执黑，黑子在下方，棋盘从黑方一侧显示"}。按 ▶ 逐步推进。`}
+  // note
+  if(note){$("note").innerHTML=`<p class="note${ply===g.key?" key":""}">${note.t}</p>${note.g?`<p class="goodline"><b>${g.id==="c7"?"提示":"换一步"}</b>　${note.g}</p>`:""}`}
+  else{$("note").innerHTML=`<p class="empty">这一步没有特别要看的。${ply<g.key?"继续往下，关键局面在第 "+Math.ceil(g.key/2)+" 回合。":""}</p>`}
+  // list
+  let L="";for(let i=0;i<g.plies.length;i+=2){L+=`<span class="no">${i/2+1}.</span>`;for(const j of[i,i+1]){if(j>=g.plies.length){L+="<span></span>";continue}const k=j+1;let c="mv";if(k===ply)c+=" cur";if((N.bad||[]).includes(k))c+=" bad";if((N.pun||[]).includes(k))c+=" pun";if((N.good||[]).includes(k))c+=" gd";if(k===g.key)c+=" k";L+=`<button class="${c}" data-k="${k}">${g.plies[j].san}</button>`}}
+  $("mvlist").innerHTML=L;{const box=$("mvlist"),c=box.querySelector(".mv.cur");if(c){const top=c.offsetTop-box.clientHeight/2;box.scrollTop=Math.max(0,top)}}document.querySelectorAll(".mv").forEach(b=>b.onclick=()=>{ply=+b.dataset.k;render()});
+  $("plyinfo").textContent=`${ply} / ${g.plies.length}`;
+  $("b-prev").disabled=$("b-start").disabled=ply===0;$("b-next").disabled=$("b-end").disabled=ply===g.plies.length}
+
+$("b-start").onclick=()=>{ply=0;render()};$("b-prev").onclick=()=>{if(ply>0){ply--;render()}};
+$("b-next").onclick=()=>{if(ply<GAMES[gi].plies.length){ply++;render()}};$("b-end").onclick=()=>{ply=GAMES[gi].plies.length;render()};
+$("b-key").onclick=()=>{ply=GAMES[gi].key;render()};
+document.addEventListener("keydown",e=>{if(e.target.closest&&e.target.closest("input,textarea"))return;if(e.key==="ArrowRight")$("b-next").click();if(e.key==="ArrowLeft")$("b-prev").click()});
+
+// drill
+const TARGETS=[["f2","白王旁边，开局时只有王守着"],["f7","黑王旁边，开局时只有王守着"],["c2","白方后翼，开局时只有后守着"],["c7","黑方后翼，开局时只有后守着"],["e5","1.e4 e5 之后黑兵所在的格子"],["h5","白后跳出来打 f7 的格子"],["d5","中心格"],["e1","白王的起始格"],["a1","白方左下角的车"],["h8","黑方的王翼车"],["c4","白象瞄准 f7 的位置"],["f3","白马守 f2 前面的格子"]];
+let dcol="W",dt=0,ok=0,tot=0,labels=false,lock=false;
+function drawDrill(){edges(dcol,"d-ranks","d-files");$("dboard").innerHTML=order(dcol).map(sq=>{const fi=FILES.indexOf(sq[0]),ri=+sq[1];return`<div class="sq ${(fi+ri)%2===1?"d":"l"}" data-sq="${sq}" tabindex="-1">${labels?`<span class="nm">${sq}</span>`:""}</div>`}).join("");
+  $("dboard").querySelectorAll(".sq").forEach(el=>el.onclick=()=>pick(el))}
+function nextT(){let n;do{n=Math.floor(Math.random()*TARGETS.length)}while(n===dt&&TARGETS.length>1);dt=n;$("d-target").textContent=TARGETS[dt][0];$("d-hint").textContent="";lock=false;drawDrill()}
+function pick(el){if(lock)return;lock=true;tot++;const want=TARGETS[dt][0];if(el.dataset.sq===want){ok++;el.classList.add("hit");$("d-hint").textContent="对。"+TARGETS[dt][1]+"。"}else{el.classList.add("miss");$("dboard").querySelector(`[data-sq="${want}"]`).classList.add("ans");$("d-hint").textContent=`点的是 ${el.dataset.sq}。${want} 在绿框那里：${TARGETS[dt][1]}。`}
+  $("d-stat").textContent=`${ok} / ${tot}`;setTimeout(nextT,el.dataset.sq===want?900:2200)}
+function setCol(c){dcol=c;$("d-white").setAttribute("aria-pressed",c==="W");$("d-black").setAttribute("aria-pressed",c==="B");drawDrill()}
+$("d-white").onclick=()=>setCol("W");$("d-black").onclick=()=>setCol("B");
+$("d-labels").onclick=()=>{labels=!labels;$("d-labels").setAttribute("aria-pressed",labels);drawDrill()};
+
+try{const s=+localStorage.getItem("chess-g");if(s>=0&&s<GAMES.length)gi=s}catch(e){}
+function fromHash(scroll){const h=location.hash.slice(1);const i=GAMES.findIndex(g=>g.id===h);if(i<0)return false;gi=i;ply=GAMES[gi].key;renderGames();render();if(scroll)document.getElementById("desk").scrollIntoView();return true}
+if(!fromHash(false)){ply=GAMES[gi].key;renderGames();render()}
+window.addEventListener("hashchange",()=>fromHash(true));
+nextT();
+/* when embedded in an iframe, tell the parent page how tall this page is */
+if(window.parent!==window&&"ResizeObserver" in window){new ResizeObserver(()=>{parent.postMessage({type:"chess-height",h:document.documentElement.scrollHeight},"*")}).observe(document.body)}
+
+
+</script>
+</body>
+</html>
