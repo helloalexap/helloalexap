@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>French Learning Lab</title>
-<meta name="description" content="French Learning Lab：把法语动词变位拆成可以拼装、拆解、重新排列的块。两张互动练习页和一套可打印的卡片。">
+<meta name="description" content="French Learning Lab：把法语动词变位拆成可以拼装、拆解、重新排列的块。两张互动练习页、一套可打印的卡片，以及每日词形练习。">
 <meta property="og:title" content="French Learning Lab">
 <meta property="og:description" content="French conjugation, taken apart into blocks you can assemble, decompose and rearrange.">
 <meta property="og:type" content="website">
@@ -57,7 +57,8 @@ footer{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-co
 footer a{color:var(--bronze);text-decoration:none;border-bottom:1px solid var(--line)}
 footer a:hover{color:var(--gold)}
 .fade{opacity:0;animation:fade-in 1s ease-out forwards}
-.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}
+.doors.single{max-width:460px}
 @keyframes fade-in{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.fade{opacity:1;animation:none}.door,.go span{transition:none}}
 @media (max-width:768px){.page{padding:96px 24px 56px}.site-nav{top:32px;left:24px;gap:18px}}
@@ -110,6 +111,23 @@ footer a:hover{color:var(--gold)}
       </div>
 
       <p class="note">这三样是一套：写的时候从左往右拼，读的时候从右往左拆，摆卡片的时候自己决定结构。</p>
+    </section>
+
+    <section class="set fade d4">
+      <div class="set-head">
+        <h2>Pratique quotidienne</h2>
+        <p class="desc">One verb form a day: recognised, taken apart, and put back into sentences.</p>
+        <p class="desc zh">每天从一个词形进入：辨认、拆解，再放回句子里读。</p>
+      </div>
+
+      <div class="doors single">
+        <a class="door" href="daily/">
+          <span class="verb">Reconnaître · 认</span>
+          <h3>Daily Practice</h3>
+          <p>每期一个词形：词汇档案、完整变位、拼装与拆解练习、语境阅读。按日期排列，最新一期在最前。</p>
+          <span class="go">打开 <span>→</span></span>
+        </a>
+      </div>
     </section>
 
     <footer>

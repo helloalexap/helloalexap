@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pratique quotidienne · French Learning Lab</title>
+<meta name="description" content="French Learning Lab 每日练习：每期一个法语词形，辨认、拆解，再放回句子里读。">
+<meta property="og:title" content="Pratique quotidienne · French Learning Lab">
+<meta property="og:description" content="One French verb form a day: recognised, taken apart, and put back into sentences.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+Garamond:wght@300;400;500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0c09; --panel:#14100c; --panel-hi:#1b1510; --line:#2a221b;
+  --bronze:#8B7355; --gold:#9D8556; --text:#9A7B5B; --bright:#c8b48a;
+  --cinzel:"Cinzel","Bodoni Moda","Cormorant Garamond",serif;
+  --bodoni:"Bodoni Moda","Cormorant Garamond",serif;
+  --zh:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--bodoni);overflow-x:hidden}
+.page{position:relative;padding:120px 40px 72px}
+.site-nav{position:absolute;top:40px;left:40px;display:flex;gap:28px;align-items:baseline;flex-wrap:wrap}
+.site-nav a{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-decoration:none;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .3s,border-color .3s;text-shadow:0 0 6px rgba(139,115,85,.35)}
+.site-nav a:hover,.site-nav a:focus-visible{color:var(--gold);border-bottom-color:rgba(157,133,86,.5);outline:none}
+.site-nav a[aria-current="page"]{color:var(--gold);border-bottom-color:rgba(157,133,86,.35)}
+.content{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:52px}
+header{display:flex;flex-direction:column;gap:20px;max-width:700px}
+.label{font-size:.75rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);text-shadow:0 0 6px rgba(139,115,85,.35)}
+h1{font-family:var(--cinzel);font-weight:400;font-size:clamp(2.2rem,3.8vw,2.8rem);line-height:1.2;letter-spacing:.02em;color:var(--gold);
+   text-shadow:0 0 8px rgba(157,133,86,.4),0 0 16px rgba(157,133,86,.3),0 0 28px rgba(184,134,11,.18)}
+.desc{font-size:1rem;font-weight:300;line-height:1.8;color:var(--text)}
+.desc.zh{font-family:var(--zh);font-size:.92rem;line-height:1.85}
+.entries{list-style:none;border-top:1px solid var(--line)}
+.entries li{border-bottom:1px solid var(--line)}
+.entry{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:6px 32px;align-items:start;padding:30px 8px;text-decoration:none;color:inherit;transition:background .3s}
+.entry:hover,.entry:focus-visible{background:rgba(157,133,86,.05);outline:none}
+.entry:focus-visible{box-shadow:inset 0 0 0 1px var(--gold)}
+.when{grid-row:1 / span 3;display:flex;flex-direction:column;gap:4px;padding-top:6px}
+.no{font-family:var(--cinzel);font-size:.78rem;letter-spacing:.2em;color:var(--bronze)}
+.when time{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--text)}
+.word{font-family:var(--bodoni);font-style:italic;font-weight:400;font-size:clamp(1.7rem,3.2vw,2.3rem);line-height:1.2;color:var(--gold);text-shadow:0 0 8px rgba(157,133,86,.25)}
+.line{font-family:var(--zh);font-size:.92rem;line-height:1.8;color:var(--text);max-width:640px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags span{font-family:var(--mono);font-size:.74rem;line-height:1.4;color:var(--bright);border:1px solid var(--line);border-radius:3px;padding:3px 8px;background:var(--panel)}
+.go{grid-column:3;grid-row:1 / span 3;align-self:center;font-size:1.4rem;color:var(--bronze);transition:transform .3s,color .3s}
+.entry:hover .go{transform:translateX(6px);color:var(--gold)}
+footer{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;font-size:.8rem;font-weight:300;letter-spacing:.12em;color:var(--bronze)}
+footer a{color:var(--bronze);text-decoration:none;border-bottom:1px solid var(--line)}
+footer a:hover{color:var(--gold)}
+.fade{opacity:0;animation:fade-in 1s ease-out forwards}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}
+@keyframes fade-in{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;animation:none}.entry,.go{transition:none}}
+@media (max-width:768px){
+  .page{padding:96px 24px 56px}.site-nav{top:32px;left:24px;gap:18px}
+  .entry{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;padding:24px 4px}
+  .when{grid-row:auto;flex-direction:row;gap:12px;padding-top:0}
+  .go{grid-column:2;grid-row:1 / span 4}
+}
+@media (max-width:480px){.page{padding:136px 16px 48px}.site-nav{left:16px;right:16px;row-gap:10px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <nav class="site-nav fade" aria-label="Site">
+    <a href="https://helloalexap.com/">helloalexap</a>
+    <a href="../../">Learning Lab</a>
+    <a href="../">French</a>
+    <a href="./" aria-current="page">Daily</a>
+  </nav>
+
+  <div class="content">
+    <header>
+      <div class="label fade d1">French Learning Lab · Daily Practice</div>
+      <h1 class="fade d2">Pratique quotidienne</h1>
+      <p class="desc fade d3">One verb form a day: recognised, taken apart, and put back into sentences.</p>
+      <p class="desc zh fade d3">每天从一个词形进入：辨认、拆解，再放回句子里读。</p>
+    </header>
+
+    <ol class="entries fade d3" reversed>
+<!-- lessons:start -->
+<!-- lessons:end -->
+    </ol>
+
+    <footer>
+      <span><a href="../">← French Learning Lab</a></span>
+      <span>Exploratory tools for learning · 探索式学习工具</span>
+    </footer>
+  </div>
+</main>
+</body>
+</html>
