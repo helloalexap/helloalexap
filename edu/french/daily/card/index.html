@@ -83,7 +83,7 @@ time{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--mut
     var tags=document.getElementById('tags'); tags.textContent='';
     var cats=it.getElementsByTagName('category');
     for(var i=0;i<cats.length;i++){ var s=document.createElement('span'); s.textContent=cats[i].textContent; tags.appendChild(s); }
-    text('count',String(items.length));
+    text('count',String(+m[1]));
   }
   fetch('../feed.xml',{cache:'no-cache'})
     .then(function(r){ if(!r.ok) throw 0; return r.text(); })
