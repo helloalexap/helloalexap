@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pratique quotidienne · French Learning Lab</title>
+    <link>https://edu.helloalexap.com/french/daily/</link>
+    <atom:link href="https://edu.helloalexap.com/french/daily/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>每天从一个法语词形进入：辨认、拆解，再放回句子里读。</description>
+    <language>zh-Hans</language>
+    <lastBuildDate>Mon, 19 Oct 2026 08:00:00 +0800</lastBuildDate>
+<!-- items:start -->
+    <item>
+      <title>N° 06 · j’avais réservé</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-19-j-avais-reserve/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-19-j-avais-reserve/</guid>
+      <pubDate>Mon, 19 Oct 2026 08:00:00 +0800</pubDate>
+      <description>愈过去时：相对于某个过去时刻，已经发生的事；从一段博物馆故事读出过去的时间层次。</description>
+      <category>Plus-que-parfait</category>
+      <category>过去时间参照</category>
+      <category>avoir/être 助动词</category>
+      <category>过去分词配合</category>
+    </item>
+    <item>
+      <title>N° 05 · s’en souvenaient</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-18-s-en-souvenaient/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-18-s-en-souvenaient/</guid>
+      <pubDate>Sun, 18 Oct 2026 08:00:00 +0800</pubDate>
+      <description>在词形前认出代词槽：s’ 和 en 与 se souvenir 一起整体读取。</description>
+      <category>se souvenir de / en</category>
+      <category>代词槽</category>
+      <category>imparfait</category>
+      <category>subjonctif</category>
+    </item>
+    <item>
+      <title>N° 04 · aurait dû</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-17-aurait-du/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-17-aurait-du/</guid>
+      <pubDate>Sat, 17 Oct 2026 08:00:00 +0800</pubDate>
+      <description>一个已经过去的「本应该」：从 devoir 进入条件式过去时。</description>
+      <category>devoir</category>
+      <category>conditionnel passé</category>
+      <category>avoir + participe passé</category>
+      <category>plus-que-parfait</category>
+    </item>
+    <item>
+      <title>N° 03 · prendraient</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-16-prendraient/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-16-prendraient/</guid>
+      <pubDate>Fri, 16 Oct 2026 08:00:00 +0800</pubDate>
+      <description>从 prenaient、prendraient、prennent 的差别，进入 prendre 的完整词形家族。</description>
+      <category>prendre 词族</category>
+      <category>prend- / pren- / prenn-</category>
+      <category>conditionnel</category>
+      <category>subjonctif</category>
+    </item>
+    <item>
+      <title>N° 02 · voyions</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-15-voyions/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-15-voyions/</guid>
+      <pubDate>Thu, 15 Oct 2026 08:00:00 +0800</pubDate>
+      <description>多出来的一个 i：从 voyons 到 voyions，从词形辨认走向语境判断。</description>
+      <category>voir</category>
+      <category>voy- / voi- / verr-</category>
+      <category>imparfait = subjonctif</category>
+      <category>prévoir</category>
+    </item>
+    <item>
+      <title>N° 01 · pourrions</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-14-pourrions/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-14-pourrions/</guid>
+      <pubDate>Wed, 14 Oct 2026 08:00:00 +0800</pubDate>
+      <description>同样是 nous：pouvons、pouvions、pourrons、pourrions、puissions，靠词干来源区分。</description>
+      <category>pouvoir</category>
+      <category>pourr- / pouv- / puiss-</category>
+      <category>conditionnel</category>
+      <category>subjonctif</category>
+    </item>
+<!-- items:end -->
+  </channel>
+</rss>

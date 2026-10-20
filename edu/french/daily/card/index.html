@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pratique quotidienne · 今日词形</title>
+<meta name="robots" content="noindex">
+<style>
+/* Embeddable "word of the day" card; same light palette as the Daily lesson pages. Reads ../feed.xml, falls back to the baked-in issue. */
+:root{
+  --bg:#edf1f5; --paper:#fffefa; --ink:#18263a; --muted:#526175; --line:#d8e0e8;
+  --blue:#2a5ab8; --gold:#a56d06; --rose:#ac3764; --purple:#6b4eb2;
+  --serif:"Bodoni 72","Bodoni Moda",Didot,"Bodoni MT","Songti SC","Noto Serif SC",Georgia,serif;
+  --mono:"SF Mono",Menlo,Consolas,"IBM Plex Mono",ui-monospace,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:transparent}
+body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{background:var(--bg);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+a{color:inherit;text-decoration:none}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--ink);border-radius:6px;padding:16px 18px 16px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--ink);transform:translateY(-1px)}
+.card:focus-visible,.all:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:9px}
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.no{font-family:var(--serif);font-size:20px;line-height:1;white-space:nowrap}
+.no small{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-right:3px;vertical-align:2px}
+time{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+.word{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(26px,9vw,38px);line-height:1.12;margin:2px 0 0;overflow-wrap:anywhere}
+.line{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tags span{font-family:var(--mono);font-size:11px;line-height:1.35;padding:2px 7px 3px;border-radius:3px;background:#e9eef6;box-shadow:inset 0 -2px 0 var(--c,var(--blue))}
+.tags span:nth-child(4n+2){--c:var(--gold);background:#f4ecdc}
+.tags span:nth-child(4n+3){--c:var(--rose);background:#f4e3ea}
+.tags span:nth-child(4n+4){--c:var(--purple);background:#ebe6f5}
+.go{font-family:var(--mono);font-size:12px;margin-top:2px}
+.go span{display:inline-block;transition:transform .2s}
+.card:hover .go span{transform:translateX(4px)}
+.all{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:0 2px}
+.all:hover{color:var(--ink)}
+.all span{white-space:nowrap}
+@media (max-width:360px){.all span:first-child{display:none}.all{justify-content:flex-end}.kicker{letter-spacing:.1em}}
+@media (min-width:460px){.wrap{padding:20px}.card{padding:18px 22px}.line{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.card,.go span{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="card" id="card" href="../2026-10-19-j-avais-reserve/" target="_top">
+    <span class="head"><span class="kicker">Pratique quotidienne</span><span class="no"><small>N°</small><span id="no">06</span></span></span>
+    <time id="date" datetime="2026-10-19">19 octobre 2026</time>
+    <span class="word" id="word" lang="fr">j’avais réservé</span>
+    <p class="line" id="line">愈过去时：相对于某个过去时刻，已经发生的事；从一段博物馆故事读出过去的时间层次。</p>
+    <span class="tags" id="tags"><span>Plus-que-parfait</span><span>过去时间参照</span><span>avoir/être 助动词</span><span>过去分词配合</span></span>
+    <span class="go">进入本期 <span>→</span></span>
+  </a>
+  <a class="all" href="../" target="_top"><span>French Learning Lab · Daily</span><span>全部 <span id="count">6</span> 期 →</span></a>
+</div>
+<script>
+(function(){
+  var MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  function report(){
+    try{ parent.postMessage({type:'daily-card-height',h:Math.ceil(document.documentElement.getBoundingClientRect().height)},'*'); }catch(e){}
+  }
+  function text(el,s){ document.getElementById(el).textContent=s; }
+  function render(xml){
+    var items=xml.getElementsByTagName('item');
+    if(!items.length) return;
+    var it=items[0], get=function(t){var n=it.getElementsByTagName(t)[0];return n?n.textContent.trim():'';};
+    var m=get('title').match(/^N°\s*(\d+)\s*·\s*(.+)$/);
+    if(!m) return;
+    text('no',m[1]); text('word',m[2]); text('line',get('description'));
+    var d=new Date(get('pubDate'));
+    if(!isNaN(d)){
+      var y=d.toLocaleString('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).slice(0,10);
+      var p=y.split('-');
+      document.getElementById('date').setAttribute('datetime',y);
+      text('date',(+p[2])+' '+MONTHS[+p[1]-1]+' '+p[0]);
+    }
+    var link=get('link'); if(link) document.getElementById('card').href=link;
+    var tags=document.getElementById('tags'); tags.textContent='';
+    var cats=it.getElementsByTagName('category');
+    for(var i=0;i<cats.length;i++){ var s=document.createElement('span'); s.textContent=cats[i].textContent; tags.appendChild(s); }
+    text('count',String(items.length));
+  }
+  fetch('../feed.xml',{cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){ render(new DOMParser().parseFromString(t,'application/xml')); })
+    .catch(function(){})
+    .then(function(){ report(); });
+  addEventListener('load',report);
+  addEventListener('resize',report);
+  if(window.ResizeObserver) new ResizeObserver(report).observe(document.body);
+})();
+</script>
+</body>
+</html>
