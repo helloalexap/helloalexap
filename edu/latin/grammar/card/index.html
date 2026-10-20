@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sententia perspicua · 本期拉丁语</title>
+<meta name="robots" content="noindex">
+<style>
+/* Embeddable latest-issue card; same stone palette as the Visual Grammar lesson pages. Reads ../feed.xml, falls back to the baked-in issue. */
+:root{
+  --bg:#EDEAE3; --paper:#F8F6F1; --ink:#1B1E23; --muted:#5B5F66; --line:#D3CEC3;
+  --rubric:#A3372A; --nom:#1C6A45; --dat:#215FA6; --acc:#AD4E28; --gen:#6A44AC; --hinge:#D99A00;
+  --la:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","Noto Serif",Georgia,serif;
+  --mono:"SF Mono",Menlo,Consolas,"IBM Plex Mono",ui-monospace,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:transparent}
+body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+.wrap{background:var(--bg);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+a{color:inherit;text-decoration:none}
+.card{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--rubric);border-radius:6px;padding:16px 18px 16px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--ink);border-top-color:var(--rubric);transform:translateY(-1px)}
+.card:focus-visible,.all:focus-visible{outline:2px solid var(--hinge);outline-offset:2px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:9px}
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.no{font-family:var(--la);font-size:20px;line-height:1;white-space:nowrap;color:var(--rubric)}
+.no small{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-right:3px;vertical-align:2px}
+time{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted)}
+.word{font-family:var(--la);font-style:italic;font-weight:400;font-size:clamp(26px,9vw,36px);line-height:1.15;margin:2px 0 0;overflow-wrap:anywhere}
+.line{margin:0;font-size:13.5px;line-height:1.7;color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tags span{font-family:var(--mono);font-size:11px;line-height:1.35;padding:2px 7px 3px;border-radius:3px;background:#e2ebe5;box-shadow:inset 0 -2px 0 var(--c,var(--nom))}
+.tags span:nth-child(4n+2){--c:var(--dat);background:#e3e9f2}
+.tags span:nth-child(4n+3){--c:var(--acc);background:#f2e5de}
+.tags span:nth-child(4n+4){--c:var(--gen);background:#ebe6f3}
+.go{font-family:var(--mono);font-size:12px;margin-top:2px}
+.go span{display:inline-block;transition:transform .2s}
+.card:hover .go span{transform:translateX(4px)}
+.all{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:0 2px}
+.all:hover{color:var(--ink)}
+.all span{white-space:nowrap}
+@media (max-width:360px){.all > span:first-child{display:none}.all{justify-content:flex-end}.kicker{letter-spacing:.1em}}
+@media (min-width:460px){.wrap{padding:20px}.card{padding:18px 22px}.line{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.card,.go span{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="card" id="card" href="../01-quis-cui-quid/" target="_top">
+    <span class="head"><span class="kicker">Sententia perspicua</span><span class="no"><small>N°</small><span id="no">01</span></span></span>
+    <time id="date" datetime="2026-10-20">a.d. XIII Kal. Nov. MMXXVI</time>
+    <span class="word" id="word" lang="la">Quis cui quid dat?</span>
+    <p class="line" id="line">谁、给谁、什么：以动词为中心，弧线连出主语、宾语与接收者；同形词形按硬约束、语义、语境三级线索消歧。原创短文 In vīllā。</p>
+    <span class="tags" id="tags"><span>主格 · 宾格 · 与格</span><span>属格 · 夺格</span><span>同形多解</span><span>形容词配合</span><span>动词三槽</span></span>
+    <span class="go">进入本期 <span>→</span></span>
+  </a>
+  <a class="all" href="../" target="_top"><span>Latin Learning Lab · Visual Grammar</span><span>全部 <span id="count">1</span> 期 →</span></a>
+</div>
+<script>
+(function(){
+  var MON=['Ian.','Feb.','Mart.','Apr.','Mai.','Iun.','Iul.','Aug.','Sept.','Oct.','Nov.','Dec.'];
+  function roman(n){var r='',v=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];for(var i=0;i<v.length;i++)while(n>=v[i][0]){r+=v[i][1];n-=v[i][0];}return r;}
+  /* Roman calendar date, counted inclusively back from Kalends, Nones or Ides */
+  function romanDate(y,m,d){
+    var non=[3,5,7,10].indexOf(m)>=0?7:5, id=non+8, last=new Date(y,m,0).getDate(), ref, gap;
+    if(d===1) return 'Kal. '+MON[m-1]+' '+roman(y);
+    if(d===non) return 'Non. '+MON[m-1]+' '+roman(y);
+    if(d===id) return 'Id. '+MON[m-1]+' '+roman(y);
+    if(d<non){ref='Non. '+MON[m-1];gap=non-d+1;}
+    else if(d<id){ref='Id. '+MON[m-1];gap=id-d+1;}
+    else{ref='Kal. '+MON[m%12];gap=last-d+2;}
+    return (gap===2?'prid. ':'a.d. '+roman(gap)+' ')+ref+' '+roman(y);
+  }
+  function report(){
+    try{ parent.postMessage({type:'latin-card-height',h:Math.ceil(document.documentElement.getBoundingClientRect().height)},'*'); }catch(e){}
+  }
+  function text(el,s){ document.getElementById(el).textContent=s; }
+  function render(xml){
+    var items=xml.getElementsByTagName('item');
+    if(!items.length) return;
+    var it=items[0], get=function(t){var n=it.getElementsByTagName(t)[0];return n?n.textContent.trim():'';};
+    var m=get('title').match(/^N°\s*(\d+)\s*·\s*(.+)$/);
+    if(!m) return;
+    text('no',m[1]); text('word',m[2]); text('line',get('description'));
+    var d=new Date(get('pubDate'));
+    if(!isNaN(d)){
+      var ymd=d.toLocaleString('en-CA',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).slice(0,10), p=ymd.split('-');
+      document.getElementById('date').setAttribute('datetime',ymd);
+      text('date',romanDate(+p[0],+p[1],+p[2]));
+    }
+    var link=get('link'); if(link) document.getElementById('card').href=link;
+    var tags=document.getElementById('tags'); tags.textContent='';
+    var cats=it.getElementsByTagName('category');
+    for(var i=0;i<cats.length;i++){ var s=document.createElement('span'); s.textContent=cats[i].textContent; tags.appendChild(s); }
+    text('count',String(+m[1]));
+  }
+  fetch('../feed.xml',{cache:'no-cache'})
+    .then(function(r){ if(!r.ok) throw 0; return r.text(); })
+    .then(function(t){ render(new DOMParser().parseFromString(t,'application/xml')); })
+    .catch(function(){})
+    .then(function(){ report(); });
+  addEventListener('load',report);
+  addEventListener('resize',report);
+  if(window.ResizeObserver) new ResizeObserver(report).observe(document.body);
+})();
+</script>
+</body>
+</html>

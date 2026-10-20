@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sententia perspicua · Latin Visual Grammar Lab</title>
+    <link>https://edu.helloalexap.com/latin/grammar/</link>
+    <atom:link href="https://edu.helloalexap.com/latin/grammar/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>每期一个拉丁语结构主题：先读短文，再在原文里透视词形、格与句子关系。</description>
+    <language>zh-Hans</language>
+    <lastBuildDate>Tue, 20 Oct 2026 08:00:00 +0800</lastBuildDate>
+<!-- Newest first. Title format: "N° 01 · Latin title". The full archive is the list page (index.html). -->
+<!-- items:start -->
+    <item>
+      <title>N° 01 · Quis cui quid dat?</title>
+      <link>https://edu.helloalexap.com/latin/grammar/01-quis-cui-quid/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/latin/grammar/01-quis-cui-quid/</guid>
+      <pubDate>Tue, 20 Oct 2026 08:00:00 +0800</pubDate>
+      <description>谁、给谁、什么：以动词为中心，弧线连出主语、宾语与接收者；同形词形按硬约束、语义、语境三级线索消歧。原创短文 In vīllā。</description>
+      <category>主格 · 宾格 · 与格</category>
+      <category>属格 · 夺格</category>
+      <category>同形多解</category>
+      <category>形容词配合</category>
+      <category>动词三槽</category>
+    </item>
+<!-- items:end -->
+  </channel>
+</rss>
