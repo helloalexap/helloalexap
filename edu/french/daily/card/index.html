@@ -41,7 +41,7 @@ time{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--mut
 .all{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding:0 2px}
 .all:hover{color:var(--ink)}
 .all span{white-space:nowrap}
-@media (max-width:360px){.all span:first-child{display:none}.all{justify-content:flex-end}.kicker{letter-spacing:.1em}}
+@media (max-width:360px){.all > span:first-child{display:none}.all{justify-content:flex-end}.kicker{letter-spacing:.1em}}
 @media (min-width:460px){.wrap{padding:20px}.card{padding:18px 22px}.line{font-size:14px}}
 @media (prefers-reduced-motion:reduce){.card,.go span{transition:none}}
 </style>
