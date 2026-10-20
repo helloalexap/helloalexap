@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Quis cui quid dat? · Latin Visual Grammar Lab</title>
+<meta name="description" content="Latin Visual Grammar Lab N° 01：谁、给谁、什么——拉丁语的格与句子关系。原创短文 In vīllā，配就地句法透视、变格表、同形消歧、配合拼装台与认读。">
+<meta property="og:title" content="Quis cui quid dat? · Latin Visual Grammar Lab">
+<meta property="og:description" content="Who gives what to whom: Latin cases and sentence relations, seen in place while reading.">
+<meta property="og:type" content="article">
+<style>
+:root{
+  --bg:#EDEAE3; --surface:#F8F6F1; --sunk:#E5E1D8; --ink:#1B1E23; --muted:#5B5F66; --line:#D3CEC3; --line2:#E3DED4;
+  --rubric:#A3372A;
+  --nom:#1C6A45; --gen:#6A44AC; --dat:#215FA6; --acc:#AD4E28; --abl:#7E5F00; --voc:#A0335A;
+  --verb:#1B1E23; --on-verb:#F8F6F1; --prep:#6B6F76;
+  --stem:#2A55C2; --hinge:#D99A00; --on-hinge:#1E1600; --pline:#7D8898; --base:#9A9690;
+  --ok:#1C6A45; --bad:#B0322F;
+  --la:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","URW Palladio L","Noto Serif",Georgia,serif;
+  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131416; --surface:#1B1D20; --sunk:#24262A; --ink:#E7E4DD; --muted:#9C9FA5; --line:#34373C; --line2:#2A2D31;
+    --rubric:#E27A64;
+    --nom:#52C08C; --gen:#AD90F3; --dat:#72A6EE; --acc:#EC8C62; --abl:#D7B24C; --voc:#E57EA3;
+    --verb:#E7E4DD; --on-verb:#131416; --prep:#A0A3A9;
+    --stem:#7E9DF2; --hinge:#F0B53A; --on-hinge:#1E1600; --pline:#7F8B9C; --base:#6F737A;
+    --ok:#52C08C; --bad:#F06B6B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131416; --surface:#1B1D20; --sunk:#24262A; --ink:#E7E4DD; --muted:#9C9FA5; --line:#34373C; --line2:#2A2D31;
+  --rubric:#E27A64;
+  --nom:#52C08C; --gen:#AD90F3; --dat:#72A6EE; --acc:#EC8C62; --abl:#D7B24C; --voc:#E57EA3;
+  --verb:#E7E4DD; --on-verb:#131416; --prep:#A0A3A9;
+  --stem:#7E9DF2; --hinge:#F0B53A; --on-hinge:#1E1600; --pline:#7F8B9C; --base:#6F737A;
+  --ok:#52C08C; --bad:#F06B6B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:64px}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;padding:28px 16px 72px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:500}
+p{margin:0;max-width:70ch}
+a{color:var(--dat)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--hinge);outline-offset:2px}
+.la{font-family:var(--la)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--rubric);font-weight:600}
+.muted{color:var(--muted)} .small{font-size:.86rem}
+.lede{font-size:1.04rem}
+
+/* site nav (same as French Lab) */
+.sitenav{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);margin-bottom:-36px}
+.sitenav a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);white-space:nowrap}
+.sitenav a:hover{color:var(--ink)}
+
+/* header */
+header.top{display:flex;flex-direction:column;gap:18px}
+h1{font-family:var(--la);font-size:clamp(2.3rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.01em}
+.h1sub{font-family:var(--la);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.5rem);color:var(--rubric);margin-top:-8px}
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px}
+.howto div{border-top:2px solid var(--ink);padding-top:10px;font-size:.88rem;color:var(--muted)}
+.howto b{display:block;color:var(--ink);font-family:var(--la);font-size:1.12rem;font-weight:500}
+.howto b i{font-family:var(--body);font-style:normal;font-size:.8rem;color:var(--muted);margin-left:6px}
+
+/* sticky index */
+.index{position:sticky;top:0;z-index:20;margin:-40px -16px -40px;padding:8px 16px;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.index-in{max-width:1080px;margin:0 auto;display:flex;gap:6px;align-items:center}
+.index nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.index nav::-webkit-scrollbar{display:none}
+.index a{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);text-decoration:none;padding:5px 8px;border-radius:4px;white-space:nowrap}
+.index a b{font-family:var(--la);font-weight:500;color:var(--rubric);margin-right:5px;font-size:.86rem}
+.index a:hover,.index a.on{color:var(--ink);background:var(--sunk)}
+.mac{flex:0 0 auto;font-family:var(--mono);font-size:.74rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.mac[aria-pressed="false"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:22px}
+.sec-head h2{font-size:clamp(1.5rem,3.4vw,2rem);line-height:1.15;font-family:var(--body);font-weight:500}
+.sec-head h2 .la{font-weight:500;margin-right:.35em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.qlabel{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted)}
+.two{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.marg{border-left:2px solid var(--rubric);padding:2px 0 2px 12px;font-size:.88rem;color:var(--muted)}
+.marg b{color:var(--ink);font-weight:600}
+
+/* chips & segmented */
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{font-size:.84rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 11px;line-height:1.5}
+.chip.la{font-size:.98rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex-wrap:wrap}
+.seg button{border:0;background:var(--surface);padding:6px 12px;font-size:.84rem;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.seg button small{display:block;font-size:.7rem;opacity:.75;font-family:var(--mono);letter-spacing:.03em}
+.btn{font-size:.88rem;background:var(--ink);color:var(--surface);border:0;border-radius:6px;padding:7px 14px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.lnk{background:none;border:0;padding:0;color:var(--dat);font-size:.86rem;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between}
+
+/* ── tiles (French Lab language) ── */
+.t{--c:var(--base);font-family:var(--mono);font-size:.95em;display:inline-block;padding:.08em .32em .14em;border-radius:3px;line-height:1.35;background:color-mix(in oklab,var(--c) 15%,var(--surface));box-shadow:inset 0 -3px 0 var(--c);white-space:nowrap}
+.t+.t{margin-left:2px}
+.t.la{font-family:var(--la)}
+.t.base{--c:var(--base);background:color-mix(in oklab,var(--base) 10%,var(--surface))}
+.t.vs{--c:var(--stem)}
+.t.vm{background:var(--hinge);color:var(--on-hinge);box-shadow:none;font-weight:600}
+.t.vp{background:transparent;box-shadow:inset 0 0 0 1px var(--pline)}
+.t.empty{background:transparent;box-shadow:none;outline:1.5px dashed var(--hinge);outline-offset:-2px;color:var(--muted);min-width:1.6em;text-align:center}
+.t.multi{box-shadow:none;background:linear-gradient(90deg,var(--g1,var(--nom)),var(--g2,var(--gen)),var(--g3,var(--dat))) bottom/100% 3px no-repeat,color-mix(in oklab,var(--ink) 6%,var(--surface))}
+.t.big{font-size:1.35rem;padding:.2em .45em .26em}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:18px;height:10px;border-radius:2px;background:color-mix(in oklab,var(--c) 18%,var(--surface));box-shadow:inset 0 -3px 0 var(--c)}
+
+/* ── I · Lectio ── */
+.modes{display:flex;flex-direction:column;gap:6px}
+.mode-hint{font-size:.86rem;color:var(--muted);min-height:1.4em}
+.lenses{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lect{display:flex;flex-direction:column;gap:2px;counter-reset:ln}
+.ln{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:4px 8px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line2)}
+.ln:last-child{border-bottom:0}
+.ln .no{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-align:right;background:none;border:0;padding:0;text-decoration:underline dotted;text-underline-offset:3px}
+.ln .no:hover{color:var(--rubric)}
+.insp .x{align-self:flex-end;margin-bottom:-30px;background:none;border:0;font-size:1.3rem;line-height:1;color:var(--muted);padding:2px 6px}
+.ln .lt{font-family:var(--la);font-size:1.5rem;line-height:1.6}
+.ln .tr{grid-column:2;font-size:.86rem;color:var(--muted);margin-top:-2px}
+.xbtn{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:4px;padding:2px 7px;align-self:center}
+.xbtn:hover{color:var(--ink);border-color:var(--ink)}
+.w{--c:var(--ink);font:inherit;background:none;border:0;padding:0 .06em;margin:0;border-radius:2px;position:relative;line-height:inherit;color:var(--ink)}
+.w:hover{background:var(--sunk)}
+.w.sel{background:color-mix(in oklab,var(--c) 16%,var(--surface))}
+.w.mk{outline:1.5px dashed var(--rubric);outline-offset:2px}
+.w.pz{text-decoration:underline dotted var(--rubric);text-decoration-thickness:2px;text-underline-offset:6px}
+.w span{transition:background .15s,box-shadow .15s}
+.lect.lens-case .ln .lt{line-height:2.5}
+.lect.lens-case .w[data-c]:not([data-c=""]){box-shadow:inset 0 -3px 0 var(--c)}
+.lect.lens-case .w::after{content:attr(data-ab);position:absolute;left:50%;top:calc(100% + 2px);transform:translateX(-50%);font-family:var(--mono);font-size:.56rem;letter-spacing:.05em;color:var(--c);white-space:nowrap;line-height:1}
+.lect.lens-blocks .ln .lt{line-height:1.9}
+.lect.lens-blocks .w .pe{background:color-mix(in oklab,var(--c) 18%,transparent);box-shadow:inset 0 -3px 0 var(--c);border-radius:2px}
+.lect.lens-blocks .w .ps{box-shadow:inset 0 -2px 0 color-mix(in oklab,var(--base) 70%,transparent)}
+.lect.lens-blocks .w .vs{box-shadow:inset 0 -3px 0 var(--stem)}
+.lect.lens-blocks .w .vm{background:var(--hinge);color:var(--on-hinge)}
+.lect.lens-blocks .w .vp{box-shadow:inset 0 0 0 1px var(--pline);border-radius:2px}
+.lect.lens-blocks .w .pe,.lect.lens-blocks .w .ps,.lect.lens-blocks .w .vs,.lect.lens-blocks .w .vp{padding:0 .04em}
+.lect.lens-blocks .w.amb .pe{background-image:repeating-linear-gradient(135deg,color-mix(in oklab,var(--c) 32%,transparent) 0 1.5px,transparent 1.5px 5px)}
+.lect.lens-case .w[data-pos="verb"]{box-shadow:inset 0 -3px 0 var(--verb)}
+.notice{display:flex;flex-direction:column;gap:8px}
+.notice-txt{font-size:.88rem;min-height:1.5em}
+.pauses{display:flex;flex-direction:column;gap:8px;border-top:1px dashed var(--line);padding-top:12px}
+.insp{position:sticky;top:64px}
+@media (max-width:860px){.insp{position:static}.insp.has{position:sticky;bottom:0;top:auto;max-height:46vh;overflow:auto;box-shadow:0 -10px 28px rgba(0,0,0,.14);z-index:15}}
+.form{font-family:var(--la);font-size:2.1rem;line-height:1.1}
+.lem{font-family:var(--la);font-style:italic;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:.78rem;font-family:var(--mono);border:1px solid var(--line);border-radius:3px;padding:1px 7px;background:var(--bg)}
+.tag.c{border-color:transparent;background:color-mix(in oklab,var(--c) 16%,var(--surface));box-shadow:inset 0 -2px 0 var(--c)}
+.alts{display:flex;flex-direction:column;gap:4px;font-size:.86rem;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line2)}
+.alts .now{font-weight:600}
+.links{display:flex;flex-wrap:wrap;gap:8px 16px}
+
+.ln-x{grid-column:1/-1;margin:6px 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:10px 10px 10px;display:flex;flex-direction:column;gap:8px}
+.ln-x .xr-stage{background:transparent;border:0;padding:4px 2px 2px;min-height:0;border-radius:0}
+.ln-x .xw .xf{font-size:clamp(1.2rem,2.4vw,1.55rem)}
+.ln-x .xw{gap:1px}
+.ln-x .bar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;font-size:.84rem}
+.ln.open{border-bottom-color:transparent}
+.pz-item{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:1px 4px 1px 4px;background:var(--surface)}
+.pz-item .open-pz{font-family:var(--la);font-size:.98rem;background:none;border:0;padding:1px 6px}
+.pz-item .open-pz small{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-left:3px}
+.pz-item .why{display:inline-flex;border-left:1px solid var(--line2);padding-left:3px}
+.pz-item .why button{font-size:.72rem;border:0;background:none;color:var(--muted);padding:1px 5px;border-radius:3px}
+.pz-item .why button[aria-pressed="true"]{background:var(--rubric);color:var(--surface)}
+.blocks-sum{font-size:.84rem;color:var(--muted)}
+.blocks-sum b{color:var(--ink);font-weight:600}
+
+/* ── II · X-Ray ── */
+.sent-chips .chip{min-width:2.2em;text-align:center;font-family:var(--mono)}
+.xr-stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 14px 22px;overflow:hidden;min-height:180px}
+.xr-line{display:flex;flex-wrap:nowrap;justify-content:center;gap:22px;align-items:flex-start;position:relative;z-index:1}
+.xw{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;padding:4px 4px;border-radius:6px;--c:var(--ink)}
+.xw:hover{background:var(--sunk)}
+.xw.sel{background:color-mix(in oklab,var(--c) 13%,var(--surface))}
+.xw .xf{font-family:var(--la);font-size:clamp(1.5rem,3.6vw,2.15rem);line-height:1.2;white-space:nowrap}
+.xw .xf .pe,.xw .xf .ps,.xw .xf .vs,.xw .xf .vm,.xw .xf .vp{padding:0 .03em}
+.xw .xf .pe{box-shadow:inset 0 -3px 0 var(--c);background:color-mix(in oklab,var(--c) 14%,transparent);border-radius:2px}
+.xw[data-pos="verb"] .xf{background:var(--verb);color:var(--on-verb);padding:0 .25em;border-radius:3px}
+.xw .xr{font-size:.8rem;color:var(--c);font-weight:600;white-space:nowrap}
+.xw .xab{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.xw[data-pos="verb"] .xr{color:var(--ink)}
+.xw .fr{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--surface);background:var(--rubric);border-radius:2px;padding:0 4px;line-height:1.5}
+.xr-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;transition:opacity .25s}
+.xr-svg path{fill:none;stroke-width:1.6}
+.xr-svg path.agree{stroke-dasharray:4 4}
+.xr-svg .dim{opacity:.18}
+.xr-svg .on path{stroke-width:2.4}
+.xr-svg text{font-family:var(--body);font-size:12px;font-weight:600;paint-order:stroke;stroke:var(--surface);stroke-width:5px;stroke-linejoin:round}
+.xr-stage.vert .xr-line{flex-direction:column;align-items:flex-start;gap:6px}
+.xr-stage.vert .xw{flex-direction:row;align-items:baseline;gap:10px;flex-wrap:wrap;text-align:left}
+.xr-stage.vert .xw .xf{font-size:1.6rem}
+.xr-tr{font-size:.92rem;color:var(--muted);text-align:center;margin-top:14px;position:relative;z-index:1;max-width:none}
+.xr-stage.vert .xr-tr{text-align:left}
+
+/* ── III · Casus ── */
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.tri{grid-template-columns:1fr}}
+.tri .card{gap:8px}
+.tri .src{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--rubric)}
+.tri h3{font-size:1rem;font-weight:600}
+.tri .big{font-family:var(--la);font-size:1.5rem;line-height:1.2}
+.cases{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+@media (max-width:760px){.cases{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.case{--c:var(--ink);text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;box-shadow:inset 0 3px 0 var(--c);display:flex;flex-direction:column;gap:1px}
+.case b{font-weight:600;font-size:.96rem}
+.case small{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.04em}
+.case em{font-style:normal;font-size:.78rem;color:var(--muted)}
+.case[aria-pressed="true"]{background:color-mix(in oklab,var(--c) 12%,var(--surface));border-color:var(--c)}
+.mx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table.mx{border-collapse:collapse;width:100%;min-width:520px}
+.mx th,.mx td{padding:6px 8px;border-bottom:1px solid var(--line2);text-align:left;vertical-align:middle}
+.mx thead th{font-weight:500;font-size:.8rem;color:var(--muted);background:var(--bg)}
+.mx thead th.fam{font-family:var(--la);font-size:1rem;color:var(--ink)}
+.mx thead th.fam small{display:block;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.mx tbody th{--c:var(--ink);font-weight:600;font-size:.86rem;white-space:nowrap;box-shadow:inset 3px 0 0 var(--c)}
+.mx tbody th small{display:block;font-family:var(--mono);font-size:.64rem;color:var(--muted);font-weight:400}
+.mx tr.rowsel{background:color-mix(in oklab,var(--rubric) 7%,transparent)}
+.mx td.gap{border-left:1px solid var(--line)}
+.cell{--c:var(--ink);font-family:var(--la);font-size:1.12rem;background:none;border:1px solid transparent;border-radius:4px;padding:1px 6px;width:100%;text-align:left}
+.cell .pe{box-shadow:inset 0 -2px 0 var(--c);font-weight:600}
+.cell .ps{color:var(--muted)}
+.cell:hover{background:var(--sunk)}
+.cell.hl{background:color-mix(in oklab,var(--rubric) 14%,var(--surface));border-color:var(--rubric)}
+.cell.src{box-shadow:0 0 0 2px var(--rubric)}
+.mx-cap{font-size:.88rem;min-height:1.5em}
+
+/* ── IV · Ambiguitas ── */
+.amb-sent{font-family:var(--la);font-size:clamp(1.4rem,3.4vw,1.9rem);line-height:1.5}
+.amb-sent .tgt{padding:0 .12em;border-radius:3px;background:color-mix(in oklab,var(--rubric) 14%,var(--surface));box-shadow:inset 0 -3px 0 var(--rubric)}
+.cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cand{--c:var(--ink);border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--surface);box-shadow:inset 0 3px 0 var(--c);display:flex;flex-direction:column;gap:2px;transition:opacity .25s,border-color .25s}
+.cand b{font-weight:600}
+.cand small{font-size:.78rem;color:var(--muted)}
+.cand .st{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--muted);margin-top:4px}
+.cand.out{opacity:.4}
+.cand.out b{text-decoration:line-through}
+.cand.weak{border-style:dashed}
+.cand.best{border-color:var(--c);background:color-mix(in oklab,var(--c) 10%,var(--surface))}
+.clues{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:cl}
+.clues li{counter-increment:cl;display:grid;grid-template-columns:24px 1fr;gap:6px;font-size:.9rem}
+.clues li::before{content:counter(cl);font-family:var(--mono);font-size:.72rem;color:var(--surface);background:var(--rubric);border-radius:50%;width:20px;height:20px;display:grid;place-items:center;margin-top:2px}
+.clues li .nt{display:block;color:var(--muted);font-size:.84rem}
+.lv{font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;border:1px solid var(--line);border-radius:3px;padding:0 5px;margin-right:6px;white-space:nowrap;vertical-align:1px}
+.lv.hard{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.lv.ctx{border-style:dashed}
+.lv-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);align-items:center}
+.verdict{font-weight:600;font-size:.95rem}
+.verdict span{font-weight:400;color:var(--muted)}
+.mini{display:grid;grid-template-columns:auto repeat(2,minmax(0,1fr));gap:2px 10px;font-size:.92rem;align-items:baseline}
+.mini .h{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.mini .f{font-family:var(--la);padding:0 5px;border-radius:3px}
+.mini .f.hl{background:color-mix(in oklab,var(--rubric) 16%,var(--surface));box-shadow:inset 0 -2px 0 var(--rubric)}
+
+/* ── V · Concordia ── */
+.conc-out{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 8px 18px;border-bottom:1px solid var(--line)}
+.phrase{font-family:var(--la);font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.2;display:flex;gap:.35em;flex-wrap:wrap;justify-content:center}
+.phrase .t{font-family:var(--la);font-size:1em;padding:.02em .2em .1em}
+.agree{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr) auto;gap:4px 14px;font-size:.9rem;align-items:baseline;width:100%;max-width:520px}
+.agree .h{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.agree .ok{color:var(--ok);font-weight:600}
+.agree .diff{color:var(--rubric);font-weight:600}
+.agree .la{font-size:1.05rem}
+.conc-ctrl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 14px;align-items:center}
+.conc-ctrl .lab{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+@media (max-width:520px){.conc-ctrl{grid-template-columns:1fr;gap:4px}}
+
+/* ── VI · Verbum ── */
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center;font-size:.8rem;color:var(--muted)}
+.slots div{padding:5px 4px;border-radius:4px;border:1px dashed var(--line)}
+.vstage{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px 14px;border-bottom:1px solid var(--line)}
+.vstage .full{font-family:var(--la);font-style:italic;font-size:clamp(2rem,7vw,3rem);line-height:1.1}
+.readstrip{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:center}
+.rc{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.rc .t{font-size:1.3rem;padding:.2em .45em .26em}
+.rc .lb{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.35;max-width:10em}
+.rc .lb b{display:block;color:var(--ink);font-family:var(--mono);font-weight:600}
+.arrow{align-self:center;color:var(--muted);font-family:var(--mono)}
+table.vg{border-collapse:collapse;width:100%}
+.vg th,.vg td{padding:6px 6px;border-bottom:1px solid var(--line2);text-align:left;font-size:.9rem}
+.vg thead th{font-family:var(--mono);font-size:.7rem;color:var(--muted);font-weight:400;letter-spacing:.04em}
+.vg td .t{font-size:.98rem}
+.vg td.p{color:var(--muted);font-size:.82rem;white-space:nowrap}
+.vg tr.diff td{background:color-mix(in oklab,var(--hinge) 9%,transparent)}
+
+/* ── VII · Recognosce ── */
+.rec-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.dots{display:flex;gap:5px}
+.dots button{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-family:var(--mono);font-size:.66rem;padding:0}
+.dots button[aria-current="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.dots button.done{border-color:var(--ok);box-shadow:inset 0 -3px 0 var(--ok)}
+.rec-sent{font-family:var(--la);font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.5;text-align:center;padding:14px 0 6px}
+.rw{font:inherit;background:none;border:0;border-bottom:2px solid var(--line);padding:0 .06em;margin:0;border-radius:2px}
+.rw:hover{background:var(--sunk)}
+.rw.right{border-bottom-color:var(--ok);background:color-mix(in oklab,var(--ok) 14%,var(--surface))}
+.rw.wrong{border-bottom-color:var(--bad);background:color-mix(in oklab,var(--bad) 10%,var(--surface))}
+.rec-ask{text-align:center;font-size:1rem;max-width:none}
+.rec-fb{min-height:3.5em;display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:6px;background:var(--bg);border:1px solid var(--line2)}
+.rec-fb .v{font-weight:600}
+.rec-fb .v.ok{color:var(--ok)} .rec-fb .v.no{color:var(--bad)}
+.rec-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
+
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px;font-size:.82rem;color:var(--muted)}
+footer a{color:var(--muted)}
+
+@media (max-width:600px){
+  body{padding-top:20px}
+  .ln{grid-template-columns:20px minmax(0,1fr) auto}
+  .ln .lt{font-size:1.36rem}
+  .seg button{padding:6px 9px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="sitenav" aria-label="Site"><a href="https://helloalexap.com/">helloalexap</a><span>/</span><a href="../../../">Learning Lab</a><span>/</span><a href="../../">Latin</a><span>/</span><a href="../">Visual Grammar</a></nav>
+
+<header class="top" id="top">
+  <span class="eyebrow">Latin Visual Grammar Lab · <b>N° 01</b> · In vīllā</span>
+  <h1 lang="la">Quis cui quid dat?</h1>
+  <p class="h1sub">谁、给谁、什么 · 格与句子关系</p>
+  <p class="lede">先读，再透视，读懂后关掉透视层继续读。拉丁语的关系主要由词尾承载，不靠词序：同一个词形可能有几种身份，要由句子决定。下面七层都围绕同一篇短文展开，任何一层都可以跳过。</p>
+  <div class="howto">
+    <div><b>Lege<i>读</i></b>初读只看意思；再读时，在仍然让你停顿的词上点一下。</div>
+    <div><b>Perspice<i>透视</i></b>打开「格」或「拆块」，或进入句子透视，看词与词之间的关系。</div>
+    <div><b>Dīmitte<i>放下</i></b>读懂后关掉透视层继续读。一种结构是否已经熟悉，要看它在下一篇文本里能否被直接认出。</div>
+  </div>
+</header>
+
+<div class="index" role="navigation" aria-label="本页分节">
+  <div class="index-in">
+    <nav id="idx">
+      <a href="#lectio"><b>I</b>Lectio</a>
+      <a href="#perspicua"><b>II</b>透视</a>
+      <a href="#casus"><b>III</b>Casus</a>
+      <a href="#ambiguitas"><b>IV</b>同形</a>
+      <a href="#concordia"><b>V</b>Concordia</a>
+      <a href="#verbum"><b>VI</b>Verbum</a>
+      <a href="#recognosce"><b>VII</b>认读</a>
+    </nav>
+    <button class="mac" id="mac" type="button" aria-pressed="true" title="显示或隐藏长音符号">ā 长音</button>
+  </div>
+</div>
+
+<!-- ═════════ I · LECTIO ═════════ -->
+<section id="lectio">
+  <div class="sec-head">
+    <span class="eyebrow"><b>I</b> · Lectio · 原创短文 · 8 句</span>
+    <h2><span class="la">In vīllā</span>在庄园里</h2>
+    <p class="muted">同一篇文字读三遍，每一遍点词的作用不同。本文为教学原创语料，按 Cambridge Latin Course Book 1 早期内容的词汇与结构编写，不是教材课文。</p>
+  </div>
+  <div class="two">
+    <div class="card">
+      <div class="modes">
+        <div class="seg" role="group" aria-label="阅读遍次" id="modes">
+          <button type="button" data-act="mode" data-arg="prima" aria-pressed="true">初读<small>Lectio prima</small></button>
+          <button type="button" data-act="mode" data-arg="nota" aria-pressed="false">发现<small>Notā</small></button>
+          <button type="button" data-act="mode" data-arg="secunda" aria-pressed="false">再读<small>Lectio secunda</small></button>
+        </div>
+        <p class="mode-hint" id="mode-hint"></p>
+      </div>
+      <div class="toolbar">
+        <div class="lenses" id="lenses"></div>
+        <button type="button" class="chip" id="tr-toggle" data-act="trs" aria-pressed="false">译文</button>
+      </div>
+      <div class="lect" id="lect"></div>
+      <div class="notice" id="notice"></div>
+      <div class="pauses" id="pauses"></div>
+    </div>
+    <aside class="card insp" id="insp" aria-live="polite"></aside>
+  </div>
+</section>
+
+<!-- ═════════ II · PERSPICUA ═════════ -->
+<section id="perspicua">
+  <div class="sec-head">
+    <span class="eyebrow"><b>II</b> · Sententia sub lūce · 句子透视</span>
+    <h2>动词是拱心石</h2>
+    <p class="muted">弧线从动词拱起，落到依附它的词上；属格挂在名词上，介词支配后面的名词。换词序时，词会移动，弧线跟着词走——关系由词尾承载。词序变化通常改变的是强调与焦点。</p>
+  </div>
+  <div class="toolbar">
+    <div class="chips sent-chips" id="xr-chips" role="group" aria-label="选择句子"></div>
+    <button type="button" class="chip" id="xr-order" data-act="xorder" aria-pressed="false">换词序</button>
+  </div>
+  <div class="xr-stage" id="xr-stage">
+    <svg class="xr-svg" id="xr-svg" aria-hidden="true"></svg>
+    <div class="xr-line" id="xr-line"></div>
+    <p class="xr-tr" id="xr-tr"></p>
+  </div>
+  <div class="legend" id="xr-legend"></div>
+  <div class="two">
+    <div class="card" id="xr-insp" aria-live="polite"></div>
+    <div class="card">
+      <span class="qlabel">这一句的观察点</span>
+      <p id="xr-note"></p>
+      <div class="marg" id="xr-alt"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ III · CASUS ═════════ -->
+<section id="casus">
+  <div class="sec-head">
+    <span class="eyebrow"><b>III</b> · Casus Atlas · 格 · 变格 · 词尾</span>
+    <h2>三个维度，三个出处</h2>
+    <p class="muted">词尾看纸面，变格看词典里的属格，格看句子。三样东西来自三个不同的地方，所以不能互相替代。</p>
+  </div>
+  <div class="chips" id="tri-chips" role="group" aria-label="选择词形"></div>
+  <div class="tri" id="tri"></div>
+  <div class="marg" id="tri-note"></div>
+
+  <span class="qlabel" style="margin-top:10px">六个格 · 点一个格，在变格表里看它的整行</span>
+  <div class="cases" id="cases"></div>
+  <p class="small" id="case-detail"></p>
+
+  <div class="toolbar">
+    <span class="qlabel">变格表 · 点任一格子，所有同形的格子一起亮起</span>
+    <button type="button" class="chip" id="endonly" data-act="endonly" aria-pressed="false">只看词尾</button>
+  </div>
+  <div class="mx-wrap"><table class="mx" id="mx"></table></div>
+  <p class="mx-cap" id="mx-cap"></p>
+  <p class="small muted">拉丁语还有处所格（locative），仅见于城市名与少数名词（如 domī「在家」），本表不展开。</p>
+</section>
+
+<!-- ═════════ IV · AMBIGUITAS ═════════ -->
+<section id="ambiguitas">
+  <div class="sec-head">
+    <span class="eyebrow"><b>IV</b> · Ambiguitās · 同形多解</span>
+    <h2>先摊开所有可能，再让线索排除</h2>
+    <p class="muted">一个词形孤立地看，往往有几种合法读法。一条一条加入句子里的线索：只有形态与句法上的硬约束能排除一种读法；语义和语境只改变它的可信程度。最后留下的，是最有根据的读法；虚线标出的，语法上仍然可能。</p>
+    <div class="lv-legend"><span><span class="lv hard">硬约束</span>形态·一致·介词支配，可以排除</span><span><span class="lv">语义</span>动词通常怎么用，调整可信度</span><span><span class="lv ctx">语境</span>前后文与篇章，调整可信度</span></div>
+  </div>
+  <div class="toolbar">
+    <div class="chips" id="amb-forms" role="group" aria-label="选择词形"></div>
+    <div class="chips" id="amb-ctx" role="group" aria-label="选择语境"></div>
+  </div>
+  <div class="two">
+    <div class="card">
+      <span class="qlabel" id="amb-label"></span>
+      <div class="amb-sent" id="amb-sent"></div>
+      <p class="small muted" id="amb-tr"></p>
+      <div class="cands" id="amb-cands"></div>
+      <ol class="clues" id="amb-clues"></ol>
+      <p class="verdict" id="amb-verdict"></p>
+      <div class="chips"><button type="button" class="btn" id="amb-next" data-act="clue">加入一条线索</button><button type="button" class="btn ghost" data-act="clue-reset">重来</button></div>
+    </div>
+    <div class="card">
+      <span class="qlabel">这个词形在变格表里</span>
+      <div class="mini" id="amb-mini"></div>
+      <div class="marg" id="amb-note"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ V · CONCORDIA ═════════ -->
+<section id="concordia">
+  <div class="sec-head">
+    <span class="eyebrow"><b>V</b> · Concordia · 配合拼装台</span>
+    <h2>性、数、格一致，词尾不必相同</h2>
+    <p class="muted">形容词跟随名词的性、数、格，但用的是形容词自己那一套词尾。选一个名词、一个形容词、一个格，看拼出来的短语。</p>
+  </div>
+  <div class="card">
+    <div class="conc-out" id="conc-out"></div>
+    <div class="conc-ctrl">
+      <span class="lab">名词</span><div class="chips" id="c-noun"></div>
+      <span class="lab">形容词</span><div class="chips" id="c-adj"></div>
+      <span class="lab">格</span><div class="chips" id="c-case"></div>
+      <span class="lab">数</span><div class="chips" id="c-num"></div>
+      <span class="lab">值得看</span><div class="chips" id="c-pre"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ VI · VERBUM ═════════ -->
+<section id="verbum">
+  <div class="sec-head">
+    <span class="eyebrow"><b>VI</b> · Verbum · 动词三槽</span>
+    <h2>从右往左拆：人称 → 时态标记 → 词干</h2>
+    <p class="muted">和法语 Décomposeur 同一个三槽形状。最右边的人称词尾最稳定，先读掉它；再看前面有没有时态标记；最后看词干属于哪个变位法。</p>
+  </div>
+  <div class="two">
+    <div class="card">
+      <div class="slots"><div>词干</div><div>时态标记</div><div>人称词尾</div></div>
+      <div class="vstage" id="v-stage"></div>
+      <div class="chips" id="v-chips"></div>
+      <p class="small muted">长元音在词尾 -t、-nt、-m 之前变短：amāmus 但 amat，amābāmus 但 amābat。</p>
+    </div>
+    <div class="card">
+      <span class="qlabel">amō · 现在时与未完成过去时</span>
+      <table class="vg" id="v-grid"></table>
+      <p class="small">两列只差中间一槽：有没有 <span class="t vm">ba</span>。人称词尾是共享模块，只有第一人称单数不同（-ō ／ -m）。</p>
+      <div class="marg"><b>和法语的接点</b>：法语 imparfait 的 -ais、-ait 可追溯到拉丁语 -ēbam、-ēbat，b 在演变中脱落。nous aimions 与 amābāmus 功能可比，词素并不一一对应。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ VII · RECOGNOSCE ═════════ -->
+<section id="recognosce">
+  <div class="sec-head">
+    <span class="eyebrow"><b>VII</b> · Recognōsce · 认读</span>
+    <h2>在句子里点出来</h2>
+    <p class="muted">只用本页出现过的结构。在句子里直接点词；点到别的词，会告诉你那个词实际是什么。可以跳过，也可以直接看答案。</p>
+  </div>
+  <div class="card" id="rec"></div>
+</section>
+
+<footer>
+  <span><a href="../">← Visual Grammar Lab</a> · <a href="../../">Latin Learning Lab</a></span>
+  <span>Latin Visual Grammar Lab · N° 01 · 原创教学语料 · 语法参照 Wheelock's Latin · 阅读进度参照 Cambridge Latin Course Book 1</span>
+</footer>
+</div>
+
+<script>
+'use strict';
+/* ───────── morphology core ───────── */
+const CASES=['nom','gen','dat','acc','abl','voc'];
+const CZ={nom:'主格',gen:'属格',dat:'与格',acc:'宾格',abl:'夺格',voc:'呼格'};
+const CEN={nom:'Nominative',gen:'Genitive',dat:'Dative',acc:'Accusative',abl:'Ablative',voc:'Vocative'};
+const CAB={nom:'NOM',gen:'GEN',dat:'DAT',acc:'ACC',abl:'ABL',voc:'VOC'};
+const NZ={sg:'单数',pl:'复数'}, NAB={sg:'SG',pl:'PL'};
+const GZ={m:'阳性',f:'阴性'};
+const FUNC={nom:'主语 · 表语',gen:'所属 · 修饰名词',dat:'接收者 · 受益者',acc:'直接宾语 · 方向',abl:'伴随 · 工具 · 位置',voc:'称呼'};
+const CASEINFO={
+ nom:{hint:'谁？（主语）',d:'最常见的用途是标记主语，也在系动词后作表语。主格不等于「施事」：被动句的主语就不是动作的发出者。'},
+ gen:{hint:'谁的？',d:'标记名词与名词之间的关系，最常见的是所属，也表示整体中的部分等。「……的」只是入门时的便利译法。'},
+ dat:{hint:'给谁？对谁？',d:'接收者、受益者、涉及的对象。dō（给）这类动词常同时带一个与格接收者和一个宾格对象。'},
+ acc:{hint:'作用于什么？',d:'最常见的是直接宾语；也可由介词支配表示方向（in vīllam「进入庄园」），或表示时间的延续。'},
+ abl:{hint:'和谁？用什么？在哪？',d:'用途很广：伴随（cum servō）、工具与方式、分离，以及由 in 等介词支配的静止位置。不宜把它等同于「地点格」。'},
+ voc:{hint:'在叫谁？',d:'直接称呼某人。多数词形与主格相同；第二变格 -us 名词单数例外：serve!「奴隶啊！」、domine!「主人！」'}
+};
+const END={
+ 1:{sg:['a','ae','ae','am','ā','a'],pl:['ae','ārum','īs','ās','īs','ae']},
+ 2:{sg:['us','ī','ō','um','ō','e'],pl:['ī','ōrum','īs','ōs','īs','ī']},
+ '3i':{sg:['is','is','ī','em','ī','is'],pl:['ēs','ium','ibus','ēs','ibus','ēs']}
+};
+const NOUN={
+ puella:{st:'puell',d:1,g:'f',gl:'女孩'}, ancilla:{st:'ancill',d:1,g:'f',gl:'女仆'}, agricola:{st:'agricol',d:1,g:'m',gl:'农夫'},
+ aqua:{st:'aqu',d:1,g:'f',gl:'水'}, 'vīlla':{st:'vīll',d:1,g:'f',gl:'庄园（乡间宅邸）'},
+ servus:{st:'serv',d:2,g:'m',gl:'奴隶'}, dominus:{st:'domin',d:2,g:'m',gl:'主人'}, hortus:{st:'hort',d:2,g:'m',gl:'花园'}
+};
+const ADJ={
+ bonus:{st:'bon',m:2,f:1,lem:'bonus, bona, bonum',gl:'好的',fam:'第一 / 第二变格形容词'},
+ fortis:{st:'fort',m:'3i',f:'3i',lem:'fortis, forte',gl:'勇敢的',fam:'第三变格形容词'}
+};
+const VERB={
+ 'habitō':{lem:'habitō, habitāre',cj:1,gl:'居住'}, 'portō':{lem:'portō, portāre',cj:1,gl:'端、搬运'},
+ 'dō':{lem:'dō, dare',cj:1,gl:'给'}, 'videō':{lem:'videō, vidēre',cj:2,gl:'看见'},
+ 'labōrō':{lem:'labōrō, labōrāre',cj:1,gl:'劳作'}, 'laudō':{lem:'laudō, laudāre',cj:1,gl:'称赞'},
+ 'amō':{lem:'amō, amāre',cj:1,gl:'爱'}, 'cantō':{lem:'cantō, cantāre',cj:1,gl:'唱歌'}
+};
+const PREP={in:{lem:'in + 夺格（位置）／ + 宾格（方向）',gl:'在……里'},cum:{lem:'cum + 夺格',gl:'和……一起'}};
+const PERZ={'1sg':'第一人称单数','2sg':'第二人称单数','3sg':'第三人称单数','1pl':'第一人称复数','2pl':'第二人称复数','3pl':'第三人称复数'};
+const TNZ={pres:'现在时',impf:'未完成过去时'};
+
+let MAC=true;
+const strip=s=>String(s).normalize('NFD').replace(/̄/g,'').normalize('NFC');
+const disp=s=>MAC?s:strip(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);
+
+function nForm(L,num,ci){const n=NOUN[L];return n.st+END[n.d][num][ci];}
+function nLemma(L){return nForm(L,'sg',0)+', '+nForm(L,'sg',1);}
+function aFam(A,g){return ADJ[A][g];}
+function aForm(A,g,num,ci){return ADJ[A].st+END[aFam(A,g)][num][ci];}
+/* every cell of a noun paradigm whose (displayed) form equals the given form */
+function nCands(L,form){const out=[];for(const num of ['sg','pl'])CASES.forEach((c,ci)=>{if(disp(nForm(L,num,ci))===disp(form))out.push({c,n:num,id:c+'.'+num});});return out;}
+function aCands(A,form){const out=[],seen=new Set();for(const g of ['m','f'])for(const num of ['sg','pl'])CASES.forEach((c,ci)=>{if(disp(aForm(A,g,num,ci))===disp(form)){const id=c+'.'+num;if(!seen.has(id)){seen.add(id);out.push({c,n:num,id});}}});return out;}
+
+/* word constructors */
+const N=(f,L,c,n,role,x)=>Object.assign({k:'n',f,L,c,n,role},x||{});
+const A=(f,Aj,g,c,n,role,x)=>Object.assign({k:'a',f,A:Aj,g,c,n,role},x||{});
+const V=(f,lem,p,per,tn,x)=>Object.assign({k:'v',f,V:lem,p,per,tn,role:'谓语'},x||{});
+const P=(f,role)=>({k:'p',f,role:role||'介词'});
+
+function parts(w){
+  if(w.k==='n'||w.k==='a'){const st=w.k==='n'?NOUN[w.L].st:ADJ[w.A].st;return [[st,'ps'],[w.f.slice(st.length),'pe']];}
+  if(w.k==='v')return [[w.p[0],'vs'],[w.p[1],'vm'],[w.p[2],'vp']].filter(x=>x[0]);
+  return [[w.f,'pw']];
+}
+const partsHTML=w=>parts(w).map(([t,k])=>`<span class="${k}">${esc(disp(t))}</span>`).join('');
+const colOf=w=>w.k==='v'?'verb':w.k==='p'?'prep':w.c;
+const abOf=w=>w.k==='v'?'VERB':w.k==='p'?'PREP':CAB[w.c]+'·'+NAB[w.n];
+function candsOf(w){return w.k==='n'?nCands(w.L,w.f):w.k==='a'?aCands(w.A,w.f):[];}
+function lemOf(w){
+  if(w.k==='n')return nLemma(w.L)+' ('+NOUN[w.L].g+'.)';
+  if(w.k==='a')return ADJ[w.A].lem;
+  if(w.k==='v')return VERB[w.V].lem;
+  return PREP[w.f].lem;
+}
+function glOf(w){return w.k==='n'?NOUN[w.L].gl:w.k==='a'?ADJ[w.A].gl:w.k==='v'?VERB[w.V].gl:PREP[w.f].gl;}
+function parseOf(w){
+  if(w.k==='n')return `${CZ[w.c]}${NZ[w.n]}`;
+  if(w.k==='a')return `${GZ[w.g]} · ${CZ[w.c]}${NZ[w.n]}`;
+  if(w.k==='v')return `${TNZ[w.tn]} · ${PERZ[w.per]}`;
+  return '介词';
+}
+
+/* ───────── the text ───────── */
+const S=[
+ {id:1,w:[N('dominus','dominus','nom','sg','主语'),P('in','介词 · 位置'),N('vīllā','vīlla','abl','sg','位置（受 in 支配）'),V('habitat','habitō',['habita','','t'],'3sg','pres')],
+  e:[[3,0,'主语'],[3,1,'位置'],[1,2,'支配']],tr:'主人住在庄园里。',alt:[1,2,0,3],
+  note:'in 带夺格表示静止的位置：in vīllā「在庄园里」。表示「进入」时，in 改带宾格：in vīllam。',
+  altNote:'in vīllā 前置：先交代场景，再出现人物。三条关系都没有变。'},
+ {id:2,w:[N('ancilla','ancilla','nom','sg','主语'),N('aquam','aqua','acc','sg','宾语'),V('portat','portō',['porta','','t'],'3sg','pres')],
+  e:[[2,0,'主语'],[2,1,'宾语']],tr:'女仆端着水。',alt:[1,0,2],
+  note:'ancilla 和 aqua 同属第一变格，-a 与 -am 的差别就是主语与宾语的差别。',
+  altNote:'aquam 移到句首，焦点落在「水」上：她端的是水。'},
+ {id:3,w:[N('servus','servus','nom','sg','主语'),N('puellae','puella','dat','sg','接收者'),N('aquam','aqua','acc','sg','宾语'),V('dat','dō',['da','','t'],'3sg','pres')],
+  e:[[3,0,'主语'],[3,1,'接收者'],[3,2,'宾语']],tr:'奴隶把水递给女孩。',alt:[2,0,1,3],
+  note:'puellae 孤立时有四种读法。dat（给）需要一个接收者，这里读作与格单数。',
+  altNote:'aquam 提前，强调所给之物；puellae 仍是接收者——靠词尾和动词，不靠位置。'},
+ {id:4,w:[N('puella','puella','nom','sg','主语'),N('servum','servus','acc','sg','宾语'),V('videt','videō',['vide','','t'],'3sg','pres')],
+  e:[[2,0,'主语'],[2,1,'宾语']],tr:'女孩看见奴隶。',alt:[1,0,2],
+  note:'puella 与 servum 的角色来自词尾：-a 是第一变格主格，-um 是第二变格宾格。',
+  altNote:'servum 在前，依然是被看见的人。汉语换了语序就换了意思，拉丁语不会。'},
+ {id:5,w:[N('servus','servus','nom','sg','主语'),N('dominī','dominus','gen','sg','所属（修饰 servus）'),P('in','介词 · 位置'),N('hortō','hortus','abl','sg','位置（受 in 支配）'),V('labōrat','labōrō',['labōra','','t'],'3sg','pres')],
+  e:[[4,0,'主语'],[0,1,'所属'],[4,2,'位置'],[2,3,'支配']],tr:'主人的奴隶在花园里劳作。',alt:[2,3,0,1,4],
+  note:'dominī 紧贴 servus，读作属格「主人的」。它孤立时也可以是主格复数或呼格复数。',
+  altNote:'地点 in hortō 前置，句子从场景开始；dominī 仍挂在 servus 上。'},
+ {id:6,w:[N('servī','servus','nom','pl','主语'),A('fortēs','fortis','m','nom','pl','配合 servī'),V('labōrant','labōrō',['labōra','','nt'],'3pl','pres')],
+  e:[[2,0,'主语'],[0,1,'配合']],tr:'勇敢的奴隶们在劳作。',alt:[1,0,2],
+  note:'servī（第二变格名词）与 fortēs（第三变格形容词）词尾不同，但性、数、格一致：阳性、复数、主格。',
+  altNote:'fortēs 移到前面，强调「勇敢」。配合关系不受位置影响。'},
+ {id:7,w:[N('puellae','puella','nom','pl','主语'),N('servōs','servus','acc','pl','宾语'),V('vident','videō',['vide','','nt'],'3pl','pres')],
+  e:[[2,0,'主语'],[2,1,'宾语']],tr:'女孩们看见奴隶们。',alt:[1,0,2],
+  note:'又一个 puellae。最自然的读法是主格复数：位于句首，动词 vident 是复数。它也可以读作属格「（他们看见）女孩的奴隶们」——拉丁语动词自带人称，主语可以不出现（见 IV）。',
+  altNote:'servōs 在前，依然是被看见的人。对照第 4 句：servum 变成了复数 servōs。'},
+ {id:8,w:[N('dominus','dominus','nom','sg','主语'),N('ancillās','ancilla','acc','pl','宾语'),V('laudat','laudō',['lauda','','t'],'3sg','pres')],
+  e:[[2,0,'主语'],[2,1,'宾语']],tr:'主人称赞女仆们。',alt:[1,0,2],
+  note:'ancillās 是第一变格宾格复数；-ās 在这张表里只有这一种读法。',
+  altNote:'ancillās 提前，强调被称赞的人。'}
+];
+const NOTICE=[
+ {lab:'puellae 出现两次',keys:['3:1','7:0'],txt:'第 3 句读作与格单数（接收者），第 7 句最自然的读法是主格复数（主语）。同一个词形，句子不同，格就不同。'},
+ {lab:'-t 与 -nt',keys:['1:3','2:2','3:3','4:2','5:4','6:2','7:2','8:2'],txt:'动词最后的字母指向主语的数：-t 是单数，-nt 是复数（labōrant、vident）。'},
+ {lab:'宾格的样子',keys:['2:1','3:2','4:1','7:1','8:1'],txt:'第一变格 -am ／ -ās，第二变格 -um ／ -ōs：四个词尾，同一个功能。'},
+ {lab:'in + 夺格',keys:['1:1','1:2','5:2','5:3'],txt:'in vīllā、in hortō：介词 in 后面跟夺格，表示静止的位置。'},
+ {lab:'servī fortēs',keys:['6:0','6:1'],txt:'词尾 -ī 与 -ēs 不同，却在配合：两个词属于不同的变格家族。'}
+];
+const sw=(sid,i)=>S[sid-1].w[i];
+const LESSON={id:'vgl-01',no:'01'};
+const FOCUS={1:'in vīllā 前置，先交代场景',2:'aquam 前置，强调端的是水',3:'aquam 前置，强调所给之物',4:'servum 前置，强调被看见的是奴隶',5:'in hortō 前置，先交代场景',6:'fortēs 前置，强调「勇敢」',7:'servōs 前置，强调被看见的人',8:'ancillās 前置，强调被称赞的人'};
+S.forEach(s=>s.focus=FOCUS[s.id]);
+const ROLEB=[['主语','nom.subj'],['宾语','acc.obj'],['接收者','dat.rec'],['所属','gen.poss'],['位置','abl.place'],['伴随','abl.with'],['配合','adj.agree']];
+const BLOCKZ={'nom.subj':'主格 · 主语','acc.obj':'宾格 · 宾语','dat.rec':'与格 · 接收者','gen.poss':'属格 · 所属','abl.place':'in + 夺格 · 位置','abl.with':'cum + 夺格 · 伴随','adj.agree':'形容词配合','verb.3sg':'动词 -t · 单数','verb.3pl':'动词 -nt · 复数','prep.in':'介词 in','prep.cum':'介词 cum'};
+function blockOf(w){if(w.k==='v')return 'verb.'+w.per;if(w.k==='p')return 'prep.'+w.f;const r=ROLEB.find(([z])=>w.role.startsWith(z));return r?r[1]:w.c+'.'+w.n;}
+/* stable word id: lesson + sentence + form, independent of word position */
+const wid=(sid,i)=>`${LESSON.id}.s${sid}.${strip(sw(sid,i).f)}`;
+function locate(id){for(const s of S)for(let i=0;i<s.w.length;i++)if(wid(s.id,i)===id)return{sid:s.id,i};return null;}
+
+/* ───────── state ───────── */
+const st={mode:'prima',lens:'none',trs:false,sel:null,notice:null,
+  open:null,openAlt:false,
+  xr:{sid:3,alt:false,sel:1},
+  tri:'servō', caseSel:'dat', mx:{n1:'puella',n2:'servus',hl:null,end:false},
+  amb:{form:'puellae',ctx:0,step:0},
+  conc:{n:'servus',a:'fortis',ci:0,num:'pl'},
+  verb:'amābāmus', rec:{i:0,state:{}}};
+const PZKEY=`latinvgl.${LESSON.id}.pauses`;
+let PAUSES=[];
+try{PAUSES=JSON.parse(localStorage.getItem(PZKEY)||'[]')||[];}catch(e){PAUSES=[];}
+PAUSES=PAUSES.filter(p=>p&&p.id&&locate(p.id));
+const savePauses=()=>{try{localStorage.setItem(PZKEY,JSON.stringify(PAUSES));}catch(e){}};
+const WHYZ={'义':'词义不熟','形':'词形不熟','系':'关系没看出来'};
+
+/* ───────── I · Lectio ───────── */
+const MODEHINT={
+ prima:'只读意思。点一个词，右侧只给词义；不分析。',
+ nota:'打开透视层，或点「观察点」让相关的词一起亮起。点词看完整解析。',
+ secunda:'不开工具再读一遍。哪个词让你停顿，就点一下它；再点一下取消。'
+};
+function wordBtn(w,key,extra){
+  const amb=candsOf(w).length>1;
+  return `<button type="button" class="w${amb?' amb':''}${extra||''}" data-act="w" data-arg="${key}" data-c="${w.k==='n'||w.k==='a'?w.c:''}" data-pos="${w.k==='v'?'verb':w.k==='p'?'prep':w.k}" data-ab="${abOf(w)}" style="--c:var(--${colOf(w)})">${partsHTML(w)}</button>`;
+}
+function renderLectio(){
+  document.querySelectorAll('#modes button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.arg===st.mode)));
+  $('mode-hint').textContent=MODEHINT[st.mode];
+  const nota=st.mode==='nota';
+  $('lenses').innerHTML=nota?['none','case','blocks'].map(l=>`<button type="button" class="chip" data-act="lens" data-arg="${l}" aria-pressed="${st.lens===l}">${{none:'直读',case:'格',blocks:'拆块'}[l]}</button>`).join(''):'<span class="small muted">透视层在「发现」中打开</span>';
+  const lect=$('lect');
+  lect.className='lect'+(nota&&st.lens!=='none'?' lens-'+st.lens:'');
+  const mk=new Set(nota&&st.notice!=null?NOTICE[st.notice].keys:[]);
+  const pz=new Set(PAUSES.map(p=>p.id));
+  lect.innerHTML=S.map(s=>{
+    const open=nota&&st.open===s.id;
+    const no=nota?`<button type="button" class="no" data-act="open" data-arg="${s.id}" aria-expanded="${open}" title="就地透视第 ${s.id} 句">${s.id}</button>`:`<span class="no">${s.id}</span>`;
+    const words=s.w.map((w,i)=>{const key=s.id+':'+i;let x='';if(st.sel===key&&st.mode!=='secunda')x+=' sel';if(mk.has(key))x+=' mk';if(pz.has(wid(s.id,i))&&st.mode!=='prima')x+=' pz';return wordBtn(w,key,x);}).join(' ');
+    const xb=nota?`<button type="button" class="xbtn" data-act="open" data-arg="${s.id}" aria-expanded="${open}">${open?'收起':'透视'}</button>`:'';
+    return `<div class="ln${open?' open':''}" id="ln-${s.id}">${no}<span class="lt">${words}.</span>${xb}${st.trs?`<span class="tr">${esc(s.tr)}</span>`:''}${open?inlinePanel(s):''}</div>`;
+  }).join('');
+  $('tr-toggle').setAttribute('aria-pressed',String(st.trs));
+  $('notice').innerHTML=nota?`<span class="qlabel">观察点 · Notā bene</span><div class="chips">${NOTICE.map((n,i)=>`<button type="button" class="chip" data-act="notice" data-arg="${i}" aria-pressed="${st.notice===i}">${esc(disp(n.lab))}</button>`).join('')}</div><p class="notice-txt">${st.notice!=null?esc(disp(NOTICE[st.notice].txt)):'<span class="muted">点一个观察点，相关的词会在文中用虚线框出。</span>'}</p>`:'';
+  renderPauses();
+  renderInsp();
+  if(nota&&st.open)drawInline();
+}
+function renderPauses(){
+  if(st.mode==='prima'){$('pauses').innerHTML='';return;}
+  if(!PAUSES.length){$('pauses').innerHTML=`<span class="qlabel">停顿记录 · 0</span><p class="small muted">在「再读」中点一个词即可记下。停顿是一次阅读的观察，不是对掌握程度的判断。</p>`;return;}
+  const items=PAUSES.map(p=>{const loc=locate(p.id),w=sw(loc.sid,loc.i);return `<span class="pz-item"><button type="button" class="open-pz" data-act="pzopen" data-arg="${p.id}" title="${esc(BLOCKZ[p.b]||'')}">${esc(disp(w.f))}<small>${loc.sid}</small></button><span class="why" role="group" aria-label="停顿原因（可选）">${Object.keys(WHYZ).map(k=>`<button type="button" data-act="pzwhy" data-arg="${p.id}|${k}" aria-pressed="${p.why===k}" title="${WHYZ[k]}">${k}</button>`).join('')}</span></span>`;}).join('');
+  const cnt={};PAUSES.forEach(p=>cnt[p.b]=(cnt[p.b]||0)+1);
+  $('pauses').innerHTML=`<span class="qlabel">停顿记录 · ${PAUSES.length}</span><div class="chips">${items}<button type="button" class="lnk" data-act="pzclear">清空</button></div>
+   <p class="blocks-sum">涉及的结构块：${Object.keys(cnt).map(b=>`<b>${esc(BLOCKZ[b]||b)}</b>${cnt[b]>1?' ×'+cnt[b]:''}`).join('　')}</p>
+   <p class="small muted">点词打开解析。原因可选：义＝词义不熟，形＝词形不熟，系＝关系没看出来。记录按结构块保存，下一篇文本里出现同一种结构时可以对照；没有停顿就继续读，不需要复习。只保存在这台设备的浏览器里。</p>`;
+}
+function inlinePanel(s){
+  const alt=st.openAlt,order=alt?s.alt:s.w.map((_,i)=>i);
+  const sel=st.sel&&+st.sel.split(':')[0]===s.id?+st.sel.split(':')[1]:null;
+  return `<div class="ln-x" id="ix-${s.id}"><div class="xr-stage"><svg class="xr-svg" aria-hidden="true"></svg><div class="xr-line">${order.map((i,pos)=>xTok(s,i,sel,'ixw',alt&&pos===0)).join('')}</div></div>
+   <div class="bar"><span class="muted">${alt?esc(disp(focusLine(s))):esc(disp(s.note))}</span><span class="chips"><button type="button" class="chip" data-act="ixorder" data-arg="${s.id}" aria-pressed="${alt}">${alt?'恢复原词序':'换词序'}</button><button type="button" class="chip" data-act="open" data-arg="${s.id}">收起</button></span></div></div>`;
+}
+function drawInline(){
+  const p=$('ix-'+st.open);if(!p)return;
+  const sel=st.sel&&+st.sel.split(':')[0]===st.open?+st.sel.split(':')[1]:null;
+  drawArcs(p.querySelector('.xr-stage'),S[st.open-1],sel);
+}
+const focusLine=s=>`关系不变：${s.e.length} 条弧线与换序前相同。变化在强调：${s.focus}。`;
+function inspHTML(w,key,full){
+  const cs=candsOf(w);
+  let h=`<span class="qlabel">${key?'第 '+key.split(':')[0]+' 句':''}</span><div class="form" style="--c:var(--${colOf(w)})">${partsHTML(w)}</div><div class="lem">${esc(disp(lemOf(w)))}</div>`;
+  if(!full)return h+`<p>${esc(glOf(w))}</p><p class="small muted">需要看结构时，切到「发现」。</p>`;
+  const tiles=parts(w).map(([t,k])=>{const cls=k==='pe'?'t la':k==='ps'?'t la base':k==='vs'?'t la vs':k==='vm'?'t la vm':k==='vp'?'t la vp':'t la base';return `<span class="${cls}" style="--c:var(--${colOf(w)})">${esc(disp(t))}</span>`;}).join('');
+  h+=`<div>${tiles}</div><div class="tags">`;
+  if(w.k==='n'||w.k==='a')h+=`<span class="tag c" style="--c:var(--${w.c})">${CZ[w.c]} · ${NZ[w.n]}</span><span class="tag">${w.k==='n'?'第'+'一二'[NOUN[w.L].d-1]+'变格 · '+GZ[NOUN[w.L].g]:ADJ[w.A].fam}</span>`;
+  if(w.k==='v')h+=`<span class="tag">${TNZ[w.tn]}</span><span class="tag">${PERZ[w.per]}</span><span class="tag">第${'一二'[VERB[w.V].cj-1]}变位法</span>`;
+  h+=`<span class="tag">${esc(w.role)}</span></div><p>${esc(glOf(w))}</p>`;
+  if(cs.length>1){
+    h+=`<div class="alts"><span class="muted small">孤立时，这个词形可以是：</span>${cs.map(c=>`<span class="${c.c===w.c&&c.n===w.n?'now':''}">${c.c===w.c&&c.n===w.n?'▸ ':'· '}${CZ[c.c]}${NZ[c.n]}</span>`).join('')}<span class="small muted">本句读作${CZ[w.c]}${NZ[w.n]}。</span></div>`;
+  }
+  const links=[];
+  if(key&&st.open!==+key.split(':')[0])links.push(`<button type="button" class="lnk" data-act="openx" data-arg="${key.split(':')[0]}">就地展开句法弧线</button>`);
+  if(w.k==='n')links.push(`<button type="button" class="lnk" data-act="goatlas" data-arg="${w.L}|${w.f}|${w.c}">在变格表中定位</button>`);
+  if(w.k==='n'&&AMB[w.f])links.push(`<button type="button" class="lnk" data-act="goamb" data-arg="${w.f}">用线索消歧</button>`);
+  if(w.k==='a')links.push(`<button type="button" class="lnk" data-act="goconc" data-arg="0">在配合拼装台看</button>`);
+  if(w.k==='v')links.push(`<button type="button" class="lnk" data-act="goverb" data-arg="${w.f}">在动词三槽里拆 ${esc(disp(w.f))}</button>`);
+  return h+`<div class="links">${links.join('')}</div>`;
+}
+function renderInsp(){
+  const el=$('insp');
+  el.classList.toggle('has',!!st.sel&&st.mode!=='secunda');
+  if(st.mode==='secunda'){el.innerHTML=`<span class="qlabel">Lectio secunda</span><p>这一遍不看解析。读到停顿的地方，点那个词。</p><p class="small muted">停顿记录的是这一次阅读时的观察，不是对掌握程度的判断。</p>`;return;}
+  if(!st.sel){el.innerHTML=`<span class="qlabel">${st.mode==='prima'?'词义':'解析'}</span><p class="muted">点文中任意一个词。</p>${st.mode==='nota'?'<div class="legend">'+legendHTML()+'</div>':''}`;return;}
+  const[sid,i]=st.sel.split(':').map(Number);
+  el.innerHTML=`<button type="button" class="x" data-act="unsel" aria-label="关闭">×</button>`+inspHTML(sw(sid,i),st.sel,st.mode==='nota');
+}
+function legendHTML(){return ['nom','gen','dat','acc','abl'].map(c=>`<span><i class="sw" style="--c:var(--${c})"></i>${CZ[c]}</span>`).join('')+`<span><i class="sw" style="--c:var(--verb)"></i>动词</span>`;}
+
+/* ───────── II · X-Ray ───────── */
+function renderXray(noDraw){
+  const s=S[st.xr.sid-1];
+  $('xr-chips').innerHTML=S.map(x=>`<button type="button" class="chip" data-act="xs" data-arg="${x.id}" aria-pressed="${x.id===st.xr.sid}">${x.id}</button>`).join('');
+  $('xr-order').setAttribute('aria-pressed',String(st.xr.alt));
+  $('xr-order').textContent=st.xr.alt?'恢复原词序':'换词序';
+  const order=st.xr.alt?s.alt:s.w.map((_,i)=>i);
+  $('xr-line').innerHTML=order.map((i,pos)=>xTok(s,i,st.xr.sel,'xw',st.xr.alt&&pos===0)).join('');
+  $('xr-tr').textContent=s.tr;
+  const used=[...new Set(s.w.map(colOf))];
+  $('xr-legend').innerHTML=used.map(c=>`<span><i class="sw" style="--c:var(--${c})"></i>${c==='verb'?'动词':c==='prep'?'介词':CZ[c]}</span>`).join('')+'<span>实线：依附　虚线：配合</span>';
+  const w=s.w[st.xr.sel]||s.w[0];
+  $('xr-insp').innerHTML=inspHTML(w,null,true);
+  $('xr-note').textContent=disp(s.note);
+  $('xr-alt').innerHTML=`<b>换词序</b>　<span class="la">${esc(disp(s.alt.map(i=>s.w[i].f).join(' ')))}.</span><br>${esc(disp(focusLine(s)))}<br>${esc(disp(s.altNote))}`;
+  if(!noDraw)requestAnimationFrame(()=>drawArcs($('xr-stage'),s,st.xr.sel));
+}
+function xTok(s,i,sel,act,front){
+  const w=s.w[i];
+  return `<button type="button" class="xw${i===sel?' sel':''}" data-act="${act}" data-arg="${act==='ixw'?s.id+':'+i:i}" data-i="${i}" data-pos="${w.k==='v'?'verb':''}" style="--c:var(--${colOf(w)})"><span class="xf">${partsHTML(w)}</span><span class="xr">${esc(w.k==='v'?'谓语':w.role.replace(/（.*）/,''))}</span><span class="xab">${abOf(w)}</span>${front?'<span class="fr">前置</span>':''}</button>`;
+}
+function drawArcs(stage,s,sel){
+  if(!stage)return;
+  const line=stage.querySelector('.xr-line'),svg=stage.querySelector('.xr-svg');
+  stage.classList.remove('vert');line.style.paddingTop='';line.style.paddingLeft='';
+  const narrow=stage.clientWidth<420||line.scrollWidth>line.clientWidth+2;
+  stage.classList.toggle('vert',narrow);
+  const tok={};line.querySelectorAll('.xw').forEach(t=>tok[t.dataset.i]=t.querySelector('.xf'));
+  const rel=(a,b)=>{const ra=a.getBoundingClientRect(),rb=stage.getBoundingClientRect();return{l:ra.left-rb.left,r:ra.right-rb.left,t:ra.top-rb.top,b:ra.bottom-rb.top,cx:ra.left-rb.left+ra.width/2,cy:ra.top-rb.top+ra.height/2};};
+  const col=i=>`var(--${colOf(s.w[i])})`;
+  let out='';
+  if(!narrow){
+    let p={};for(const i in tok)p[i]=rel(tok[i]);
+    const H=s.e.map(([h,d])=>Math.max(30,Math.min(130,24+0.3*Math.abs(p[h].cx-p[d].cx))));
+    line.style.paddingTop=(Math.max(...H)+34)+'px';
+    for(const i in tok)p[i]=rel(tok[i]);
+    // endpoint offsets at shared heads
+    const off=s.e.map(()=>0),byHead={};
+    s.e.forEach(([h,d],k)=>{const dir=p[d].cx<p[h].cx?-1:1;(byHead[h+':'+dir]=byHead[h+':'+dir]||[]).push(k);});
+    for(const g in byHead){const dir=+g.split(':')[1];byHead[g].sort((a,b)=>H[a]-H[b]).forEach((k,r)=>off[k]=dir*(5+7*r));}
+    s.e.forEach(([h,d,lab],k)=>{
+      const x1=p[h].cx+off[k],x2=p[d].cx,y=Math.min(p[h].t,p[d].t)-4,y1=p[h].t-4,y2=p[d].t-4,hh=H[k],cy=y-hh/0.75;
+      const cls=sel==null?'':(sel===h||sel===d?'on':'dim');
+      const agree=lab==='配合';
+      out+=`<g class="${cls}" style="color:${col(d)}"><path class="${agree?'agree':''}" style="stroke:${col(d)}" d="M${x1} ${y1} C${x1} ${cy},${x2} ${cy},${x2} ${y2}"/>${agree?'':`<polygon style="fill:${col(d)}" points="${x2-4},${y2-8} ${x2+4},${y2-8} ${x2},${y2-1}"/>`}<text x="${(x1+x2)/2}" y="${y-hh-6}" text-anchor="middle" style="fill:${col(d)}">${lab}</text></g>`;
+    });
+  }else{
+    let p={};for(const i in tok)p[i]=rel(tok[i]);
+    const W=s.e.map(([h,d])=>Math.max(16,Math.min(90,12+0.42*Math.abs(p[h].cy-p[d].cy))));
+    line.style.paddingLeft=(Math.max(...W)+14)+'px';
+    for(const i in tok)p[i]=rel(tok[i]);
+    s.e.forEach(([h,d,lab],k)=>{
+      const x=Math.min(p[h].l,p[d].l)-8,y1=p[h].cy,y2=p[d].cy,cx=x-W[k]/0.75;
+      const cls=sel==null?'':(sel===h||sel===d?'on':'dim');
+      const agree=lab==='配合';
+      out+=`<g class="${cls}"><path class="${agree?'agree':''}" style="stroke:${col(d)}" d="M${x} ${y1} C${cx} ${y1},${cx} ${y2},${x} ${y2}"/>${agree?'':`<polygon style="fill:${col(d)}" points="${x-8},${y2-4} ${x-8},${y2+4} ${x-1},${y2}"/>`}</g>`;
+    });
+  }
+  svg.innerHTML=out;
+}
+function rectsOf(stage){const r={};stage.querySelectorAll('.xw').forEach(t=>r[t.dataset.i]=t.getBoundingClientRect());return r;}
+/* FLIP: tokens glide from their old positions; arcs fade back in once words have settled */
+function glide(stage,before,s,sel){
+  drawArcs(stage,s,sel);
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const svg=stage.querySelector('.xr-svg'),toks=[...stage.querySelectorAll('.xw')];
+  svg.style.opacity='0';
+  toks.forEach(t=>{const a=before[t.dataset.i],b=t.getBoundingClientRect();if(!a)return;t.style.transition='none';t.style.transform=`translate(${a.left-b.left}px,${a.top-b.top}px)`;});
+  requestAnimationFrame(()=>requestAnimationFrame(()=>toks.forEach(t=>{t.style.transition='transform .45s cubic-bezier(.3,.7,.2,1)';t.style.transform='';})));
+  setTimeout(()=>{toks.forEach(t=>t.style.transition='');svg.style.opacity='1';},480);
+}
+function flipReorder(){
+  const stage=$('xr-stage'),before=rectsOf(stage);
+  st.xr.alt=!st.xr.alt;renderXray(true);
+  glide(stage,before,S[st.xr.sid-1],st.xr.sel);
+}
+function flipInline(){
+  const p=$('ix-'+st.open);const before=p?rectsOf(p):{};
+  st.openAlt=!st.openAlt;renderLectio();
+  const q=$('ix-'+st.open);if(!q)return;
+  const sel=st.sel&&+st.sel.split(':')[0]===st.open?+st.sel.split(':')[1]:null;
+  glide(q.querySelector('.xr-stage'),before,S[st.open-1],sel);
+}
+/* ───────── III · Casus ───────── */
+const TRI=[
+ {f:'servō',L:'servus',note:'-ō 有三个家：第二变格名词的与格／夺格单数（servō）；部分第三变格名词的主格单数（sermō「话语」，属格 sermōnis）；动词现在时第一人称单数（portō「我端」）。只凭 -ō 认不出家族，要看词典里的属格：servus, servī → -ī → 第二变格。'},
+ {f:'puellae',L:'puella',note:'一个 -ae 对应四个格位。词典属格 puellae 告诉你它是第一变格；具体是哪一格，要等句子。'},
+ {f:'dominōrum',L:'dominus',note:'-ōrum 只出现在第二变格的属格复数（第一变格对应的是 -ārum）。看到它，变格和格一起确定了。'},
+ {f:'ancillās',L:'ancilla',note:'-ās 是第一变格宾格复数，没有别的读法，不需要等句子。'},
+ {f:'agricola',L:'agricola',note:'第一变格，却是阳性。变格是词形家族，性是另一个维度：agricola 配形容词时用阳性 bonus，不用 bona（见 V · Concordia）。'},
+ {f:'hortō',L:'hortus',note:'与 servō 同型。in hortō 里，介词 in 选定了夺格。'}
+];
+function renderCasus(){
+  $('tri-chips').innerHTML=TRI.map(t=>`<button type="button" class="chip la" data-act="tri" data-arg="${t.f}" aria-pressed="${t.f===st.tri}">${esc(disp(t.f))}</button>`).join('');
+  const t=TRI.find(x=>x.f===st.tri),n=NOUN[t.L],cs=nCands(t.L,t.f),en=t.f.slice(n.st.length);
+  const multi=cs.length>1,g=cs.slice(0,3).map((c,i)=>`--g${i+1}:var(--${c.c})`).join(';');
+  $('tri').innerHTML=`
+   <div class="card"><span class="src">看纸面 · 词尾</span><h3>Ending</h3><div class="big"><span class="t la base">${esc(disp(n.st))}</span><span class="t la ${multi?'multi':''}" style="${multi?g:'--c:var(--'+cs[0].c+')'}">${esc(disp(en))}</span></div><p class="small muted">看得见的线索。同一个词尾可以属于不同家族、不同的格。</p></div>
+   <div class="card"><span class="src">看词典 · 变格</span><h3>Declension</h3><div class="big">${esc(disp(nLemma(t.L)))}</div><p class="small">属格单数 <b class="la">-${esc(disp(END[n.d].sg[1]))}</b> → <b>第${'一二'[n.d-1]}变格</b> · ${GZ[n.g]}</p><p class="small muted">词典的第二个形式（属格）决定词形家族：-ae 第一，-ī 第二，-is 第三。</p></div>
+   <div class="card"><span class="src">看句子 · 格</span><h3>Case</h3><div class="tags">${cs.map(c=>`<span class="tag c" style="--c:var(--${c.c})">${CZ[c.c]}${NZ[c.n]}</span>`).join('')}</div><p class="small muted">${multi?'孤立时有 '+cs.length+' 种可能，要由句子决定。':'只有一种可能。'}</p>${multi&&AMB[t.f]?`<button type="button" class="lnk" data-act="goamb" data-arg="${t.f}">用线索消歧 →</button>`:''}</div>`;
+  $('tri-note').innerHTML=esc(disp(t.note));
+  $('cases').innerHTML=CASES.map(c=>`<button type="button" class="case" style="--c:var(--${c})" data-act="case" data-arg="${c}" aria-pressed="${st.caseSel===c}"><small>${CEN[c]}</small><b>${CZ[c]}</b><em>${CASEINFO[c].hint}</em></button>`).join('');
+  $('case-detail').innerHTML=`<b>${CZ[st.caseSel]} · ${CEN[st.caseSel]}</b>　${esc(disp(CASEINFO[st.caseSel].d))}`;
+  renderMx();
+}
+function renderMx(){
+  const m=st.mx,cols=[[m.n1,'sg'],[m.n1,'pl'],[m.n2,'sg'],[m.n2,'pl']];
+  const pick=(d,cur,slot)=>Object.keys(NOUN).filter(k=>NOUN[k].d===d&&!['aqua','vīlla'].includes(k)).map(k=>`<button type="button" class="chip la" data-act="mxn" data-arg="${slot}|${k}" aria-pressed="${k===cur}">${esc(disp(k))}</button>`).join(' ');
+  let h=`<thead><tr><th rowspan="2">格</th><th colspan="2" class="fam">${esc(disp(nLemma(m.n1)))}<small>第一变格 · ${GZ[NOUN[m.n1].g]}</small><div class="chips" style="margin-top:4px">${pick(1,m.n1,'n1')}</div></th><th colspan="2" class="fam gap">${esc(disp(nLemma(m.n2)))}<small>第二变格 · ${GZ[NOUN[m.n2].g]}</small><div class="chips" style="margin-top:4px">${pick(2,m.n2,'n2')}</div></th></tr><tr><th>单数</th><th>复数</th><th class="gap">单数</th><th>复数</th></tr></thead><tbody>`;
+  CASES.forEach((c,ci)=>{
+    h+=`<tr class="${st.caseSel===c?'rowsel':''}"><th style="--c:var(--${c})">${CZ[c]}<small>${CEN[c]}</small></th>`;
+    cols.forEach(([L,num],j)=>{
+      const f=nForm(L,num,ci),stem=NOUN[L].st,en=f.slice(stem.length);
+      const isHl=m.hl&&m.hl.L===L&&disp(m.hl.f)===disp(f);
+      const isSrc=isHl&&m.hl.c===c&&m.hl.n===num;
+      h+=`<td class="${j===2?'gap':''}"><button type="button" class="cell${isHl?' hl':''}${isSrc?' src':''}" style="--c:var(--${c})" data-act="cell" data-arg="${L}|${f}|${c}|${num}">${m.end?'':`<span class="ps">${esc(disp(stem))}</span>`}<span class="pe">${m.end?'-':''}${esc(disp(en))}</span></button></td>`;
+    });
+    h+='</tr>';
+  });
+  $('mx').innerHTML=h+'</tbody>';
+  $('endonly').setAttribute('aria-pressed',String(m.end));
+  if(m.hl){const cs=nCands(m.hl.L,m.hl.f);$('mx-cap').innerHTML=`<b class="la">${esc(disp(m.hl.f))}</b> 在 ${esc(disp(nLemma(m.hl.L)))} 的变格表里出现 ${cs.length} 次：${cs.map(c=>CZ[c.c]+NZ[c.n]).join('、')}。${cs.length>1?'这些格子长得一样，区分它们的是句子。':'只有一个格位，看到即可确定。'}${!MAC?' （长音已隐藏：有些原本不同的词形现在看起来一样了。）':''}`;}
+  else $('mx-cap').innerHTML='<span class="muted">点任一格子。</span>';
+}
+
+/* ───────── IV · Ambiguitas ───────── */
+const LV={hard:'硬约束',sem:'语义',ctx:'语境'};
+const NOADDR={lv:'ctx',t:'这是叙述文本，没有在对谁说话的迹象。'};
+const AMB={
+ puellae:{L:'puella',ctx:[
+  {s:'puellae servōs vident.',ti:0,tr:'女孩们看见奴隶们。（也可读作：他们看见女孩的奴隶们。）',clues:[
+    Object.assign({weak:['voc.pl']},NOADDR),
+    {lv:'sem',t:'videō（看见）带宾格对象 servōs，不需要接收者。',weak:['dat.sg'],nt:'与格并没有被语法排除，只是在这里找不到它的用途。'},
+    {lv:'sem',t:'拉丁语动词自带人称：vident 本身就是「他们看见」，句中不一定要有主格名词。所以 puellae 既可以作主语（女孩们看见奴隶们），也可以作属格修饰 servōs（他们看见女孩的奴隶们）。',fav:['nom.pl'],weak:['gen.sg'],nt:'没有上下文时，句首名词加复数动词，读作主语最自然。'},
+    {lv:'ctx',t:'放回 In vīllā 第 7 句：前文没有一群可以充当省略主语的「他们」，读作「女孩们看见」最连贯。',fav:['nom.pl']}]},
+  {s:'servus puellae aquam dat.',ti:1,tr:'奴隶把水递给女孩。',clues:[
+    {lv:'hard',t:'主格复数的 puellae 只能作主语，那样动词应是复数；dat 是单数，与 servus 一致。',out:['nom.pl']},
+    Object.assign({weak:['voc.pl']},NOADDR),
+    {lv:'sem',t:'dō（给）通常带一个与格接收者，句中没有别的与格。',fav:['dat.sg'],weak:['gen.sg'],nt:'属格「女孩的水」语法上仍然成立，只是句子就缺了接收者。'}]},
+  {s:'ancilla puellae cantat.',ti:1,tr:'女孩的女仆在唱歌。／女仆为女孩唱歌。',clues:[
+    {lv:'hard',t:'主格复数的 puellae 只能作主语，那样动词应是复数；cantat 是单数，与 ancilla 一致。',out:['nom.pl']},
+    Object.assign({weak:['voc.pl']},NOADDR),
+    {lv:'sem',t:'cantō（唱歌）不要求接收者；puellae 紧贴名词 ancilla，属格「女孩的」最自然。',fav:['gen.sg'],weak:['dat.sg'],nt:'与格也成立：「为女孩唱歌」（受益者）。两种读法都合乎语法，要靠更大的上下文。'}]}
+ ],note:'puellae 是第一变格中最「拥挤」的词形：一个 -ae 占了四个格位。'},
+ 'servō':{L:'servus',ctx:[
+  {s:'dominus servō aquam dat.',ti:1,tr:'主人把水递给奴隶。',clues:[
+    {lv:'sem',t:'dō（给）通常带一个与格接收者。',fav:['dat.sg']},
+    {lv:'sem',t:'不带介词的夺格确实存在（工具、方式等），但「用奴隶给水」意思不自然。',weak:['abl.sg'],nt:'这是语义上的判断，不是语法上的排除。'}]},
+  {s:'dominus cum servō labōrat.',ti:2,tr:'主人和奴隶一起劳作。',clues:[
+    {lv:'hard',t:'cum（和……一起）支配夺格。',out:['dat.sg']}]}
+ ],note:'servō 属于第二变格（servus, servī），不是第三变格。-ō 同时是第二变格单数的与格和夺格。'},
+ 'servīs':{L:'servus',ctx:[
+  {s:'dominus servīs aquam dat.',ti:1,tr:'主人把水递给奴隶们。',clues:[
+    {lv:'sem',t:'dō 通常带一个与格接收者；不带介词的夺格读法（「用奴隶们」）意思不自然。',fav:['dat.pl'],weak:['abl.pl']}]},
+  {s:'dominus cum servīs labōrat.',ti:2,tr:'主人和奴隶们一起劳作。',clues:[
+    {lv:'hard',t:'cum 支配夺格。',out:['dat.pl']}]}
+ ],note:'第一、第二变格的与格复数和夺格复数完全同形（-īs）。复数里这两个格永远要靠句子分开。'},
+ 'dominī':{L:'dominus',ctx:[
+  {s:'servus dominī in hortō labōrat.',ti:1,tr:'主人的奴隶在花园里劳作。',clues:[
+    {lv:'hard',t:'主格复数的 dominī 只能作主语，那样动词应是复数；labōrat 是单数，与 servus 一致。',out:['nom.pl']},
+    Object.assign({weak:['voc.pl']},NOADDR),
+    {lv:'sem',t:'dominī 紧贴 servus：「主人的奴隶」。',fav:['gen.sg']}]},
+  {s:'dominī in vīllā habitant.',ti:0,tr:'主人们住在庄园里。',clues:[
+    Object.assign({weak:['voc.pl']},NOADDR),
+    {lv:'sem',t:'habitant 是复数，句首的 dominī 作主语最自然。',fav:['nom.pl'],weak:['gen.sg'],nt:'属格并未被排除：省略主语时可读作「他们住在主人的庄园里」，只是这里属格和 vīllā 之间隔着介词 in，不自然。'}]}
+ ],note:'第二变格的 -ī 有三个格位：属格单数、主格复数、呼格复数。'},
+ 'puella':{L:'puella',label:'puella ／ puellā',ctx:[
+  {s:'puella servum videt.',ti:0,tr:'女孩看见奴隶。',clues:[
+    Object.assign({weak:['voc.sg']},NOADDR),
+    {lv:'sem',t:'句首的 puella 作 videt 的主语最自然。去掉长音时会多出夺格读法，但这里没有介词，也看不出工具或方式的用途。',fav:['nom.sg'],weak:['abl.sg']}]},
+  {s:'dominus cum puellā labōrat.',ti:2,tr:'主人和女孩一起劳作。',clues:[
+    {lv:'hard',t:'cum 支配夺格。',out:['nom.sg','voc.sg']}]}
+ ],note:'带长音时，puella（主格／呼格）与 puellā（夺格）是两个词形，一个长音就分开了它们。Cambridge Latin Course 的课文正文通常不印长音，读那样的文本，就要靠句子来分。试试顶部的「ā 长音」开关。'}
+};
+
+function ambState(){
+  const e=AMB[st.amb.form],c=e.ctx[st.amb.ctx];
+  const words=c.s.replace(/\.$/,'').split(' '),tw=words[c.ti];
+  const cs=nCands(e.L,tw);
+  const out=new Set(),weak=new Set(),fav=new Set();
+  c.clues.slice(0,st.amb.step).forEach(cl=>{(cl.out||[]).forEach(x=>out.add(x));(cl.weak||[]).forEach(x=>weak.add(x));(cl.fav||[]).forEach(x=>fav.add(x));});
+  return{e,c,words,tw,cs,out,weak,fav};
+}
+function renderAmb(){
+  $('amb-forms').innerHTML=Object.keys(AMB).map(k=>`<button type="button" class="chip la" data-act="ambf" data-arg="${k}" aria-pressed="${k===st.amb.form}">${esc(disp(AMB[k].label||k))}</button>`).join('');
+  const{e,c,words,tw,cs,out,weak,fav}=ambState();
+  $('amb-ctx').innerHTML=e.ctx.map((x,i)=>`<button type="button" class="chip" data-act="ambc" data-arg="${i}" aria-pressed="${i===st.amb.ctx}">语境 ${'ABC'[i]}</button>`).join('');
+  $('amb-label').textContent=`语境 ${'ABC'[st.amb.ctx]} · 目标词 ${disp(tw)}`;
+  $('amb-sent').innerHTML=words.map((w,i)=>i===c.ti?`<span class="tgt">${esc(disp(w))}</span>`:esc(disp(w))).join(' ')+'.';
+  const remain=cs.filter(x=>!out.has(x.id));
+  const done=st.amb.step>=c.clues.length||remain.length<=1;
+  $('amb-tr').textContent=done?c.tr:'译文在线索用完后显示。';
+  $('amb-cands').innerHTML=cs.map(x=>{const o=out.has(x.id),wk=!o&&weak.has(x.id),fv=!o&&!wk&&(fav.has(x.id)||(done&&remain.length===1));const lab=o?'已排除 · 硬约束':wk?'仍可能 · 较弱':fv?'最有根据':'待定';return `<div class="cand${o?' out':''}${wk?' weak':''}${fv?' best':''}" style="--c:var(--${x.c})"><b>${CZ[x.c]}${NZ[x.n]}</b><small>${FUNC[x.c]}</small><span class="st">${lab}</span></div>`;}).join('');
+  $('amb-clues').innerHTML=c.clues.slice(0,st.amb.step).map(cl=>`<li><span><span class="lv ${cl.lv}">${LV[cl.lv]}</span>${esc(disp(cl.t))}${cl.nt?`<span class="nt">${esc(disp(cl.nt))}</span>`:''}</span></li>`).join('');
+  const nb=$('amb-next');nb.disabled=done;nb.style.opacity=done?.45:1;nb.textContent=done?'线索已用完':`加入线索（${st.amb.step+1} / ${c.clues.length}）`;
+  let v='';
+  if(cs.length===1)v=`词形本身已经确定：${CZ[cs[0].c]}${NZ[cs[0].n]}。<span>${MAC?'试着关掉顶部的长音符号，看看候选会不会变多。':''}</span>`;
+  else if(done){const strong=remain.filter(r=>!weak.has(r.id)),wk=remain.filter(r=>weak.has(r.id));v=`最有根据的读法：${strong.map(r=>CZ[r.c]+NZ[r.n]).join('、')||'—'}${wk.length?`<span>　仍保留：${wk.map(r=>CZ[r.c]+NZ[r.n]).join('、')}（语法上可能，可信度较低）</span>`:''}`;}
+  else v=`<span>还有 ${remain.length} 种读法在场。</span>`;
+  $('amb-verdict').innerHTML=v;
+  const L=e.L;let mh='<span class="h"></span><span class="h">单数</span><span class="h">复数</span>';
+  CASES.forEach((cc,ci)=>{mh+=`<span class="h">${CZ[cc]}</span>`+['sg','pl'].map(num=>{const f=nForm(L,num,ci);return `<span class="f${disp(f)===disp(tw)?' hl':''}">${esc(disp(f))}</span>`;}).join('');});
+  $('amb-mini').innerHTML=mh;
+  $('amb-note').innerHTML=esc(disp(e.note));
+}
+/* ───────── V · Concordia ───────── */
+const PRE=[['servus','fortis',0,'pl'],['agricola','bonus',0,'sg'],['puella','bonus',3,'sg'],['puella','fortis',1,'pl'],['dominus','bonus',2,'pl'],['agricola','fortis',4,'sg']];
+function renderConc(){
+  const c=st.conc,n=NOUN[c.n],g=n.g;
+  const nf=nForm(c.n,c.num,c.ci),af=aForm(c.a,g,c.num,c.ci),ne=nf.slice(n.st.length),ae=af.slice(ADJ[c.a].st.length);
+  const same=disp(ne)===disp(ae);const cc=CASES[c.ci];
+  const famN=`第${'一二'[n.d-1]}变格名词`,famA=ADJ[c.a].fam;
+  $('conc-out').innerHTML=`<div class="phrase"><span><span class="t la base">${esc(disp(n.st))}</span><span class="t la" style="--c:var(--${cc})">${esc(disp(ne))}</span></span><span><span class="t la base">${esc(disp(ADJ[c.a].st))}</span><span class="t la" style="--c:var(--${cc})">${esc(disp(ae))}</span></span></div>
+   <p class="small muted">${esc(n.gl)} · ${esc(ADJ[c.a].gl)}</p>
+   <div class="agree"><span class="h"></span><span class="h la">${esc(disp(nf))}</span><span class="h la">${esc(disp(af))}</span><span class="h"></span>
+    <span class="h">性</span><span>${GZ[g]}</span><span>${GZ[g]}</span><span class="ok">一致</span>
+    <span class="h">数</span><span>${NZ[c.num]}</span><span>${NZ[c.num]}</span><span class="ok">一致</span>
+    <span class="h">格</span><span>${CZ[cc]}</span><span>${CZ[cc]}</span><span class="ok">一致</span>
+    <span class="h">词尾</span><span class="la">-${esc(disp(ne))}</span><span class="la">-${esc(disp(ae))}</span><span class="${same?'ok':'diff'}">${same?'恰好相同':'不同'}</span>
+    <span class="h">家族</span><span class="small">${famN}</span><span class="small">${famA}</span><span></span></div>
+   <p class="small" style="max-width:52ch;text-align:center">${same?`词尾相同，是因为此处名词和形容词恰好用同一套词尾，并不是配合的要求。`:`名词用${famN}的词尾，形容词用${famA}的词尾。只要性、数、格一致，词尾可以完全不同。`}${c.n==='agricola'&&c.a==='bonus'?' agricola 是第一变格的阳性名词，所以配阳性 bonus，不配 bona。':''}${c.a==='fortis'&&cc==='acc'&&c.num==='pl'?' 宾格复数 fortēs 也写作 fortīs。':''}</p>`;
+  $('c-noun').innerHTML=['puella','ancilla','agricola','servus','dominus'].map(k=>`<button type="button" class="chip la" data-act="cn" data-arg="${k}" aria-pressed="${k===c.n}">${esc(disp(k))} <span class="muted small">${NOUN[k].g}.·${NOUN[k].d}</span></button>`).join('');
+  $('c-adj').innerHTML=Object.keys(ADJ).map(k=>`<button type="button" class="chip la" data-act="ca" data-arg="${k}" aria-pressed="${k===c.a}">${esc(disp(ADJ[k].lem))}</button>`).join('');
+  $('c-case').innerHTML=CASES.map((k,i)=>`<button type="button" class="chip" data-act="cc" data-arg="${i}" aria-pressed="${i===c.ci}">${CZ[k]}</button>`).join('');
+  $('c-num').innerHTML=['sg','pl'].map(k=>`<button type="button" class="chip" data-act="cnum" data-arg="${k}" aria-pressed="${k===c.num}">${NZ[k]}</button>`).join('');
+  $('c-pre').innerHTML=PRE.map((p,i)=>{const nn=NOUN[p[0]];return `<button type="button" class="chip la" data-act="cpre" data-arg="${i}">${esc(disp(nForm(p[0],p[3],p[2])+' '+aForm(p[1],nn.g,p[3],p[2])))}</button>`;}).join('');
+}
+
+/* ───────── VI · Verbum ───────── */
+const VA={
+ 'amābāmus':{V:'amō',p:['amā','bā','mus'],per:'1pl',tn:'impf',m:'我们（那时）爱着／常常爱'},
+ 'amābat':{V:'amō',p:['amā','ba','t'],per:'3sg',tn:'impf',m:'他／她（那时）爱着'},
+ 'amābant':{V:'amō',p:['amā','ba','nt'],per:'3pl',tn:'impf',m:'他们（那时）爱着'},
+ 'amāmus':{V:'amō',p:['amā','','mus'],per:'1pl',tn:'pres',m:'我们爱'},
+ 'amat':{V:'amō',p:['ama','','t'],per:'3sg',tn:'pres',m:'他／她爱'},
+ 'vident':{V:'videō',p:['vide','','nt'],per:'3pl',tn:'pres',m:'他们看见'},
+ 'vidēbant':{V:'videō',p:['vidē','ba','nt'],per:'3pl',tn:'impf',m:'他们（那时）看着'}
+};
+const TEXTVERBS=()=>[...new Set(S.flatMap(s=>s.w).filter(w=>w.k==='v').map(w=>w.f))];
+function vaOf(f){
+  if(VA[f])return VA[f];
+  const w=[...S.flatMap(s=>s.w),...REC.filter(r=>r.w).flatMap(r=>r.w)].find(x=>x.k==='v'&&x.f===f);if(!w)return null;
+  const who={'1sg':'我','2sg':'你','3sg':'他／她','1pl':'我们','2pl':'你们','3pl':'他们'}[w.per];
+  return{V:w.V,p:w.p,per:w.per,tn:w.tn,m:who+(w.tn==='impf'?'（那时）':'')+VERB[w.V].gl};
+}
+function renderVerb(){
+  const v=vaOf(st.verb)||VA['amābāmus'],vb=VERB[v.V];
+  const tiles=`<span class="t big la vs">${esc(disp(v.p[0]))}</span>${v.p[1]?`<span class="t big la vm">${esc(disp(v.p[1]))}</span>`:`<span class="t big empty">·</span>`}<span class="t big la vp">${esc(disp(v.p[2]))}</span>`;
+  $('v-stage').innerHTML=`<div class="full">${esc(disp(st.verb))}</div><div>${tiles}</div><p>${esc(v.m)}</p>
+   <span class="qlabel">从右往左读：① → ② → ③</span>
+   <div class="readstrip">
+    <div class="rc"><span class="t la vs">${esc(disp(v.p[0]))}</span><span class="lb"><b>③ 词干</b>${esc(disp(vb.lem))} · 第${'一二'[vb.cj-1]}变位法</span></div><span class="arrow">←</span>
+    <div class="rc">${v.p[1]?`<span class="t la vm">${esc(disp(v.p[1]))}</span>`:'<span class="t empty">·</span>'}<span class="lb"><b>② 时态标记</b>${v.p[1]?TNZ[v.tn]:'空槽 → 现在时'}</span></div><span class="arrow">←</span>
+    <div class="rc"><span class="t la vp">${esc(disp(v.p[2]))}</span><span class="lb"><b>① 人称</b>${PERZ[v.per]}</span></div>
+   </div>`;
+  const chip=k=>`<button type="button" class="chip la" data-act="vb" data-arg="${k}" aria-pressed="${k===st.verb}">${esc(disp(k))}</button>`;
+  $('v-chips').innerHTML=`<span class="qlabel">amō 等范例</span>${Object.keys(VA).map(chip).join('')}<span class="qlabel" style="margin-left:6px">本篇动词</span>${TEXTVERBS().filter(k=>!VA[k]).map(chip).join('')}`;
+  if(v.V==='dō')$('v-stage').insertAdjacentHTML('beforeend','<p class="small muted">dō 的 a 是短元音（dare、damus），是第一变位法里的特例。</p>');
+  const pres=[['am','','ō'],['amā','','s'],['ama','','t'],['amā','','mus'],['amā','','tis'],['ama','','nt']];
+  const impf=[['amā','ba','m'],['amā','bā','s'],['amā','ba','t'],['amā','bā','mus'],['amā','bā','tis'],['amā','ba','nt']];
+  const who=['我','你','他／她','我们','你们','他们'];
+  const tl=p=>`<span class="t la vs">${esc(disp(p[0]))}</span>${p[1]?`<span class="t la vm">${esc(disp(p[1]))}</span>`:''}<span class="t la vp">${esc(disp(p[2]))}</span>`;
+  $('v-grid').innerHTML=`<thead><tr><th></th><th>现在时 · praesēns</th><th>未完成过去时 · imperfectum</th></tr></thead><tbody>${pres.map((p,i)=>`<tr class="${i===0?'diff':''}"><td class="p">${who[i]}</td><td>${tl(p)}</td><td>${tl(impf[i])}</td></tr>`).join('')}</tbody>`;
+}
+
+/* ───────── VII · Recognosce ───────── */
+const REC=[
+ {w:[N('dominus','dominus','nom','sg','主语'),N('servō','servus','dat','sg','接收者'),N('aquam','aqua','acc','sg','宾语'),V('dat','dō',['da','','t'],'3sg','pres')],ask:'谁接收了东西？点出接收者。',a:1,why:'servō 是第二变格名词 servus 的与格或夺格单数。dō（给）通常带一个与格接收者，因此 servō 在这句话中最自然地读作与格单数。没有介词并不自动排除夺格，但此处缺少支持夺格解读的语义线索。',go:['goamb','servō','在同形多解里看 servō']},
+ {w:[N('puellae','puella','nom','pl','主语'),N('dominum','dominus','acc','sg','宾语'),V('vident','videō',['vide','','nt'],'3pl','pres')],ask:'最自然的读法里，谁在看？点出主语。',a:0,why:'句首的 puellae 加复数动词 vident，读作主格复数主语最自然：女孩们看见主人。拉丁语动词自带人称，所以也可以把 puellae 读作属格——「他们看见女孩的主人」——但那需要上下文提供「他们」。',go:['goamb','puellae','在同形多解里看 puellae']},
+ {w:[N('aquam','aqua','acc','sg','宾语'),N('ancilla','ancilla','nom','sg','主语'),V('portat','portō',['porta','','t'],'3sg','pres')],ask:'谁在端水？点出主语。',a:1,why:'排在最前面的 aquam 是宾格（-am）。主语看词尾 -a，不看位置。',go:['gox','2','在句子透视中看换词序']},
+ {w:[N('servus','servus','nom','sg','主语'),N('dominī','dominus','gen','sg','所属'),V('labōrat','labōrō',['labōra','','t'],'3sg','pres')],ask:'「谁的」奴隶？点出表示所属的词。',a:1,why:'labōrat 是单数，servus 已经是主语，所以 dominī 不是主格复数；它紧贴 servus，读作属格单数。',go:['goamb','dominī','在同形多解里看 dominī']},
+ {w:[N('servī','servus','nom','pl','主语'),A('fortēs','fortis','m','nom','pl','配合 servī'),V('labōrant','labōrō',['labōra','','nt'],'3pl','pres')],ask:'哪个词和 servī 配合？',a:1,why:'fortēs 与 servī 同为阳性、复数、主格。词尾 -ēs 与 -ī 不同，因为两个词属于不同的变格家族。',go:['goconc','0','在配合拼装台看']},
+ {w:[N('dominus','dominus','nom','sg','主语'),P('cum','介词 · 伴随'),N('servō','servus','abl','sg','伴随（受 cum 支配）'),V('labōrat','labōrō',['labōra','','t'],'3sg','pres')],ask:'这里的 servō 是夺格。点出决定这一点的词。',a:1,why:'cum（和……一起）支配夺格。同一个 servō，第 1 题因为 dō 读作与格，这里因为 cum 读作夺格。',go:['goamb','servō','在同形多解里看 servō']},
+ {tiles:[['amā','vs','词干：amō，第一变位法'],['bā','vm','未完成过去时标记'],['mus','vp','人称词尾：第一人称复数']],ask:'amābāmus 里，哪一块告诉你「过去」？',a:1,why:'-bā- 是未完成过去时的标记；amā- 是词干，-mus 是第一人称复数。',go:['goverb','amābāmus','在动词三槽里拆']}
+];
+function recWordDesc(w){return w.k==='v'?`${disp(w.f)}：动词 · ${TNZ[w.tn]} · ${PERZ[w.per]}`:w.k==='p'?`${disp(w.f)}：介词`:`${disp(w.f)}：${CZ[w.c]}${NZ[w.n]} · ${w.role}`;}
+function renderRec(){
+  const R=st.rec,q=REC[R.i],s=R.state[R.i]||{};
+  const items=q.tiles?q.tiles.map((t,i)=>`<button type="button" class="t big la ${t[1]} rw${s.picked===i?(i===q.a?' right':' wrong'):''}${s.shown&&i===q.a?' right':''}" data-act="rp" data-arg="${i}">${esc(disp(t[0]))}</button>`).join(''):
+    q.w.map((w,i)=>`<button type="button" class="rw${s.picked===i?(i===q.a?' right':' wrong'):''}${s.shown&&i===q.a?' right':''}" data-act="rp" data-arg="${i}">${esc(disp(w.f))}</button>`).join(' ')+'.';
+  let fb='<span class="muted">在句子里点一个词。</span>';
+  if(s.picked!=null||s.shown){
+    const right=s.picked===q.a||s.shown;
+    const what=s.picked!=null&&s.picked!==q.a?(q.tiles?`${disp(q.tiles[s.picked][0])}：${q.tiles[s.picked][2]}`:recWordDesc(q.w[s.picked])):'';
+    fb=s.picked===q.a?`<span class="v ok">就是它。</span><span>${esc(disp(q.why))}</span>`:s.shown?`<span class="v">答案：${esc(disp(q.tiles?q.tiles[q.a][0]:q.w[q.a].f))}</span><span>${esc(disp(q.why))}</span>`:`<span class="v no">${q.tiles?'这一块是':'这个词是'} ${esc(what)}。</span><span class="muted">再找一次，或直接看答案。</span>`;
+    if(right)fb+=`<button type="button" class="lnk" style="align-self:flex-start" data-act="${q.go[0]}" data-arg="${q.go[1]}">${esc(disp(q.go[2]))} →</button>`;
+  }
+  $('rec').innerHTML=`<div class="rec-top"><span class="qlabel">认读 ${R.i+1} / ${REC.length}</span><div class="dots">${REC.map((_,i)=>`<button type="button" data-act="rgo" data-arg="${i}" aria-current="${i===R.i}" class="${(R.state[i]||{}).done?'done':''}" aria-label="第 ${i+1} 题">${i+1}</button>`).join('')}</div></div>
+   <div class="rec-sent">${items}</div><p class="rec-ask">${esc(disp(q.ask))}</p><div class="rec-fb" aria-live="polite">${fb}</div>
+   <div class="rec-btns"><button type="button" class="btn ghost" data-act="rshow">直接看答案</button><button type="button" class="btn" data-act="rnext">${R.i===REC.length-1?'回到第 1 题':'下一题 →'}</button></div>`;
+}
+
+/* ───────── navigation helpers ───────── */
+const scrollTo_=id=>{const el=$(id);el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});};
+function renderAll(){renderLectio();renderXray();renderCasus();renderAmb();renderConc();renderVerb();renderRec();}
+
+document.addEventListener('click',ev=>{
+  const b=ev.target.closest('[data-act]');if(!b)return;
+  const a=b.dataset.act,g=b.dataset.arg;
+  switch(a){
+   case 'mode':st.mode=g;if(g!=='nota')st.notice=null;renderLectio();break;
+   case 'lens':st.lens=g;renderLectio();break;
+   case 'trs':st.trs=!st.trs;renderLectio();break;
+   case 'notice':st.notice=st.notice===+g?null:+g;renderLectio();break;
+   case 'w':
+     if(st.mode==='secunda'){const[sid,i]=g.split(':').map(Number),id=wid(sid,i),k=PAUSES.findIndex(p=>p.id===id);if(k>=0)PAUSES.splice(k,1);else PAUSES.push({id,b:blockOf(sw(sid,i)),why:''});savePauses();}
+     else st.sel=st.sel===g?null:g;
+     renderLectio();break;
+   case 'unsel':st.sel=null;renderLectio();break;
+   case 'pzopen':{const loc=locate(g);if(!loc)break;st.mode='nota';st.sel=loc.sid+':'+loc.i;renderLectio();$('ln-'+loc.sid).scrollIntoView({block:'center'});break;}
+   case 'pzwhy':{const[id,k]=g.split('|'),p=PAUSES.find(x=>x.id===id);if(p){p.why=p.why===k?'':k;savePauses();renderPauses();}break;}
+   case 'open':st.open=st.open===+g?null:+g;st.openAlt=false;renderLectio();break;
+   case 'openx':st.open=+g;st.openAlt=false;renderLectio();break;
+   case 'ixw':st.sel=g;renderLectio();break;
+   case 'ixorder':flipInline();break;
+   case 'pzclear':PAUSES=[];savePauses();renderLectio();break;
+   case 'gox':st.xr.sid=+g;st.xr.alt=false;st.xr.sel=S[+g-1].w.findIndex(w=>w.k==='v');if(st.sel&&st.sel.split(':')[0]===g)st.xr.sel=+st.sel.split(':')[1];renderXray();scrollTo_('perspicua');break;
+   case 'xs':st.xr.sid=+g;st.xr.alt=false;st.xr.sel=S[+g-1].w.findIndex(w=>w.k==='v');renderXray();break;
+   case 'xw':st.xr.sel=+g;
+     $('xr-line').querySelectorAll('.xw').forEach(t=>t.classList.toggle('sel',t.dataset.i===g));
+     $('xr-insp').innerHTML=inspHTML(S[st.xr.sid-1].w[+g],null,true);drawArcs($('xr-stage'),S[st.xr.sid-1],st.xr.sel);break;
+   case 'xorder':flipReorder();break;
+   case 'tri':st.tri=g;renderCasus();break;
+   case 'case':st.caseSel=g;renderCasus();break;
+   case 'endonly':st.mx.end=!st.mx.end;renderMx();break;
+   case 'mxn':{const[slot,k]=g.split('|');st.mx[slot]=k;st.mx.hl=null;renderMx();break;}
+   case 'cell':{const[L,f,c,n]=g.split('|');st.mx.hl={L,f,c,n};st.caseSel=c;renderCasus();break;}
+   case 'goatlas':{const[L,f,c]=g.split('|');if(NOUN[L].d===1)st.mx.n1=L;else st.mx.n2=L;const cs=nCands(L,f).find(x=>x.c===c)||{n:'sg'};st.mx.hl={L,f,c,n:cs.n};st.caseSel=c;renderCasus();scrollTo_('mx');break;}
+   case 'goamb':st.amb={form:g,ctx:0,step:0};renderAmb();scrollTo_('ambiguitas');break;
+   case 'ambf':st.amb={form:g,ctx:0,step:0};renderAmb();break;
+   case 'ambc':st.amb.ctx=+g;st.amb.step=0;renderAmb();break;
+   case 'clue':st.amb.step++;renderAmb();break;
+   case 'clue-reset':st.amb.step=0;renderAmb();break;
+   case 'goconc':{const p=PRE[+g];st.conc={n:p[0],a:p[1],ci:p[2],num:p[3]};renderConc();scrollTo_('concordia');break;}
+   case 'cn':st.conc.n=g;renderConc();break;
+   case 'ca':st.conc.a=g;renderConc();break;
+   case 'cc':st.conc.ci=+g;renderConc();break;
+   case 'cnum':st.conc.num=g;renderConc();break;
+   case 'cpre':{const p=PRE[+g];st.conc={n:p[0],a:p[1],ci:p[2],num:p[3]};renderConc();break;}
+   case 'goverb':st.verb=g;renderVerb();scrollTo_('verbum');break;
+   case 'vb':st.verb=g;renderVerb();break;
+   case 'rp':{const s=st.rec.state[st.rec.i]=st.rec.state[st.rec.i]||{};if(s.picked===REC[st.rec.i].a||s.shown)break;s.picked=+g;if(+g===REC[st.rec.i].a)s.done=true;renderRec();break;}
+   case 'rshow':{const s=st.rec.state[st.rec.i]=st.rec.state[st.rec.i]||{};s.shown=true;s.done=true;renderRec();break;}
+   case 'rnext':st.rec.i=(st.rec.i+1)%REC.length;renderRec();break;
+   case 'rgo':st.rec.i=+g;renderRec();break;
+  }
+});
+$('mac').addEventListener('click',()=>{MAC=!MAC;$('mac').setAttribute('aria-pressed',String(MAC));$('mac').textContent=MAC?'ā 长音':'a 无长音';renderAll();});
+
+/* section index highlight */
+const secs=['lectio','perspicua','casus','ambiguitas','concordia','verbum','recognosce'];
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('#idx a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-30% 0px -60% 0px'});
+  secs.forEach(id=>io.observe($(id)));
+}
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{drawArcs($('xr-stage'),S[st.xr.sid-1],st.xr.sel);if(st.open&&st.mode==='nota')drawInline();},120);});
+renderAll();
+</script>
+</body>
+</html>
