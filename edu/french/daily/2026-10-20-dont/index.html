@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Atelier de français · 20 octobre 2026 · dont</title>
+<meta name="description" content="Leçon 07 · dont：从一段法语阅读辨认看不见的 de 关系。A2–B1 关系代词、搭配与互动辨认。">
+<style>
+:root{
+ --bg:#f4f1ea;--paper:#fffefa;--ink:#25302d;--muted:#65716c;--line:#d8dfd9;
+ --blue:#286fa5;--gold:#ae7728;--green:#357b5c;--rose:#ad5367;--purple:#765ba4;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+ --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+ --shadow:0 15px 45px rgba(34,55,43,.065);--tint:#e9f2ed;--soft:#f5f7f3;
+ --answer:#e9f4ec;--wrong:#fff1ec;--accent:#185e50;
+}
+@media(prefers-color-scheme:dark){
+ :root{
+ --bg:#141b1a;--paper:#202a28;--ink:#ecf0e9;--muted:#b0c0b9;--line:#41524b;
+ --blue:#88c5f4;--gold:#e7ba77;--green:#93d3ae;--rose:#efa1b3;--purple:#c5abf1;
+ --shadow:0 15px 45px rgba(0,0,0,.16);--tint:#273b34;--soft:#26322e;
+ --answer:#264336;--wrong:#48332f;--accent:#9bd7b7;
+ }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:18px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);overflow-wrap:break-word}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+::selection{background:var(--gold);color:#141b18}
+.page{width:min(1080px,calc(100% - 36px));margin:0 auto;padding:26px 0 74px}
+.ll-crumb{max-width:1130px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font:500 .74rem/1.6 var(--mono,ui-monospace,Menlo,Consolas,monospace);letter-spacing:.06em;color:var(--muted,#667)}
+.ll-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line,#ccd)}
+.ll-crumb a:hover{color:var(--ink,inherit)}.ll-crumb span{opacity:.6}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--paper);border-radius:26px;padding:clamp(24px,5vw,55px);box-shadow:var(--shadow)}
+.hero:before{content:"";position:absolute;right:-100px;top:-130px;width:440px;height:440px;border:1px solid var(--line);border-radius:50%;opacity:.75;pointer-events:none}
+.hero:after{content:"";position:absolute;right:-10px;top:-20px;width:265px;height:265px;border:1px solid var(--line);border-radius:50%;opacity:.5;pointer-events:none}
+.eyebrow{font:700 .71rem/1.5 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.topline{display:flex;flex-wrap:wrap;align-items:center;gap:9px 14px;position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;min-height:29px;padding:3px 11px;border:1px solid var(--line);border-radius:99px;font-size:.75rem;color:var(--muted);font-weight:650}
+.hero h1{font:650 clamp(5.5rem,15vw,10rem)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.075em;margin:20px 0 8px;color:var(--accent);position:relative;z-index:1}
+.hero h1 span{font-size:.22em;vertical-align:top;letter-spacing:0;color:var(--gold);font-family:var(--mono);font-weight:500}
+.hero h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:750;letter-spacing:-.03em;margin:4px 0 10px;position:relative;z-index:1}
+.hero p.lead{max-width:700px;color:var(--muted);margin:0 0 25px;font-size:1.02rem;position:relative;z-index:1}
+.hero-ex{padding:15px 18px;border-left:4px solid var(--gold);background:var(--soft);border-radius:0 12px 12px 0;max-width:720px;position:relative;z-index:1}
+.hero-ex .fr{font-size:clamp(1.12rem,2.5vw,1.4rem);line-height:1.8;font-weight:650}
+.hero-ex .zh{font-size:.88rem;color:var(--muted)}
+.toc{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 0;position:relative;z-index:1}
+.toc a{text-decoration:none;background:var(--tint);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:.79rem;font-weight:650;transition:transform .18s}
+.toc a:hover{transform:translateY(-2px)}
+.section{margin-top:24px;border:1px solid var(--line);border-radius:23px;background:var(--paper);padding:clamp(22px,4vw,42px);box-shadow:var(--shadow);min-width:0}
+.sectionhead{display:flex;gap:15px;align-items:flex-start;margin-bottom:23px}
+.sectionhead .num{font:700 .75rem var(--mono);border:1px solid var(--line);padding:6px 10px;border-radius:10px;color:var(--accent);white-space:nowrap;margin-top:5px}
+.section h2{font-size:clamp(1.35rem,3vw,1.8rem);line-height:1.4;letter-spacing:-.035em;margin:0}
+.section .sub{font-size:.89rem;color:var(--muted);margin:4px 0 0}
+.kicker{color:var(--accent);font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px}
+.fr{font-family:var(--sans);font-weight:500}
+.fr-reading{font:450 clamp(19px,2.2vw,21px)/1.91 var(--sans);letter-spacing:.005em}
+.fr-reading p{margin:0 0 18px}
+.fr-reading p:last-child{margin-bottom:0}
+.fr-reading mark{color:inherit;background:transparent;border-radius:4px;padding:0 2px}
+.fr-reading.show-traces mark[data-kind="dont"]{background:color-mix(in srgb,var(--gold) 23%,transparent);box-shadow:inset 0 -2px var(--gold)}
+.fr-reading.show-traces mark[data-kind="qui"]{background:color-mix(in srgb,var(--green) 19%,transparent);box-shadow:inset 0 -2px var(--green)}
+.fr-reading.show-traces mark[data-kind="que"]{background:color-mix(in srgb,var(--blue) 19%,transparent);box-shadow:inset 0 -2px var(--blue)}
+.fr-reading.show-traces mark[data-kind="ou"]{background:color-mix(in srgb,var(--purple) 19%,transparent);box-shadow:inset 0 -2px var(--purple)}
+.note{color:var(--muted);font-size:.87rem}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;min-height:48px;padding:9px 15px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;font-size:.89rem;font-weight:700;transition:background .15s,border-color .15s,transform .15s}
+.btn:hover{background:var(--tint);border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--tint);border-color:var(--accent);color:var(--accent)}
+.btn.small{min-height:46px}
+.controlbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+details{border:1px solid var(--line);border-radius:13px;background:var(--soft);padding:0 17px;margin-top:15px}
+details summary{list-style:none;cursor:pointer;padding:13px 3px;min-height:46px;font-size:.89rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:"＋";font-size:1.2rem;color:var(--accent);font-weight:400}
+details[open] summary:after{content:"−"}
+details .detailbody{border-top:1px solid var(--line);padding:13px 2px 17px;color:var(--ink);font-size:.92rem}
+details .detailbody p{margin:0 0 10px}
+details .detailbody p:last-child{margin-bottom:0}
+.translation p{margin-bottom:9px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--soft);padding:19px;min-width:0}
+.card h3{font-size:1.04rem;margin:0 0 8px}
+.card p{margin:0 0 9px}
+.card p:last-child{margin:0}
+.card .ex{font-size:1.04rem;line-height:1.85;font-weight:600}
+.card .smallzh{color:var(--muted);font-size:.83rem}
+.under{border-bottom:2px solid var(--gold);padding-bottom:1px}
+.strong-de{color:var(--gold);font-weight:800}
+.trace-flow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;margin:22px 0}
+.trace-box{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--soft);min-width:0}
+.trace-box .label{font:700 .7rem var(--mono);color:var(--muted);letter-spacing:.08em}
+.trace-box .big{font-size:clamp(1rem,2.5vw,1.27rem);font-weight:750;margin:7px 0}
+.trace-arrow{font:600 2rem Georgia,serif;color:var(--gold)}
+.trace-target{border:2px solid var(--gold);background:color-mix(in srgb,var(--gold) 9%,var(--paper))}
+.stack{display:grid;gap:12px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;border:1px solid var(--line);border-radius:14px;padding:15px}
+.pair>div{min-width:0}
+.pair .label{font:700 .72rem var(--mono);color:var(--muted);margin-bottom:4px}
+.pair .fr{font-size:1.06rem;line-height:1.7}
+.rule{display:inline-block;padding:1px 6px;border-radius:5px;background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--ink);font-weight:750}
+.blue{color:var(--blue)}.gold{color:var(--gold)}.green{color:var(--green)}.rose{color:var(--rose)}.purple{color:var(--purple)}
+.table-scroll{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:17px 0;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:.91rem;min-width:590px}
+th,td{text-align:left;vertical-align:top;padding:13px 14px;border-bottom:1px solid var(--line)}
+th{background:var(--tint);font-weight:800;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+th:first-child,td:first-child{position:sticky;left:0;background:var(--paper);z-index:1}
+th:first-child{background:var(--tint);z-index:2}
+.mono{font-family:var(--mono)}
+.callout{padding:18px 20px;background:var(--tint);border-left:4px solid var(--accent);border-radius:0 13px 13px 0;margin:18px 0}
+.callout strong{color:var(--accent)}
+.callout p{margin:4px 0 0}
+.mistake{border-left-color:var(--rose);background:color-mix(in srgb,var(--rose) 9%,var(--paper))}
+.mistake strong{color:var(--rose)}
+.ipa{font:650 1.05rem var(--mono);color:var(--accent)}
+.quiz-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;margin:12px 0 17px}
+.progress-wrap{display:flex;align-items:center;gap:12px;min-width:210px;flex:1;max-width:370px}
+.progress{height:9px;background:var(--line);border-radius:99px;flex:1;overflow:hidden}
+.progress>span{display:block;height:100%;width:0;background:var(--green);transition:width .25s}
+.quizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.quiz{border:1px solid var(--line);background:var(--soft);border-radius:16px;padding:18px;min-width:0}
+.quiz .qnum{font:700 .72rem var(--mono);color:var(--muted);letter-spacing:.1em}
+.quiz .question{font:550 1.12rem/1.75 var(--sans);margin:8px 0 15px}
+.quiz .gap{display:inline-block;border-bottom:2px dashed var(--gold);min-width:53px;text-align:center;color:var(--gold)}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.options .btn{min-width:0;min-height:49px;padding:8px 6px;font-size:.93rem}
+.options .btn.correct{background:var(--answer);border-color:var(--green);color:var(--green)}
+.options .btn.wrong{background:var(--wrong);border-color:var(--rose);color:var(--rose)}
+.feedback{min-height:27px;font-size:.85rem;line-height:1.65;margin-top:11px;color:var(--muted)}
+.feedback.good{color:var(--green)}.feedback.bad{color:var(--rose)}
+.quiz details{margin-top:8px;background:var(--paper)}
+.quiz details summary{font-size:.83rem}
+.score{font:700 .82rem var(--mono);color:var(--accent)}
+.dialogue{border-left:3px solid var(--gold);padding-left:19px;margin:14px 0}
+.dialogue p{margin:0 0 12px}
+.dialogue .speaker{font:700 .76rem var(--mono);color:var(--muted);display:block;margin-bottom:1px}
+.anchor-list{display:grid;gap:10px}
+.anchor{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border:1px solid var(--line);border-radius:13px;background:var(--soft)}
+.anchor .index{font:700 .85rem var(--mono);color:var(--gold);min-width:25px}
+.anchor p{margin:0}
+.footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:26px 4px 0;color:var(--muted);font:600 .75rem/1.7 var(--mono)}
+@media(max-width:760px){
+ .page{width:min(100% - 24px,620px);padding:12px 0 48px}
+ .hero{border-radius:20px;padding:23px 20px}
+ .section{border-radius:19px;padding:22px 18px}
+ .grid2,.grid3,.quizgrid,.pair{grid-template-columns:minmax(0,1fr)}
+ .trace-flow{grid-template-columns:1fr;gap:8px}
+ .trace-arrow{transform:rotate(90deg);justify-self:center;line-height:1}
+ .hero h1{font-size:clamp(5rem,26vw,7rem)}
+ .hero:before{right:-200px;top:-190px}
+ .toc{gap:7px}
+ .toc a{padding:8px 11px}
+ .sectionhead{gap:10px}
+ .sectionhead .num{padding:5px 8px}
+ .quiz-head{align-items:flex-start}
+ .progress-wrap{width:100%;max-width:none}
+ .ll-crumb{font-size:.67rem;gap:3px 5px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+@media print{
+ :root{--bg:white;--paper:white;--ink:#111;--muted:#444;--line:#aaa}
+ body{background:white}
+ .page{width:100%;padding:0}
+ .hero,.section{box-shadow:none;break-inside:avoid}
+ .toc,.controlbar,.quiz-head .btn{display:none}
+ details{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<style>.ll-crumb{max-width:1130px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font:500 .74rem/1.6 var(--mono,ui-monospace,Menlo,Consolas,monospace);letter-spacing:.06em;color:var(--muted,#667)}.ll-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line,#ccd)}.ll-crumb a:hover{color:var(--ink,inherit)}.ll-crumb span{opacity:.6}</style>
+<nav class="ll-crumb" aria-label="Site"><a href="https://helloalexap.com/">helloalexap</a><span>/</span><a href="../../../">Learning Lab</a><span>/</span><a href="../../">French</a><span>/</span><a href="../">Daily</a></nav>
+<header class="hero">
+ <div class="topline"><span class="eyebrow">ATELIER DE FRANÇAIS · LEÇON 07</span><span class="pill">20 octobre 2026</span><span class="pill">A2 → B1</span><span class="pill">RECOGNITION LAB</span></div>
+ <h1 lang="fr">dont<span> /dɔ̃/</span></h1>
+ <h2>一根看不见的 <span class="gold">de</span> 线索</h2>
+ <p class="lead">从一段真实感的街区阅读出发，识别关系代词 <b>dont</b> 背后藏着的介词 <b>de</b>：它可能来自一个动词、形容词，也可能来自两个名词之间的所属关系。</p>
+ <div class="hero-ex"><div class="fr" lang="fr">C’est le livre <span class="gold">dont</span> une amie m’a parlé.</div><div class="zh">这就是一位朋友跟我提过的那本书。<br><span class="mono">parler <b>de</b> quelque chose → <b>dont</b></span></div></div>
+ <nav class="toc" aria-label="课程章节"><a href="#lecture">01 阅读</a><a href="#fil">02 找 de</a><a href="#atlas">03 对照地图</a><a href="#laboratoire">04 互动辨认</a><a href="#retour">05 第二轮</a><a href="#memo">归档</a></nav>
+</header>
+<main>
+<section class="section" id="lecture">
+ <div class="sectionhead"><span class="num">01</span><div><h2>Entrée · Une bibliothèque derrière le café</h2><p class="sub">第一遍先顺着故事读。暂时不必分析每一个关系代词。</p></div></div>
+ <div class="fr-reading" id="story" lang="fr">
+  <p>Le samedi matin, Camille passe à la petite bibliothèque installée derrière un café. Elle y dépose deux romans <mark data-kind="que">qu’</mark>elle a déjà lus et regarde les livres <mark data-kind="que">que</mark> les voisins ont apportés.</p>
+  <p>Sur une table, elle remarque un recueil de poèmes <mark data-kind="dont">dont</mark> une amie lui avait parlé. À côté, une femme prépare l’atelier d’écriture <mark data-kind="qui">qui</mark> commencera à onze heures. Camille reconnaît cette voisine, mais elle a oublié son prénom. C’est pourtant elle <mark data-kind="qui">qui</mark> lui avait conseillé ce café l’hiver dernier.</p>
+  <p>Elles discutent quelques minutes d’un projet <mark data-kind="dont">dont</mark> elles sont toutes les deux très fières : un petit journal écrit par les habitants du quartier.</p>
+  <p>En partant, Camille emporte le recueil et se promet de revenir. Elle a trouvé <mark data-kind="dont">ce dont</mark> elle avait besoin : un endroit <mark data-kind="ou">où</mark> lire tranquillement et rencontrer des gens.</p>
+ </div>
+ <div class="controlbar"><button type="button" class="btn" id="trace-toggle" aria-pressed="false" aria-controls="story">◌ 显示 / 隐藏关系代词线索</button><span class="note">金色 dont · 蓝色 que · 绿色 qui · 紫色 où</span></div>
+ <details><summary>阅读译文 · Traduction</summary><div class="detailbody translation">
+  <p>星期六早晨，卡米耶来到一家咖啡馆后面的小型街区图书角。她放下两本已经读过的小说，翻看邻居们带来的书。</p>
+  <p>桌上有一本诗集，她的一位朋友曾向她提起过。旁边，一位女士正在准备十一点开始的写作工作坊。卡米耶认得这位邻居，却忘了她的名字。其实正是这位邻居去年冬天向她推荐了这家咖啡馆。</p>
+  <p>她们聊起一个让两人都很自豪的项目：一份由街区居民共同撰写的小报。</p>
+  <p>离开时，卡米耶带走了诗集，决定以后再来。她找到了自己需要的东西：一个可以安静阅读、又能结识他人的地方。</p>
+ </div></details>
+ <details><summary>第一遍只抓三件事 · Repères de lecture</summary><div class="detailbody">
+  <p><b>Qui ?</b> Camille、她的邻居，以及一个街区读书角。</p>
+  <p><b>Quoi ?</b> 一本朋友提过的诗集、一个她们引以为豪的项目、一个她需要的地方。</p>
+  <p><b>时间的小回声：</b><span lang="fr"> lui <b>avait parlé</b> / lui <b>avait conseillé</b></span> 都是上一课的 <i>plus-que-parfait</i>：在这个星期六之前已经发生的事。</p>
+ </div></details>
+</section>
+
+<section class="section" id="fil">
+ <div class="sectionhead"><span class="num">02</span><div><h2>Le fil invisible · dont 从哪里来？</h2><p class="sub">核心不是背诵「dont = ……的」，而是找到原句里要求 <b>de</b> 的关系。</p></div></div>
+ <div class="trace-flow">
+  <div class="trace-box"><div class="label">TWO SENTENCES · 原来的两句</div><div class="big fr" lang="fr">Une amie m’a parlé <span class="strong-de">de ce recueil</span>.</div><div class="note">一位朋友跟我谈起过这本诗集。</div></div>
+  <div class="trace-arrow" aria-hidden="true">→</div>
+  <div class="trace-box trace-target"><div class="label">ONE SENTENCE · 合成一句</div><div class="big fr" lang="fr">Le recueil <span class="strong-de">dont</span> une amie m’a parlé.</div><div class="note"><b>dont</b> 接住了原来 <b>de ce recueil</b> 的关系。</div></div>
+ </div>
+ <div class="callout"><strong>辨认公式</strong><p><span lang="fr">[先行词] + <b>dont</b> + [缺少一个 de 关系的从句]</span>。看到 <b>dont</b>，向右找哪个动词、形容词或名词原本需要 <b>de</b>。</p></div>
+ <div class="grid3">
+  <article class="card"><p class="kicker">A · Verbe + de</p><h3>动词要求 de</h3><p class="fr ex" lang="fr">Le livre <span class="under">dont</span> je parle.</p><p class="smallzh">parler <b>de</b> ce livre<br>我谈论的那本书</p><p class="fr ex" lang="fr">Une soirée <span class="under">dont</span> je me souviens.</p><p class="smallzh">se souvenir <b>de</b> cette soirée<br>我记得的那个夜晚</p></article>
+  <article class="card"><p class="kicker">B · Adjectif + de</p><h3>形容词要求 de</h3><p class="fr ex" lang="fr">Le projet <span class="under">dont</span> elles sont fières.</p><p class="smallzh">être fier / fière <b>de</b> ce projet<br>她们引以为豪的项目</p><p class="note"><b>fières</b> 与主语 <i>elles</i> 配合；不是跟 dont 配合。</p></article>
+  <article class="card"><p class="kicker">C · Nom + de</p><h3>名词之间的所属关系</h3><p class="fr ex" lang="fr">Une voisine <span class="under">dont</span> j’ai oublié le prénom.</p><p class="smallzh">le prénom <b>de</b> cette voisine<br>我忘了名字的一位邻居</p><p class="fr ex" lang="fr">Un roman <span class="under">dont</span> la fin surprend.</p><p class="smallzh">la fin <b>du</b> roman<br>结局令人意外的一本小说</p></article>
+ </div>
+ <h3 style="margin:26px 0 12px">高频 de 搭配 · Lexique de reconnaissance</h3>
+ <div class="grid2">
+  <div class="card"><p class="kicker">VERBES</p><p lang="fr"><b>parler de</b> · 谈及<br><b>avoir besoin de</b> · 需要<br><b>se souvenir de</b> · 记得<br><b>rêver de</b> · 梦想／梦见<br><b>s’occuper de</b> · 负责、照料<br><b>dépendre de</b> · 取决于</p></div>
+  <div class="card"><p class="kicker">ADJECTIFS & NOMS</p><p lang="fr"><b>être fier / fière de</b> · 为……自豪<br><b>être content / contente de</b> · 对……满意<br><b>être responsable de</b> · 负责……<br><b>le titre de</b> · ……的标题<br><b>la couverture de</b> · ……的封面<br><b>le prénom de</b> · ……的名字</p></div>
+ </div>
+ <details><summary>发音观察 · dont /dɔ̃/</summary><div class="detailbody">
+  <p><span class="ipa">/dɔ̃/</span>：<b>on</b> 是鼻化元音；单独读 <i>dont</i> 时末尾 <b>t</b> 不发音。</p>
+  <p>元音开头的后续词前可出现 <b>t</b> 连诵，例如 <span lang="fr">dont elle parle</span> 读作 <span class="mono">/dɔ̃.tɛl paʁl/</span>。听力中不要把这个 /t/ 误认为另一个词。</p>
+ </div></details>
+</section>
+
+<section class="section" id="atlas">
+ <div class="sectionhead"><span class="num">03</span><div><h2>Atlas des relatifs · 四条路线</h2><p class="sub">不要先翻译成中文「的」。先判断从句缺少的是主语、直接宾语、de 关系，还是地点／时间线索。</p></div></div>
+ <div class="table-scroll" role="region" aria-label="关系代词对照表" tabindex="0">
+ <table><thead><tr><th>关系代词</th><th>寻找的空位</th><th>法语例句</th><th>识别锚点</th></tr></thead><tbody>
+  <tr><td><b class="green" lang="fr">qui</b></td><td>主语</td><td lang="fr">La voisine <b>qui</b> organise l’atelier.</td><td>谁组织？<b>la voisine</b></td></tr>
+  <tr><td><b class="blue" lang="fr">que / qu’</b></td><td>直接宾语 COD</td><td lang="fr">Le livre <b>que</b> je cherche.</td><td>je cherche <b>le livre</b></td></tr>
+  <tr><td><b class="gold" lang="fr">dont</b></td><td><b>de</b> 关系</td><td lang="fr">Le livre <b>dont</b> je parle.</td><td>je parle <b>du livre</b></td></tr>
+  <tr><td><b class="purple" lang="fr">où</b></td><td>地点／时间</td><td lang="fr">Le café <b>où</b> nous lisons.</td><td>nous lisons <b>dans ce café</b></td></tr>
+ </tbody></table></div>
+ <div class="grid2">
+  <div class="card"><p class="kicker">COMPARAISON MINIMALE</p><p class="fr ex" lang="fr">La femme <span class="gold">dont</span> je parle.</p><p class="smallzh">parler <b>de</b> quelqu’un · 我谈起的那位女士</p><p class="fr ex" lang="fr">La femme <span class="blue">à qui</span> je parle.</p><p class="smallzh">parler <b>à</b> quelqu’un · 我正在与之交谈的那位女士</p><p class="note">同一个动词 <i>parler</i>，介词变了，关系代词也随之改变。</p></div>
+  <div class="card"><p class="kicker">CE + RELATIF</p><p class="fr ex" lang="fr"><span class="green">Ce qui</span> m’intéresse, c’est la poésie.</p><p class="smallzh">让我感兴趣的，是诗歌。（主语）</p><p class="fr ex" lang="fr"><span class="blue">Ce que</span> je cherche, c’est un livre.</p><p class="smallzh">我找的是一本书。（COD）</p><p class="fr ex" lang="fr"><span class="gold">Ce dont</span> j’ai besoin, c’est du temps.</p><p class="smallzh">我需要的是时间。（avoir besoin <b>de</b>）</p></div>
+ </div>
+ <div class="callout mistake"><strong>两个很容易误判的地方</strong>
+  <p><b>① 不重复 de 的代词：</b><span lang="fr">Le livre <b>dont</b> j’ai besoin.</span> ✓　<span lang="fr">Le livre dont <s>j’en</s> ai besoin.</span> ✗　因为 <i>dont</i> 已经承担了那个 <i>de</i> 关系。</p>
+  <p><b>② 不把所有 de 都换成 dont：</b><span lang="fr">Le café <b>près duquel</b> j’habite.</span> ✓　这里是整体介词短语 <i>près de</i>，通常用 <i>duquel / de laquelle</i> 等，而不是 <i>dont</i>。</p>
+ </div>
+ <details><summary>延伸辨认 · dont 与 en 其实是同一条 de 线索</summary><div class="detailbody">
+  <p><span lang="fr">Je parle <b>de ce livre</b>. → J’<b>en</b> parle.</span>（独立句中，用 <i>en</i> 指回 de + 事物。）</p>
+  <p><span lang="fr">C’est le livre <b>dont</b> je parle.</span>（关系从句中，用 <i>dont</i> 接住这条关系。）</p>
+  <p>这不是说 <i>en</i> 与 <i>dont</i> 可以在所有环境下互换，而是识别它们共享的 <b>de</b> 来源。</p>
+ </div></details>
+</section>
+
+<section class="section" id="laboratoire">
+ <div class="sectionhead"><span class="num">04</span><div><h2>Laboratoire · Choisissez le lien</h2><p class="sub">看句子，寻找缺少的语法关系。每题的四个选项始终可见；答题后可随时展开静态解析。</p></div></div>
+ <div class="quiz-head"><div class="progress-wrap"><div class="progress" aria-hidden="true"><span id="progress-bar"></span></div><span class="score" id="progress-text" aria-live="polite">0 / 10</span></div><button class="btn small" type="button" id="reset">↻ 重新辨认</button></div>
+ <div class="quizgrid">
+  <article class="quiz" data-correct="dont" data-why="parler de quelque chose：原句是 « Je t’ai parlé de ce recueil. »"><div class="qnum">01 · VERBE + DE</div><div class="question" lang="fr">Le recueil <span class="gap">___</span> je t’ai parlé est sur la table.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>dont</b> · <span lang="fr">Je t’ai parlé <b>de ce recueil</b>.</span> 这里的 <i>de</i> 来自动词搭配 <i>parler de</i>。</div></details></article>
+  <article class="quiz" data-correct="qui" data-why="从句需要主语：« La voisine prépare l’atelier. »"><div class="qnum">02 · SUJET</div><div class="question" lang="fr">La voisine <span class="gap">___</span> prépare l’atelier est arrivée.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>qui</b> · <span lang="fr"><b>La voisine</b> prépare l’atelier.</span> 主语缺位，而不是 <i>de</i> 关系。</div></details></article>
+  <article class="quiz" data-correct="que" data-why="créer 的直接宾语：« Les habitants ont créé le journal. »"><div class="qnum">03 · OBJET DIRECT</div><div class="question" lang="fr">Le journal <span class="gap">___</span> les habitants ont créé est gratuit.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>que</b> · <span lang="fr">Les habitants ont créé <b>le journal</b>.</span> 宾语前置后，<i>créé</i> 在这里仍不加 <i>-s</i>，因为 <i>le journal</i> 是阳性单数。</div></details></article>
+  <article class="quiz" data-correct="où" data-why="地点：« Nous nous retrouvons dans ce café. »"><div class="qnum">04 · LIEU</div><div class="question" lang="fr">Le café <span class="gap">___</span> nous nous retrouvons ouvre tôt.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>où</b> · <span lang="fr">Nous nous retrouvons <b>dans ce café</b>.</span> 指地点。</div></details></article>
+  <article class="quiz" data-correct="dont" data-why="être fier de quelque chose：« Nous sommes fiers de ce projet. »"><div class="qnum">05 · ADJECTIF + DE</div><div class="question" lang="fr">C’est un projet <span class="gap">___</span> nous sommes fiers.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>dont</b> · <span lang="fr">Nous sommes fiers <b>de ce projet</b>.</span> <i>fiers</i> 与主语 <i>nous</i> 配合（此处指男性或混合群体）。</div></details></article>
+  <article class="quiz" data-correct="dont" data-why="名词之间的所属关系：« J’admire les romans de cette autrice. »"><div class="qnum">06 · NOM + DE</div><div class="question" lang="fr">Voici une autrice <span class="gap">___</span> j’admire les romans.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="où" aria-pressed="false">où</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>dont</b> · <span lang="fr">J’admire les romans <b>de cette autrice</b>.</span> 不是动词 <i>admirer</i> 要求 <i>de</i>，而是 <i>les romans de l’autrice</i> 的所属关系。</div></details></article>
+  <article class="quiz" data-correct="à qui" data-why="téléphoner à quelqu’un：是 à 关系，不是 de 关系。"><div class="qnum">07 · ATTENTION À LA PRÉPOSITION</div><div class="question" lang="fr">La femme <span class="gap">___</span> je téléphone habite près d’ici.</div><div class="options"><button class="btn" type="button" data-value="qui" aria-pressed="false">qui</button><button class="btn" type="button" data-value="que" aria-pressed="false">que</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button><button class="btn" type="button" data-value="à qui" aria-pressed="false">à qui</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>à qui</b> · <span lang="fr">Je téléphone <b>à cette femme</b>.</span> 介词是 <i>à</i>，所以不能用 <i>dont</i>。</div></details></article>
+  <article class="quiz" data-correct="ce que" data-why="chercher 直接接宾语：« Je cherche quelque chose. »"><div class="qnum">08 · CE + RELATIF</div><div class="question" lang="fr">Voilà exactement <span class="gap">___</span> je cherchais.</div><div class="options"><button class="btn" type="button" data-value="ce qui" aria-pressed="false">ce qui</button><button class="btn" type="button" data-value="ce que" aria-pressed="false">ce que</button><button class="btn" type="button" data-value="ce dont" aria-pressed="false">ce dont</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>ce que</b> · <span lang="fr">Je cherchais <b>quelque chose</b>.</span> <i>chercher</i> 是直接及物动词；这里没有 <i>de</i>。</div></details></article>
+  <article class="quiz" data-correct="ce dont" data-why="avoir besoin de quelque chose；没有明确名词先行词，用 ce dont。"><div class="qnum">09 · CE DONT</div><div class="question" lang="fr">Je ne sais pas <span class="gap">___</span> elle a besoin.</div><div class="options"><button class="btn" type="button" data-value="ce qui" aria-pressed="false">ce qui</button><button class="btn" type="button" data-value="ce que" aria-pressed="false">ce que</button><button class="btn" type="button" data-value="ce dont" aria-pressed="false">ce dont</button><button class="btn" type="button" data-value="dont" aria-pressed="false">dont</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>ce dont</b> · <span lang="fr">Elle a besoin <b>de quelque chose</b>.</span> 这里 <i>ce</i> 表示「……的东西／事情」，不是指回前面某个明确的名词。</div></details></article>
+  <article class="quiz" data-correct="ce qui" data-why="从句缺少主语：« Quelque chose m’intéresse. »"><div class="qnum">10 · CE QUI</div><div class="question" lang="fr"><span class="gap">___</span> m’intéresse, c’est le club de lecture.</div><div class="options"><button class="btn" type="button" data-value="ce qui" aria-pressed="false">Ce qui</button><button class="btn" type="button" data-value="ce que" aria-pressed="false">Ce que</button><button class="btn" type="button" data-value="ce dont" aria-pressed="false">Ce dont</button><button class="btn" type="button" data-value="dont" aria-pressed="false">Dont</button></div><div class="feedback" aria-live="polite"></div><details><summary>答案与关系还原</summary><div class="detailbody"><b>Ce qui</b> · <span lang="fr"><b>Quelque chose</b> m’intéresse.</span> 缺少的是 <i>intéresse</i> 的主语。</div></details></article>
+ </div>
+ <div class="callout" id="result-callout"><strong>阅读式练习，不追求速度。</strong><p>遇到犹豫时，把句子还原成两句，再看动词、形容词或名词后面是否原本有 <b>de</b>。</p></div>
+</section>
+
+<section class="section" id="retour">
+ <div class="sectionhead"><span class="num">05</span><div><h2>Deuxième lecture · 同一条线索，再遇见一次</h2><p class="sub">这次在自然对话里辨认。可以先阅读，再展开译文和逐句还原。</p></div></div>
+ <div class="dialogue fr-reading" lang="fr">
+  <p><span class="speaker">MAYA</span>Tu connais la femme <span class="gold">dont</span> Léa m’a parlé ?</p>
+  <p><span class="speaker">NOÉ</span>Celle <span class="green">qui</span> organise les rencontres du jeudi ?</p>
+  <p><span class="speaker">MAYA</span>Oui. J’ai lu le journal <span class="gold">dont</span> elle s’occupe. C’est exactement <span class="gold">ce dont</span> notre quartier avait besoin.</p>
+  <p><span class="speaker">NOÉ</span>Et le café <span class="purple">où</span> elle travaille ?</p>
+  <p><span class="speaker">MAYA</span>C’est là <span class="blue">que</span> nous nous retrouverons samedi.</p>
+ </div>
+ <details><summary>对话译文与逐句辨认</summary><div class="detailbody">
+  <p><b>Maya：</b>你认识莱娅跟我提过的那位女士吗？（<i>parler de quelqu’un</i> → <b>dont</b>）</p>
+  <p><b>Noé：</b>就是那个组织周四聚会的人吗？（<b>qui</b> 作 <i>organise</i> 的主语）</p>
+  <p><b>Maya：</b>对。我读过她负责的那份小报。这正是我们街区需要的东西。（<i>s’occuper de</i> → <b>dont</b>；<i>avoir besoin de</i> → <b>ce dont</b>）</p>
+  <p><b>Noé：</b>那她工作的咖啡馆呢？（<b>où</b> 表地点）</p>
+  <p><b>Maya：</b>我们星期六就在那里见。（<i>là que</i> 在这里是强调结构，不是 <i>dont</i> 的替代品。）</p>
+ </div></details>
+ <h3 style="margin:26px 0 13px">La petite nuance · 同一个动词，不同方向</h3>
+ <div class="pair"><div><div class="label">PARLER DE · 谈起某人</div><div class="fr" lang="fr">La personne <span class="gold">dont</span> je parle.</div><div class="note">Je parle <b>de</b> cette personne.</div></div><div><div class="label">PARLER À · 对某人说话</div><div class="fr" lang="fr">La personne <span class="blue">à qui</span> je parle.</div><div class="note">Je parle <b>à</b> cette personne.</div></div></div>
+ <h3 style="margin:27px 0 12px">Trois ancres · 今天带走的三个辨认锚点</h3>
+ <div class="anchor-list">
+  <div class="anchor"><span class="index">01</span><p>看见 <b class="gold">dont</b>，先在从句里找一个原本需要 <b>de</b> 的位置：<i>parler de / être fier de / le titre de</i>。</p></div>
+  <div class="anchor"><span class="index">02</span><p><b>qui / que / dont / où</b> 不按中文「的」来分，而按法语从句缺少的<strong>句法关系</strong>来分。</p></div>
+  <div class="anchor"><span class="index">03</span><p><b>ce dont</b> = 「……所需要／谈及／记得的东西」这一类结构；它不是机械地等于 <i>ce que</i>。</p></div>
+ </div>
+</section>
+<section class="section" id="memo">
+ <div class="sectionhead"><span class="num">06</span><div><h2>FICHE MÉMO · 归档信息</h2><p class="sub">本期主题与索引标签</p></div></div>
+ <div class="card">
+ <p class="eyebrow">FICHE MÉMO · 归档信息</p>
+ <p><b>Lesson:</b> 07 · dont — The Invisible de Connection<br>
+ <b>Date:</b> 2026-10-20<br>
+ <b>Focus:</b> dont；关系代词；de 搭配；ce dont；qui / que / où 对比<br>
+ <b>Suggested tags:</b> Français · A2–B1 · Recognition · Pronoms relatifs</p>
+ </div>
+</section>
+</main>
+<footer class="footer"><span>Atelier de français · Leçon 07 · 20 octobre 2026</span><span>Lecture · Structure · Reconnaissance</span></footer>
+</div>
+<script>
+(function(){
+"use strict";
+const trace=document.getElementById("trace-toggle");
+const story=document.getElementById("story");
+trace.addEventListener("click",function(){
+ const on=!story.classList.contains("show-traces");
+ story.classList.toggle("show-traces",on);
+ trace.setAttribute("aria-pressed",String(on));
+});
+const quizzes=[...document.querySelectorAll(".quiz")];
+const bar=document.getElementById("progress-bar");
+const progress=document.getElementById("progress-text");
+const result=document.getElementById("result-callout");
+function update(){
+ const answered=quizzes.filter(q=>q.dataset.picked).length;
+ const correct=quizzes.filter(q=>q.dataset.picked===q.dataset.correct).length;
+ progress.textContent=answered+" / "+quizzes.length;
+ bar.style.width=(answered/quizzes.length*100)+"%";
+ if(answered===quizzes.length){
+  result.innerHTML="<strong>这一轮完成 · "+correct+" / "+quizzes.length+" 正确</strong><p>可展开每道题的关系还原。尤其留意：<b>dont</b> 的 de 来源有时是动词，有时是形容词或名词。</p>";
+ }else{
+  result.innerHTML="<strong>阅读式练习，不追求速度。</strong><p>遇到犹豫时，把句子还原成两句，再看动词、形容词或名词后面是否原本有 <b>de</b>。</p>";
+ }
+}
+quizzes.forEach(q=>{
+ const buttons=[...q.querySelectorAll(".options button")];
+ const feedback=q.querySelector(".feedback");
+ buttons.forEach(b=>b.addEventListener("click",()=>{
+  const picked=b.dataset.value;
+  q.dataset.picked=picked;
+  buttons.forEach(opt=>{
+   const active=opt===b;
+   opt.setAttribute("aria-pressed",String(active));
+   opt.classList.toggle("correct",active&&picked===q.dataset.correct);
+   opt.classList.toggle("wrong",active&&picked!==q.dataset.correct);
+  });
+  const ok=picked===q.dataset.correct;
+  feedback.textContent=(ok?"✓ 找对了。":"↗ 再辨认一次。")+" "+q.dataset.why;
+  feedback.className="feedback "+(ok?"good":"bad");
+  update();
+ }));
+});
+document.getElementById("reset").addEventListener("click",()=>{
+ quizzes.forEach(q=>{
+  delete q.dataset.picked;
+  q.querySelectorAll(".options button").forEach(b=>{
+   b.setAttribute("aria-pressed","false");
+   b.classList.remove("correct","wrong");
+  });
+  const f=q.querySelector(".feedback");
+  f.textContent="";f.className="feedback";
+ });
+ update();
+});
+update();
+})();
+</script>
+</body>
+</html>

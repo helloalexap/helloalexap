@@ -6,9 +6,20 @@
     <atom:link href="https://edu.helloalexap.com/french/daily/feed.xml" rel="self" type="application/rss+xml"/>
     <description>每天从一个法语词形进入：辨认、拆解，再放回句子里读。</description>
     <language>zh-Hans</language>
-    <lastBuildDate>Mon, 19 Oct 2026 08:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 08:00:00 +0800</lastBuildDate>
 <!-- Keep the newest 30 items, newest first. The full archive is the list page (index.html). -->
 <!-- items:start -->
+    <item>
+      <title>N° 07 · dont</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-20-dont/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-20-dont/</guid>
+      <pubDate>Tue, 20 Oct 2026 08:00:00 +0800</pubDate>
+      <description>一根看不见的 de 线索：识别关系代词 dont 背后的介词 de，它可能来自动词、形容词，或两个名词之间的所属关系。</description>
+      <category>dont</category>
+      <category>关系代词</category>
+      <category>de 搭配</category>
+      <category>ce dont</category>
+    </item>
     <item>
       <title>N° 06 · j’avais réservé</title>
       <link>https://edu.helloalexap.com/french/daily/2026-10-19-j-avais-reserve/</link>
