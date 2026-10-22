@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Atelier de français · 21 octobre 2026 · j’allais partir</title>
+<meta name="description" content="Leçon 08 · 参照点与方向：venir de、être en train de、aller + infinitif 与 passé composé、plus-que-parfait、imparfait、futur、conditionnel 放进同一张时间矩阵。">
+<style>
+:root{color-scheme:light;--bg:#edf1f6;--paper:#fff;--ink:#182432;--muted:#526477;--line:#d2dbe5;--blue:#2855bd;--gold:#ad7500;--green:#087b61;--rose:#aa315f;--purple:#6548b6;--slate:#6a7a8c;--bad:#ad293b;--ok:#087b61;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;--mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;--serif:Georgia,"Times New Roman",serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#101721;--paper:#1a2532;--ink:#eaf0f7;--muted:#b5c4d4;--line:#39485b;--blue:#9bb8ff;--gold:#ffca65;--green:#7be0c4;--rose:#ff9dc4;--purple:#c0acff;--slate:#a9b8c8;--bad:#ff9ba7;--ok:#7be0c4}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);padding:16px 15px 64px}
+button{font:inherit;cursor:pointer;touch-action:manipulation;color:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+h1,h2,h3,p{margin:0}a{color:var(--blue)}
+.wrap{max-width:1130px;margin:auto;display:flex;flex-direction:column;gap:34px}
+.eyebrow{font:700 .72rem/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}.helper{color:var(--muted);font-size:.92rem}
+.badge{border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.79rem;color:var(--muted);display:inline-flex;background:var(--paper)}
+.section{display:grid;gap:17px;scroll-margin-top:18px}
+.sec-head{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:8px}
+h2{font-size:clamp(1.5rem,3.5vw,2.15rem);line-height:1.3;letter-spacing:-.025em}
+h3{font-size:1.1rem;line-height:1.4}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;display:grid;align-content:start;gap:12px;min-width:0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cards.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rule{border-left:4px solid var(--c,var(--blue));padding:9px 14px;background:color-mix(in srgb,var(--c,var(--blue)) 7%,var(--paper));border-radius:0 9px 9px 0}
+.fr-line{font-size:1.08rem;line-height:1.75}
+
+/* tiles */
+.tiles{display:inline-flex;flex-wrap:wrap;align-items:stretch;gap:4px;vertical-align:middle}
+.t{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:4px 9px;border-radius:6px;border-bottom:3px solid var(--c);background:color-mix(in srgb,var(--c) 12%,var(--paper));color:var(--ink);font:700 1rem/1.35 var(--mono);white-space:nowrap}
+.t.big{font-size:clamp(1.25rem,3.2vw,1.8rem);min-height:52px;padding:8px 13px}
+.t.sm{font-size:.86rem;min-height:30px;padding:2px 7px}
+.t.stem{--c:var(--blue)}.t.hinge{--c:var(--gold);background:color-mix(in srgb,var(--gold) 24%,var(--paper))}
+.t.fut{--c:var(--green)}.t.b{--c:var(--rose)}.t.now{--c:var(--slate)}
+.t.link{--c:var(--purple);font-weight:600}
+.t.inf{--c:var(--line);background:transparent;border:1px solid var(--line);border-bottom-width:3px;font-weight:600}
+.t.subj{--c:transparent;background:transparent;border:0;font-weight:500;color:var(--muted);padding-left:2px;padding-right:2px}
+.key{display:flex;flex-wrap:wrap;gap:8px 14px}.key span{font-size:.83rem;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:3px;background:var(--c);display:inline-block}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.topbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{border:1px solid var(--line);border-radius:20px;background:var(--paper);padding:6px 11px;text-decoration:none;font-size:.78rem;color:var(--muted)}
+.hero h1{font:italic 500 clamp(3rem,9vw,5.6rem)/1.05 var(--serif);letter-spacing:-.03em}
+.hero h1 .dots{color:var(--rose)}
+.shift{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:18px 20px}
+.shift .arrow{font:700 1.4rem var(--mono);color:var(--muted)}
+.shift .cap{font-size:.8rem;color:var(--muted);display:block;margin-top:4px}
+.subhead{font-size:1.1rem;color:var(--muted);max-width:76ch}
+
+/* reading */
+.reading{font-size:20px;line-height:1.95;font-weight:470;max-width:72ch}
+.reading p{margin:0 0 16px}.reading .line{display:block;padding-left:14px;border-left:3px solid var(--line);margin:4px 0}
+.reading mark{background:none;color:inherit;border-radius:3px;padding:0 2px}
+.dir-on mark[data-dir="before"]{background:color-mix(in srgb,var(--blue) 17%,transparent);box-shadow:inset 0 -2px var(--blue)}
+.dir-on mark[data-dir="during"]{background:color-mix(in srgb,var(--gold) 22%,transparent);box-shadow:inset 0 -2px var(--gold)}
+.dir-on mark[data-dir="after"]{background:color-mix(in srgb,var(--green) 18%,transparent);box-shadow:inset 0 -2px var(--green)}
+.dir-on mark[data-dir="event"]{outline:1.5px dashed var(--muted);outline-offset:1px}
+.cam-on mark[data-cam="now"]{text-decoration:underline 2px var(--slate);text-underline-offset:6px}
+.cam-on mark[data-cam="past"]{text-decoration:underline wavy 2px var(--rose);text-underline-offset:6px}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.pick{border:1.5px solid var(--line);border-radius:9px;background:var(--paper);min-height:46px;padding:9px 13px;line-height:1.3;font-weight:600}
+.pick[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,var(--paper));box-shadow:inset 0 0 0 1px var(--blue)}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+details summary{cursor:pointer;font-weight:650;min-height:30px}
+details[open]{padding-bottom:14px}details p{margin-top:8px}
+
+/* matrix */
+.matrix{display:grid;grid-template-columns:118px repeat(3,minmax(0,1fr));gap:8px}
+.mx-h{font:700 .74rem/1.4 var(--mono);letter-spacing:.06em;color:var(--muted);padding:6px 4px;display:flex;align-items:flex-end}
+.mx-h.col{justify-content:center;text-align:center}
+.mx-row{font:700 .78rem/1.45 var(--mono);color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:10px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.mx-row small{font-weight:500;color:var(--muted)}
+.mx-row.past{border-color:color-mix(in srgb,var(--rose) 45%,var(--line))}
+.mx-cell{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:9px;min-width:0}
+.mx-cell.past{background:color-mix(in srgb,var(--rose) 5%,var(--paper));border-color:color-mix(in srgb,var(--rose) 35%,var(--line))}
+.lens{display:grid;gap:4px}
+.lens .lbl{font:600 .68rem/1.3 var(--mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.lens .fr{font-size:1rem;line-height:1.5}
+.lens .fr b{font-weight:750}
+.mx-cell .zh{font-size:.82rem;color:var(--muted);line-height:1.5}
+.end-hinge{box-shadow:inset 0 -2px var(--gold);color:var(--gold)}.end-now{box-shadow:inset 0 -2px var(--slate)}.end-b{box-shadow:inset 0 -2px var(--rose);color:var(--rose)}.end-fut{box-shadow:inset 0 -2px var(--green);color:var(--green)}
+
+/* tables */
+.table-scroll{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:11px;background:var(--paper);-webkit-overflow-scrolling:touch}
+.table-scroll table{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:.93rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{background:color-mix(in srgb,var(--blue) 7%,var(--paper));font-size:.82rem}
+tbody th{position:sticky;left:0;background:var(--paper);z-index:1}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+td .s{color:var(--blue)}td .e{color:var(--rose);font-weight:700}
+
+/* pairs */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.pair>div{padding:15px 17px;min-width:0;display:grid;gap:5px;align-content:start}
+.pair>div+div{border-left:1px solid var(--line)}
+.pair .lbl{font:700 .7rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.pair .fr{font-size:1.08rem;line-height:1.6;font-weight:600}
+.pair .zh{font-size:.9rem;color:var(--muted)}
+.pair-note{padding:11px 17px;border-top:1px dashed var(--line);font-size:.9rem;grid-column:1/-1;background:color-mix(in srgb,var(--gold) 5%,var(--paper))}
+
+/* builder */
+.builder{display:grid;gap:16px}
+.control{display:grid;gap:7px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pills.subj{display:grid;grid-template-columns:repeat(8,minmax(0,1fr))}
+.output{padding:18px;border-radius:12px;background:color-mix(in srgb,var(--blue) 5%,var(--paper));border:1px dashed var(--line);display:grid;gap:10px;min-height:150px}
+.out-sentence{font:700 clamp(1.25rem,3.6vw,1.75rem)/1.45 var(--sans)}
+.out-alt{font-size:.92rem;color:var(--muted)}
+
+/* map game */
+.game{display:grid;gap:16px}
+.q-box{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;display:grid;gap:10px}
+.q-sentence{font:600 clamp(1.25rem,3.6vw,1.65rem)/1.55 var(--sans)}
+.q-zh{font-size:.92rem;color:var(--muted)}
+.map{display:grid;grid-template-columns:96px repeat(3,minmax(0,1fr));gap:7px}
+.map .mx-h{font-size:.7rem}
+.cellbtn{min-height:76px;border:1.5px solid var(--line);border-radius:11px;background:var(--paper);padding:8px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:6px;text-align:left;min-width:0}
+.cellbtn.past{background:color-mix(in srgb,var(--rose) 5%,var(--paper))}
+.cellbtn .cl{font:600 .72rem/1.3 var(--mono);color:var(--muted)}
+.cellbtn .dots{display:flex;flex-wrap:wrap;gap:3px}
+.cellbtn .dots span{font:700 .68rem var(--mono);border-radius:20px;padding:1px 6px;background:color-mix(in srgb,var(--green) 18%,var(--paper));color:var(--ink)}
+.cellbtn.correct{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.cellbtn.wrong{border-color:var(--bad);box-shadow:inset 0 0 0 1px var(--bad)}
+.cellbtn.reveal{border-color:var(--ok);border-style:dashed}
+.movebtn{grid-column:2/-1;min-height:48px;border:1.5px solid var(--line);border-radius:11px;background:var(--paper);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px}
+.movebtn .cl{font:600 .76rem var(--mono);color:var(--muted)}
+.feedback{min-height:26px;font-size:.95rem}
+.feedback .ok{color:var(--ok);font-weight:700}.feedback .no{color:var(--bad);font-weight:700}
+.clues{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.clue{font:600 .78rem/1.4 var(--mono);border:1px solid var(--line);border-radius:6px;padding:3px 8px;background:var(--bg)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.action{min-height:48px;border:0;border-radius:9px;padding:10px 16px;font-weight:700;background:var(--blue);color:#fff}
+.action.secondary{background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.progress{font:700 .8rem var(--mono);color:var(--muted)}
+.placed{display:grid;gap:4px;font-size:.9rem;margin:0;padding-left:20px}
+
+/* reported speech */
+.shiftlist{display:grid;gap:8px}
+.srow{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.srow .fr{font-size:1.02rem;line-height:1.6}
+.srow .arr{text-align:center;color:var(--muted);font:700 1.1rem var(--mono)}
+.srow b.n{color:var(--slate);box-shadow:inset 0 -2px var(--slate)}.srow b.p{color:var(--rose);box-shadow:inset 0 -2px var(--rose)}
+.srow small{display:block;color:var(--muted);font-size:.8rem}
+
+.anchor{display:flex;gap:12px;align-items:flex-start}
+.anchor .n{font:700 .85rem var(--mono);color:var(--gold);min-width:24px;padding-top:3px}
+.links{display:grid;gap:8px}
+.links a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 14px;background:var(--paper)}
+.links a span{color:var(--muted);font-size:.88rem}
+.links a i{font-family:var(--serif);font-size:1.08rem}
+.foot{border-top:1px solid var(--line);padding-top:17px;color:var(--muted);font-size:.9rem}
+
+@media(max-width:760px){
+ body{padding:12px 12px 58px}.wrap{gap:28px}
+ .cards,.cards.three{grid-template-columns:1fr}
+ .card{padding:17px}
+ .reading{font-size:20px;line-height:1.92;font-weight:500}
+ .matrix{grid-template-columns:1fr;gap:6px}
+ .matrix .mx-h.col,.matrix .mx-h.corner{display:none}
+ .mx-row{flex-direction:row;gap:8px;align-items:baseline;margin-top:10px}
+ .mx-cell .colname{display:block}
+ .pair{grid-template-columns:1fr}.pair>div+div{border-left:0;border-top:1px solid var(--line)}
+ .pills.subj{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .pills .pick{flex:1 1 auto}
+ .map{grid-template-columns:64px repeat(3,minmax(0,1fr));gap:5px}
+ .cellbtn{min-height:70px;padding:7px}
+ .srow{grid-template-columns:1fr}.srow .arr{transform:rotate(90deg);line-height:1}
+ .nav a{font-size:.74rem;padding:6px 9px}
+}
+@media(min-width:761px){.mx-cell .colname{display:none}}
+.colname{font:700 .7rem var(--mono);color:var(--muted);letter-spacing:.06em}
+@media(max-width:360px){.reading{font-size:19px}.map{grid-template-columns:52px repeat(3,minmax(0,1fr))}.cellbtn .cl{font-size:.66rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><style>.ll-crumb{max-width:1130px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font:500 .74rem/1.6 var(--mono,ui-monospace,Menlo,Consolas,monospace);letter-spacing:.06em;color:var(--muted,#667)}.ll-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line,#ccd)}.ll-crumb a:hover{color:var(--ink,inherit)}.ll-crumb span{opacity:.6}</style><nav class="ll-crumb" aria-label="Site"><a href="https://helloalexap.com/">helloalexap</a><span>/</span><a href="../../../">Learning Lab</a><span>/</span><a href="../../">French</a><span>/</span><a href="../">Daily</a></nav>
+<main class="wrap">
+
+<header class="hero" id="top">
+ <div class="topbar"><span class="eyebrow">Atelier de français · Leçon 08</span><span class="badge">21 octobre 2026 · A2 → B1 · Temps &amp; aspect</span></div>
+ <nav class="nav" aria-label="课程章节"><a href="#lecture">01 阅读</a><a href="#matrice">02 时间矩阵</a><a href="#ais">03 -ais 一行</a><a href="#lentilles">04 近与远</a><a href="#composteur">05 拼装台</a><a href="#carte">06 归位</a><a href="#deplacer">07 移动参照点</a><a href="#liens">08 连接</a></nav>
+ <p class="eyebrow">LA PHRASE DU JOUR · 今日句式</p>
+ <h1 lang="fr">J’allais partir<span class="dots">…</span></h1>
+ <div class="shift" aria-label="vais 变成 allais">
+  <div><span class="tiles"><span class="t subj big">je</span><span class="t now big">vais</span><span class="t inf big">partir</span></span><span class="cap">参照点 = 现在 · 我要走了</span></div>
+  <span class="arrow" aria-hidden="true">→</span>
+  <div><span class="tiles"><span class="t subj big">j’</span><span class="t stem big">all</span><span class="t b big">ais</span><span class="t inf big">partir</span></span><span class="cap">参照点 = 过去 · 我那时正要走（接着发生了什么）</span></div>
+ </div>
+ <p class="subhead">每个时间表达都由两个设定决定：<b>参照点</b>在现在还是过去，动作在参照点的<b>之前、之中还是之后</b>。今天把 <i lang="fr">venir de · être en train de · aller</i> 和已经见过的六个时态放进同一张矩阵里。参照点一旦移到过去，这一整行的变位动词都换上同一组词尾：<b>-ais</b>。</p>
+ <div class="key"><span><i class="sw" style="--c:var(--slate)"></i>现在时形式</span><span><i class="sw" style="--c:var(--blue)"></i>词干</span><span><i class="sw" style="--c:var(--rose)"></i>B 组词尾 -ais（过去参照点）</span><span><i class="sw" style="--c:var(--gold)"></i>将来 r 铰链</span><span><i class="sw" style="--c:var(--green)"></i>Futur 词尾</span><span><i class="sw" style="--c:var(--purple)"></i>de / en train de</span></div>
+</header>
+
+<section class="section" id="lecture">
+ <div class="sec-head"><p class="eyebrow">01 · Lecture · 先读故事</p><h2>Le train de 20 heures</h2><p class="muted">第一遍只跟着故事走。读完再打开两层标记：一层看方向，一层看参照点。</p></div>
+ <div class="card">
+  <div class="reading" id="story" lang="fr">
+   <p>Vendredi soir, à 19 h 50, Léa <mark data-dir="during" data-cam="past">était</mark> sur le quai de la gare de Lyon. Elle <mark data-dir="before" data-cam="past">venait d’arriver</mark>, un peu essoufflée : elle <mark data-dir="before" data-cam="past">avait couru</mark> depuis le métro. Le train pour Marseille <mark data-dir="after" data-cam="past">allait partir</mark> dans dix minutes. Elle <mark data-dir="during" data-cam="past">était en train de chercher</mark> son billet dans son sac quand son téléphone <mark data-dir="event">a sonné</mark>. C’était Noé.</p>
+   <p><span class="line">— Tu es où ?</span><span class="line">— À la gare. Je <mark data-dir="before" data-cam="now">viens d’arriver</mark> et je <mark data-dir="during" data-cam="now">suis en train de chercher</mark> mon billet. Le train <mark data-dir="after" data-cam="now">va partir</mark> dans dix minutes !</span><span class="line">— Tu <mark data-dir="before" data-cam="now">as oublié</mark> ta valise chez moi. Je <mark data-dir="before" data-cam="now">viens de la voir</mark> dans l’entrée.</span><span class="line">— Quoi ?!</span><span class="line">— Ne bouge pas. Je <mark data-dir="after" data-cam="now">vais prendre</mark> un taxi, je <mark data-dir="after" data-cam="now">serai</mark> là dans cinq minutes.</span></p>
+   <p>Léa <mark data-dir="event">a ri</mark>. Elle <mark data-dir="during" data-cam="past">pensait</mark> qu’elle <mark data-dir="after" data-cam="past">partirait</mark> légère, mais pas à ce point-là ! À 19 h 58, elle <mark data-dir="after" data-cam="past">allait monter</mark> dans le train quand Noé <mark data-dir="event">est arrivé</mark> en courant, la valise à la main.</p>
+  </div>
+  <div class="toggles">
+   <button type="button" class="pick" id="t-dir" aria-pressed="false" aria-controls="story">方向：之前 · 之中 · 之后</button>
+   <button type="button" class="pick" id="t-cam" aria-pressed="false" aria-controls="story">参照点：现在 · 过去</button>
+  </div>
+  <div class="key" id="legend-dir"><span><i class="sw" style="--c:var(--blue)"></i>之前</span><span><i class="sw" style="--c:var(--gold)"></i>之中</span><span><i class="sw" style="--c:var(--green)"></i>之后</span><span><i class="sw" style="--c:var(--muted)"></i>虚线框 = 事件，参照点停在这一刻</span><span>直线 = 参照点在现在 · 波浪线 = 参照点在过去</span></div>
+ </div>
+ <details><summary>译文</summary>
+  <p>星期五晚上 7 点 50 分，莱娅站在巴黎里昂站的站台上。她刚到，有点喘：她是从地铁一路跑过来的。开往马赛的火车再过十分钟就要发车。她正在包里找车票，电话响了。是诺埃。</p>
+  <p>「你在哪儿？」「在车站。我刚到，正在找车票。火车十分钟后就要开了！」「你把行李箱忘在我家了。我刚在门厅看到它。」「什么？！」「别动。我这就打车过去，五分钟后到。」</p>
+  <p>莱娅笑了。她本以为这趟会轻装出行，可没想到轻到这个地步！7 点 58 分，她正要上车，诺埃跑着赶到了，手里提着那只箱子。</p>
+ </details>
+ <details><summary>为什么同一个「刚到」写法不同</summary>
+  <p>叙述部分的参照点是电话响起的那一刻（过去）：<span lang="fr">elle <b>venait</b> d’arriver</span>。对话里，说话的此刻就是参照点（现在）：<span lang="fr">je <b>viens</b> d’arriver</span>。方向相同，都是「之前、而且很近」；变的只是 venir 的词尾。</p>
+ </details>
+</section>
+
+<section class="section" id="matrice">
+ <div class="sec-head"><p class="eyebrow">02 · La matrice · 时间矩阵</p><h2>两行 × 三列 × 两种镜头</h2><p class="muted">同一个动作 <span lang="fr">finir le rapport</span>（写完报告），主语 je。每格上面是近距镜头（迂说结构），下面是普通时态；两者落在同一格，只是距离感不同。</p></div>
+ <div class="matrix" role="table" aria-label="参照点与方向矩阵">
+  <div class="mx-h corner" role="columnheader"></div>
+  <div class="mx-h col" role="columnheader">← AVANT · 之前</div>
+  <div class="mx-h col" role="columnheader">◉ PENDANT · 之中</div>
+  <div class="mx-h col" role="columnheader">→ APRÈS · 之后</div>
+
+  <div class="mx-row" role="rowheader">MAINTENANT<small>参照点 = 现在</small></div>
+  <div class="mx-cell" role="cell"><span class="colname">← 之前</span>
+   <div class="lens"><span class="lbl">近 · venir de</span><span class="fr" lang="fr">je <b class="end-now">viens</b> de finir</span></div>
+   <div class="lens"><span class="lbl">普通 · passé composé</span><span class="fr" lang="fr">j’<b class="end-now">ai</b> fini</span></div>
+   <span class="zh">刚写完 ／ 写完了</span></div>
+  <div class="mx-cell" role="cell"><span class="colname">◉ 之中</span>
+   <div class="lens"><span class="lbl">近 · en train de</span><span class="fr" lang="fr">je <b class="end-now">suis</b> en train de finir</span></div>
+   <div class="lens"><span class="lbl">普通 · présent</span><span class="fr" lang="fr">je <b class="end-now">finis</b></span></div>
+   <span class="zh">正在写 ／ 在写</span></div>
+  <div class="mx-cell" role="cell"><span class="colname">→ 之后</span>
+   <div class="lens"><span class="lbl">近 · aller</span><span class="fr" lang="fr">je <b class="end-now">vais</b> finir</span></div>
+   <div class="lens"><span class="lbl">普通 · futur simple</span><span class="fr" lang="fr">je fini<b class="end-hinge">r</b><b class="end-fut">ai</b></span></div>
+   <span class="zh">马上要写完 ／ 将会写完</span></div>
+
+  <div class="mx-row past" role="rowheader">À CE MOMENT-LÀ<small>参照点 = 过去</small></div>
+  <div class="mx-cell past" role="cell"><span class="colname">← 之前</span>
+   <div class="lens"><span class="lbl">近 · venir de</span><span class="fr" lang="fr">je ven<b class="end-b">ais</b> de finir</span></div>
+   <div class="lens"><span class="lbl">普通 · plus-que-parfait</span><span class="fr" lang="fr">j’av<b class="end-b">ais</b> fini</span></div>
+   <span class="zh">当时刚写完 ／ 在那之前已写完</span></div>
+  <div class="mx-cell past" role="cell"><span class="colname">◉ 之中</span>
+   <div class="lens"><span class="lbl">近 · en train de</span><span class="fr" lang="fr">j’ét<b class="end-b">ais</b> en train de finir</span></div>
+   <div class="lens"><span class="lbl">普通 · imparfait</span><span class="fr" lang="fr">je finiss<b class="end-b">ais</b></span></div>
+   <span class="zh">当时正在写 ／ 当时在写（背景）</span></div>
+  <div class="mx-cell past" role="cell"><span class="colname">→ 之后</span>
+   <div class="lens"><span class="lbl">近 · aller</span><span class="fr" lang="fr">j’all<b class="end-b">ais</b> finir</span></div>
+   <div class="lens"><span class="lbl">普通 · conditionnel</span><span class="fr" lang="fr">je fini<b class="end-hinge">r</b><b class="end-b">ais</b></span></div>
+   <span class="zh">当时正要写完 ／ 当时设想会写完</span></div>
+ </div>
+ <div class="rule" style="--c:var(--rose)"><b>只看下面一行：</b>六个形式里负责变位的那个动词，都以 <b>-ais</b> 结尾：ven<b>ais</b>、av<b>ais</b>、ét<b>ais</b>、finiss<b>ais</b>、all<b>ais</b>、fini<b>r</b><b>ais</b>。识别时先看这个词尾，就知道参照点在过去；再看结构，就知道方向。</div>
+</section>
+
+<section class="section" id="ais">
+ <div class="sec-head"><p class="eyebrow">03 · Une seule rangée · 同一组词尾</p><h2>-ais 一行，六个动词</h2><p class="muted">B 组词尾已经在第 01 期（conditionnel）和第 06 期（plus-que-parfait）出现过。今天它把整行串起来。</p></div>
+ <div class="cards three">
+  <div class="card"><p class="eyebrow">← 之前</p><span class="tiles"><span class="t stem">ven</span><span class="t b">ais</span><span class="t link">de</span><span class="t inf">finir</span></span><span class="tiles"><span class="t stem">av</span><span class="t b">ais</span><span class="t inf">fini</span></span><p class="helper">venir 与助动词 avoir（或 être）都用 imparfait。</p></div>
+  <div class="card"><p class="eyebrow">◉ 之中</p><span class="tiles"><span class="t stem">ét</span><span class="t b">ais</span><span class="t link">en train de</span><span class="t inf">finir</span></span><span class="tiles"><span class="t stem">finiss</span><span class="t b">ais</span></span><p class="helper">imparfait 本身就是「过去参照点 · 之中」。</p></div>
+  <div class="card"><p class="eyebrow">→ 之后</p><span class="tiles"><span class="t stem">all</span><span class="t b">ais</span><span class="t inf">finir</span></span><span class="tiles"><span class="t stem">fini</span><span class="t hinge">r</span><span class="t b">ais</span></span><p class="helper">conditionnel = 将来词干 + B 词尾：过去视角中的将来。</p></div>
+ </div>
+ <div class="table-scroll" tabindex="0" role="region" aria-label="四个前置动词的六人称变位"><table>
+  <thead><tr><th>人称</th><th>venir · présent</th><th>venir · imparfait</th><th>être · présent</th><th>être · imparfait</th><th>aller · présent</th><th>aller · imparfait</th><th>avoir · présent</th><th>avoir · imparfait</th></tr></thead>
+  <tbody>
+   <tr><th>je / j’</th><td>viens</td><td><span class="s">ven</span><span class="e">ais</span></td><td>suis</td><td><span class="s">ét</span><span class="e">ais</span></td><td>vais</td><td><span class="s">all</span><span class="e">ais</span></td><td>ai</td><td><span class="s">av</span><span class="e">ais</span></td></tr>
+   <tr><th>tu</th><td>viens</td><td><span class="s">ven</span><span class="e">ais</span></td><td>es</td><td><span class="s">ét</span><span class="e">ais</span></td><td>vas</td><td><span class="s">all</span><span class="e">ais</span></td><td>as</td><td><span class="s">av</span><span class="e">ais</span></td></tr>
+   <tr><th>il / elle</th><td>vient</td><td><span class="s">ven</span><span class="e">ait</span></td><td>est</td><td><span class="s">ét</span><span class="e">ait</span></td><td>va</td><td><span class="s">all</span><span class="e">ait</span></td><td>a</td><td><span class="s">av</span><span class="e">ait</span></td></tr>
+   <tr><th>nous</th><td>venons</td><td><span class="s">ven</span><span class="e">ions</span></td><td>sommes</td><td><span class="s">ét</span><span class="e">ions</span></td><td>allons</td><td><span class="s">all</span><span class="e">ions</span></td><td>avons</td><td><span class="s">av</span><span class="e">ions</span></td></tr>
+   <tr><th>vous</th><td>venez</td><td><span class="s">ven</span><span class="e">iez</span></td><td>êtes</td><td><span class="s">ét</span><span class="e">iez</span></td><td>allez</td><td><span class="s">all</span><span class="e">iez</span></td><td>avez</td><td><span class="s">av</span><span class="e">iez</span></td></tr>
+   <tr><th>ils / elles</th><td>viennent</td><td><span class="s">ven</span><span class="e">aient</span></td><td>sont</td><td><span class="s">ét</span><span class="e">aient</span></td><td>vont</td><td><span class="s">all</span><span class="e">aient</span></td><td>ont</td><td><span class="s">av</span><span class="e">aient</span></td></tr>
+  </tbody></table></div>
+ <p class="helper">现在时这一侧四个动词都不规则，形状各不相同；imparfait 这一侧只换词干，词尾完全一样。手机上可以在表格内横向滑动。</p>
+ <div class="cards">
+  <div class="card"><h3>耳朵听到的差别</h3><p class="fr-line" lang="fr">vais /vɛ/ → allais /a.lɛ/<br>viens /vjɛ̃/ → venais /və.nɛ/<br>suis /sɥi/ → étais /e.tɛ/</p><p class="helper">现在时短而各异；imparfait 多出一个音节，结尾都是 /ɛ/。</p></div>
+  <div class="card"><h3>finirai 与 finirais</h3><p class="fr-line" lang="fr">je finirai /fi.ni.ʁe/ · je finirais /fi.ni.ʁɛ/</p><p class="helper">很多人的口语里这两个结尾差别很小。阅读时看拼写，听的时候看语境：<span lang="fr">je pensais que…</span> 之后通常是 conditionnel。</p></div>
+ </div>
+</section>
+
+<section class="section" id="lentilles">
+ <div class="sec-head"><p class="eyebrow">04 · Deux lentilles · 近距与普通</p><h2>同一格里的两种说法</h2><p class="muted">迂说结构把动作拉近到参照点旁边；普通时态只说位置，不强调距离。</p></div>
+ <div class="pair">
+  <div><span class="lbl">← 近 · venir de</span><span class="fr" lang="fr">Je viens de finir le rapport.</span><span class="zh">刚写完，事情还很新。</span></div>
+  <div><span class="lbl">← 普通 · passé composé</span><span class="fr" lang="fr">J’ai fini le rapport hier.</span><span class="zh">写完了，可以加上任何时间。</span></div>
+  <p class="pair-note"><span lang="fr">venir de</span> 已经包含「很近」，通常不和 <span lang="fr">hier、l’an dernier</span> 这类较远的时间词连用。</p>
+ </div>
+ <div class="pair">
+  <div><span class="lbl">◉ 近 · en train de</span><span class="fr" lang="fr">Je suis en train de travailler.</span><span class="zh">此刻正在工作中，常带「现在不方便」的意味。</span></div>
+  <div><span class="lbl">◉ 普通 · présent</span><span class="fr" lang="fr">Je travaille.</span><span class="zh">我在工作／我上班：可以是此刻，也可以是习惯。</span></div>
+  <p class="pair-note">法语现在时本身就能表示「正在」；<span lang="fr">en train de</span> 只在需要突出过程时使用。</p>
+ </div>
+ <div class="pair">
+  <div><span class="lbl">→ 近 · aller</span><span class="fr" lang="fr">Le train va partir.</span><span class="zh">火车要开了：和眼前相连，迹象已经在。</span></div>
+  <div><span class="lbl">→ 普通 · futur simple</span><span class="fr" lang="fr">Je serai là dans cinq minutes.</span><span class="zh">我五分钟后到：独立的预告或承诺。</span></div>
+  <p class="pair-note">日常对话里 <span lang="fr">aller + infinitif</span> 更常见；预告、承诺、正式文本里常见 futur simple。</p>
+ </div>
+ <div class="pair">
+  <div><span class="lbl">→ 过去 · 近 · allais</span><span class="fr" lang="fr">J’allais partir quand il a appelé.</span><span class="zh">我正要走，他打来了电话。常和 <i lang="fr">quand…</i> 连用：将要发生的事被打断。</span></div>
+  <div><span class="lbl">→ 过去 · 普通 · conditionnel</span><span class="fr" lang="fr">Je pensais que je partirais seule.</span><span class="zh">我以为自己会一个人走。常跟在 <i lang="fr">je pensais que / il a dit que</i> 之后：当时设想的将来。</span></div>
+ </div>
+</section>
+
+<section class="section" id="composteur">
+ <div class="sec-head"><p class="eyebrow">05 · Composteur des repères · 拼装台</p><h2>五个旋钮，288 种组合</h2><p class="muted">换参照点时，只有变位动词的词尾变；换方向时，前面的结构变；换镜头时，同一格换一种说法。</p></div>
+ <div class="card builder" id="builder">
+  <div class="control"><p class="eyebrow">① 动作</p><div class="pills" data-group="verb"><button type="button" class="pick" data-v="finir" aria-pressed="true">finir le rapport</button><button type="button" class="pick" data-v="partir" aria-pressed="false">partir</button><button type="button" class="pick" data-v="prendre" aria-pressed="false">prendre le train</button></div></div>
+  <div class="control"><p class="eyebrow">② 主语</p><div class="pills subj" data-group="subj"><button type="button" class="pick" data-v="0" aria-pressed="true">je</button><button type="button" class="pick" data-v="1" aria-pressed="false">tu</button><button type="button" class="pick" data-v="2" aria-pressed="false">il</button><button type="button" class="pick" data-v="3" aria-pressed="false">elle</button><button type="button" class="pick" data-v="4" aria-pressed="false">nous</button><button type="button" class="pick" data-v="5" aria-pressed="false">vous</button><button type="button" class="pick" data-v="6" aria-pressed="false">ils</button><button type="button" class="pick" data-v="7" aria-pressed="false">elles</button></div></div>
+  <div class="cards">
+   <div class="control"><p class="eyebrow">③ 参照点</p><div class="pills" data-group="cam"><button type="button" class="pick" data-v="now" aria-pressed="false">现在</button><button type="button" class="pick" data-v="past" aria-pressed="true">过去</button></div></div>
+   <div class="control"><p class="eyebrow">④ 方向</p><div class="pills" data-group="dir"><button type="button" class="pick" data-v="before" aria-pressed="false">← 之前</button><button type="button" class="pick" data-v="during" aria-pressed="false">◉ 之中</button><button type="button" class="pick" data-v="after" aria-pressed="true">→ 之后</button></div></div>
+  </div>
+  <div class="control"><p class="eyebrow">⑤ 镜头</p><div class="pills" data-group="lens"><button type="button" class="pick" data-v="near" aria-pressed="true">近距 · 迂说结构</button><button type="button" class="pick" data-v="plain" aria-pressed="false">普通时态</button></div></div>
+  <div class="output" aria-live="polite">
+   <span class="eyebrow" id="b-label">过去 · 之后 · 近距 → aller (imparfait) + infinitif</span>
+   <span class="tiles" id="b-tiles"><span class="t subj">j’</span><span class="t stem">all</span><span class="t b">ais</span><span class="t inf">finir</span></span>
+   <p class="out-sentence" id="b-sentence" lang="fr">J’allais finir le rapport.</p>
+   <p class="helper" id="b-zh">当时正要写完报告。</p>
+   <p class="out-alt" id="b-alt">同一格的另一种说法：<span lang="fr">Je finirais le rapport.</span>（conditionnel）</p>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="carte">
+ <div class="sec-head"><p class="eyebrow">06 · Décomposeur · 归位</p><h2>把句子放进矩阵</h2><p class="muted">读一句，点它所在的格子。参照点看变位动词的词尾，方向看结构或时态。有一句不属于这张矩阵。答错的句子会排到后面再出现一次。</p></div>
+ <div class="game">
+  <div class="q-box" aria-live="polite">
+   <div class="actions" style="justify-content:space-between"><span class="progress" id="g-progress">01 / 12</span><span class="progress" id="g-score"></span></div>
+   <p class="q-sentence" id="g-sentence" lang="fr">Je viens de finir le rapport.</p>
+   <p class="q-zh" id="g-zh"></p>
+   <div class="feedback" id="g-feedback"></div>
+  </div>
+  <div class="map" id="g-map">
+   <div class="mx-h corner"></div><div class="mx-h col">← 之前</div><div class="mx-h col">◉ 之中</div><div class="mx-h col">→ 之后</div>
+   <div class="mx-row">现在</div>
+   <button type="button" class="cellbtn" data-cell="now-before"><span class="cl">现在 · 之前</span><span class="dots"></span></button>
+   <button type="button" class="cellbtn" data-cell="now-during"><span class="cl">现在 · 之中</span><span class="dots"></span></button>
+   <button type="button" class="cellbtn" data-cell="now-after"><span class="cl">现在 · 之后</span><span class="dots"></span></button>
+   <div class="mx-row past">过去</div>
+   <button type="button" class="cellbtn past" data-cell="past-before"><span class="cl">过去 · 之前</span><span class="dots"></span></button>
+   <button type="button" class="cellbtn past" data-cell="past-during"><span class="cl">过去 · 之中</span><span class="dots"></span></button>
+   <button type="button" class="cellbtn past" data-cell="past-after"><span class="cl">过去 · 之后</span><span class="dots"></span></button>
+   <button type="button" class="movebtn" data-cell="move"><span>不是时间结构 · 空间里的移动或来源</span><span class="dots"></span></button>
+  </div>
+  <div class="actions"><button type="button" class="action" id="g-next">下一句 →</button><button type="button" class="action secondary" id="g-reset">重新开始</button></div>
+  <ol class="placed" id="g-placed"></ol>
+ </div>
+ <details><summary>全部 12 句与答案</summary>
+  <p><b>01</b> <span lang="fr">Je viens de finir le rapport.</span> → 现在 · 之前（viens 现在时 + venir de）</p>
+  <p><b>02</b> <span lang="fr">Tu as vu mon message ?</span> → 现在 · 之前（passé composé）</p>
+  <p><b>03</b> <span lang="fr">Nous sommes en train de dîner.</span> → 现在 · 之中</p>
+  <p><b>04</b> <span lang="fr">Le film va commencer.</span> → 现在 · 之后</p>
+  <p><b>05</b> <span lang="fr">Tu seras là demain ?</span> → 现在 · 之后（futur simple）</p>
+  <p><b>06</b> <span lang="fr">Quand il a appelé, je venais de finir le rapport.</span> → 过去 · 之前</p>
+  <p><b>07</b> <span lang="fr">Ils avaient déjà mangé quand nous sommes arrivés.</span> → 过去 · 之前（plus-que-parfait）</p>
+  <p><b>08</b> <span lang="fr">Elle était en train de lire quand la lumière s’est éteinte.</span> → 过去 · 之中</p>
+  <p><b>09</b> <span lang="fr">Il pleuvait quand je suis sorti.</span> → 过去 · 之中（imparfait）</p>
+  <p><b>10</b> <span lang="fr">Vous alliez dire quelque chose ?</span> → 过去 · 之后（参照点是刚才那一刻）</p>
+  <p><b>11</b> <span lang="fr">Elle pensait que le train partirait à l’heure.</span> → 过去 · 之后（conditionnel）</p>
+  <p><b>12</b> <span lang="fr">Je viens de Lyon, et je vais à Marseille.</span> → 不是时间结构：de 后面是地名，à 后面是地点</p>
+ </details>
+</section>
+
+<section class="section" id="deplacer">
+ <div class="sec-head"><p class="eyebrow">07 · Déplacer le repère · 移动参照点</p><h2>第二天，Léa 转述那通电话</h2><p class="muted">直接引语里，参照点是说话的那一刻。转述时参照点移到过去，每个动词都在矩阵里往下挪一行：现在时形式换成 -ais 一行，方向不变。</p></div>
+ <div class="shiftlist">
+  <div class="srow"><p class="fr" lang="fr">Noé : « Tu <b class="n">as</b> oublié ta valise. »<small>现在 · 之前 · passé composé</small></p><span class="arr" aria-hidden="true">→</span><p class="fr" lang="fr">Il m’a dit que j’<b class="p">avais</b> oublié ma valise.<small>过去 · 之前 · plus-que-parfait</small></p></div>
+  <div class="srow"><p class="fr" lang="fr">Noé : « Je <b class="n">viens</b> de la voir. »<small>现在 · 之前 · venir de</small></p><span class="arr" aria-hidden="true">→</span><p class="fr" lang="fr">… qu’il <b class="p">venait</b> de la voir.<small>过去 · 之前 · venir de</small></p></div>
+  <div class="srow"><p class="fr" lang="fr">Léa : « Je <b class="n">suis</b> en train de chercher mon billet. »<small>现在 · 之中 · en train de</small></p><span class="arr" aria-hidden="true">→</span><p class="fr" lang="fr">Je lui ai dit que j’<b class="p">étais</b> en train de chercher mon billet.<small>过去 · 之中 · en train de</small></p></div>
+  <div class="srow"><p class="fr" lang="fr">Noé : « Je <b class="n">vais</b> prendre un taxi. »<small>现在 · 之后 · aller</small></p><span class="arr" aria-hidden="true">→</span><p class="fr" lang="fr">Il m’a dit qu’il <b class="p">allait</b> prendre un taxi.<small>过去 · 之后 · aller</small></p></div>
+  <div class="srow"><p class="fr" lang="fr">Noé : « Je <b class="n">serai</b> là dans cinq minutes. »<small>现在 · 之后 · futur simple</small></p><span class="arr" aria-hidden="true">→</span><p class="fr" lang="fr">… et qu’il <b class="p">serait</b> là cinq minutes plus tard.<small>过去 · 之后 · conditionnel</small></p></div>
+ </div>
+ <div class="rule" style="--c:var(--gold)"><b>一起移动的还有三样：</b>人称（Noé 的 <span lang="fr">tu → je，je → il</span>；Léa 自己的话仍是 <span lang="fr">je</span>）、物主词（<span lang="fr">ta → ma</span>），以及以「现在」为基准的时间词（<span lang="fr">dans cinq minutes → cinq minutes plus tard</span>）。代词 <span lang="fr">la</span> 始终贴在不定式 <span lang="fr">voir</span> 前面。</div>
+</section>
+
+<section class="section" id="liens">
+ <div class="sec-head"><p class="eyebrow">08 · Connexions · 连接</p><h2>移动变成时间</h2></div>
+ <div class="cards">
+  <div class="card"><h3>venir 与 aller：从空间到时间</h3>
+   <p class="fr-line" lang="fr">Je viens <b>de Lyon</b>. → Je viens <b>de manger</b>.<br>Je vais <b>à Lyon</b>. → Je vais <b>manger</b>.</p>
+   <p class="helper">「从某处来」变成「刚从某个动作里出来」；「往某处去」变成「朝某个动作走去」。区分的线索在后面：地名还是不定式。</p>
+   <p class="helper">英语 <i lang="en">I’m going to…</i> 用的是同一个隐喻；西班牙语用 <i lang="es">acabo de comer</i>（acabar = 结束）和 <i lang="es">voy a comer</i>。</p></div>
+  <div class="card"><h3>迂说结构会变成词尾</h3>
+   <p>法语的 futur simple 来自通俗拉丁语「不定式 + habēre」的组合：<i lang="la">cantāre habeō</i> → <i lang="fr">chanterai</i>。conditionnel 来自不定式加上 habēre 的过去形式。这就是第 01 期所说「词尾借自 avoir」的来历。</p>
+   <p class="helper">古典拉丁语也有一个表示「即将、打算」的迂说结构：<i lang="la">amātūrus sum</i>（我即将去爱）。今天的 <i lang="fr">aller + infinitif</i> 在法语里承担着类似的位置。</p></div>
+ </div>
+ <div class="card"><h3>三个带走的锚点</h3>
+  <div class="anchor"><span class="n">01</span><p><b>先看变位动词的词尾。</b>-ais / -ait / -aient 一出现，参照点就在过去。</p></div>
+  <div class="anchor"><span class="n">02</span><p><b>再看结构定方向。</b><span lang="fr">venir de</span> ← · <span lang="fr">en train de</span> ◉ · <span lang="fr">aller</span> →；普通时态各占同一格。</p></div>
+  <div class="anchor"><span class="n">03</span><p><b>后面接的是什么。</b>不定式是时间结构；地名、地点是空间移动。</p></div>
+ </div>
+ <div class="links">
+  <a href="../2026-10-14-pourrions/"><i lang="fr">pourrions</i><span>N° 01 · conditionnel = 将来词干 + B 词尾</span></a>
+  <a href="../2026-10-16-prendraient/"><i lang="fr">prendraient</i><span>N° 03 · 过去视角中的将来</span></a>
+  <a href="../2026-10-19-j-avais-reserve/"><i lang="fr">j’avais réservé</i><span>N° 06 · plus-que-parfait = 过去参照点之前</span></a>
+ </div>
+</section>
+
+<section class="section" id="memo">
+ <div class="card">
+  <p class="eyebrow">FICHE MÉMO · 归档信息</p>
+  <p><b>Lesson:</b> 08 · j’allais partir — Reference Point, Direction and Two Lenses<br><b>Date:</b> 2026-10-21<br><b>Focus:</b> 参照点与方向；venir de / être en train de / aller + infinitif；-ais 词尾 = 过去参照点；passé composé / plus-que-parfait；futur / conditionnel；转述中的时态移动<br><b>Suggested tags:</b> Français · A2–B1 · Recognition · Temps &amp; aspect</p>
+ </div>
+ <footer class="foot">Atelier de français · Leçon 08 · 21 octobre 2026 · <a href="#top">↑ 返回顶部</a></footer>
+</section>
+
+</main>
+<script>
+(function(){'use strict';
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* reading toggles */
+var story=$('story');
+[['t-dir','dir-on'],['t-cam','cam-on']].forEach(function(p){var b=$(p[0]);b.addEventListener('click',function(){var on=story.classList.toggle(p[1]);b.setAttribute('aria-pressed',String(on))})});
+
+/* builder data */
+var SUBJ=['je','tu','il','elle','nous','vous','ils','elles'];
+var CI=[0,1,2,2,3,4,5,5];
+var AGR=['(e)','(e)','','e','(e)s','(e)(s)','s','es'];
+var B=['ais','ais','ait','ions','iez','aient'],A=['ai','as','a','ons','ez','ont'];
+var AUX={
+ venir:{pres:['viens','viens','vient','venons','venez','viennent'],imp:'ven'},
+ etre:{pres:['suis','es','est','sommes','êtes','sont'],imp:'ét'},
+ aller:{pres:['vais','vas','va','allons','allez','vont'],imp:'all'},
+ avoir:{pres:['ai','as','a','avons','avez','ont'],imp:'av'}
+};
+var VERBS={
+ finir:{inf:'finir',obj:' le rapport',pres:['finis','finis','finit','finissons','finissez','finissent'],imp:'finiss',fut:'fini',pp:'fini',aux:'avoir',zh:'写完报告'},
+ partir:{inf:'partir',obj:'',pres:['pars','pars','part','partons','partez','partent'],imp:'part',fut:'parti',pp:'parti',aux:'etre',zh:'出发'},
+ prendre:{inf:'prendre',obj:' le train',pres:['prends','prends','prend','prenons','prenez','prennent'],imp:'pren',fut:'prend',pp:'pris',aux:'avoir',zh:'坐上火车'}
+};
+var ZH={now:{before:['刚刚','了'],during:['此刻正在',''],after:['接下来要','']},past:{before:['当时刚刚',''],during:['当时正在',''],after:['当时正要','']}};
+var ZHP={now:{before:['','了（已完成）'],during:['','（现在）'],after:['将会','']},past:{before:['在那之前已经',''],during:['当时在','（背景）'],after:['当时设想会','（过去中的将来）']}};
+var TNAME={now:{before:'passé composé',during:'présent',after:'futur simple'},past:{before:'plus-que-parfait',during:'imparfait',after:'conditionnel présent'}};
+var NNAME={before:'venir de',during:'être en train de',after:'aller'};
+var DIRZH={before:'之前',during:'之中',after:'之后'},CAMZH={now:'现在',past:'过去'};
+var st={verb:'finir',subj:0,cam:'past',dir:'after',lens:'near'};
+
+/* returns list of tiles [text, cls] for the conjugated part */
+function conjAux(name,cam,ci){var a=AUX[name];return cam==='now'?[[a.pres[ci],'now']]:[[a.imp,'stem'],[B[ci],'b']]}
+function build(s){
+ var v=VERBS[s.verb],ci=CI[s.subj],cam=s.cam,dir=s.dir,lens=s.lens,t=[];
+ if(lens==='near'){
+  if(dir==='before'){t=conjAux('venir',cam,ci).concat([['de','link'],[v.inf,'inf']])}
+  else if(dir==='during'){t=conjAux('etre',cam,ci).concat([['en train de','link'],[v.inf,'inf']])}
+  else{t=conjAux('aller',cam,ci).concat([[v.inf,'inf']])}
+ }else{
+  if(dir==='before'){var pp=v.pp+(v.aux==='etre'?AGR[s.subj]:'');t=conjAux(v.aux,cam,ci).concat([[pp,'inf']])}
+  else if(dir==='during'){t=cam==='now'?[[v.pres[ci],'now']]:[[v.imp,'stem'],[B[ci],'b']]}
+  else{t=[[v.fut,'stem'],['r','hinge'],[cam==='now'?A[ci]:B[ci],cam==='now'?'fut':'b']]}
+ }
+ var first=t.map(function(x){return x[0]}).join('');
+ var subj=SUBJ[s.subj];
+ if(s.subj===0&&/^[aeéiouh]/.test(first)){subj='j’'}
+ /* join tiles into words: tiles of one word are adjacent without spaces; word boundaries after link/inf/now tiles and between conj and next */
+ var words=[],cur='';
+ t.forEach(function(x,i){cur+=x[0];var next=t[i+1];var boundary=!next||x[1]==='now'||x[1]==='b'||x[1]==='fut'||x[1]==='link'||x[1]==='inf';if(boundary){words.push(cur);cur=''}});
+ var sentence=(subj==='j’'?'j’':subj+' ')+words.join(' ')+v.obj+'.';
+ sentence=sentence.charAt(0).toUpperCase()+sentence.slice(1);
+ return {tiles:[[subj,'subj']].concat(t),sentence:sentence};
+}
+function zhLine(s){var v=VERBS[s.verb],z=(s.lens==='near'?ZH:ZHP)[s.cam][s.dir];return z[0]+v.zh+z[1]+'。'}
+function label(s){var base=CAMZH[s.cam]+' · '+DIRZH[s.dir]+' · ';if(s.lens==='near'){var n=NNAME[s.dir];return base+'近距 → '+n.split(' ')[0]+' ('+(s.cam==='now'?'présent':'imparfait')+')'+(n.indexOf(' de')>0?' + '+n.slice(n.indexOf(' ')+1):'')+' + infinitif'}return base+'普通 → '+TNAME[s.cam][s.dir]}
+function render(){
+ var r=build(st);
+ $('b-tiles').innerHTML=r.tiles.map(function(x){return '<span class="t '+x[1]+'">'+esc(x[0])+'</span>'}).join('');
+ $('b-sentence').textContent=r.sentence;
+ $('b-label').textContent=label(st);
+ $('b-zh').textContent=zhLine(st);
+ var o={};for(var k in st)o[k]=st[k];o.lens=st.lens==='near'?'plain':'near';
+ var alt=build(o);
+ $('b-alt').innerHTML='同一格的另一种说法：<span lang="fr">'+esc(alt.sentence)+'</span>（'+esc(o.lens==='near'?NNAME[st.dir]:TNAME[st.cam][st.dir])+'）';
+}
+Array.prototype.forEach.call($('builder').querySelectorAll('[data-group]'),function(g){
+ var key=g.getAttribute('data-group');
+ Array.prototype.forEach.call(g.querySelectorAll('button'),function(b){b.addEventListener('click',function(){
+  var v=b.getAttribute('data-v');st[key]=key==='subj'?+v:v;
+  Array.prototype.forEach.call(g.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))});render();
+ })});
+});
+render();
+window.__lesson08={build:build,VERBS:VERBS};
+
+/* map game */
+var Q=[
+ {fr:'Je viens de finir le rapport.',zh:'我刚写完报告。',cell:'now-before',cam:'viens · 现在时',dir:'venir de → 之前'},
+ {fr:'Tu as vu mon message ?',zh:'你看到我的消息了吗？',cell:'now-before',cam:'as · 现在时',dir:'passé composé → 之前'},
+ {fr:'Nous sommes en train de dîner.',zh:'我们正在吃晚饭。',cell:'now-during',cam:'sommes · 现在时',dir:'en train de → 之中'},
+ {fr:'Le film va commencer.',zh:'电影要开始了。',cell:'now-after',cam:'va · 现在时',dir:'aller + infinitif → 之后'},
+ {fr:'Tu seras là demain ?',zh:'你明天在吗？',cell:'now-after',cam:'futur（-as）',dir:'futur simple → 之后'},
+ {fr:'Quand il a appelé, je venais de finir le rapport.',zh:'他打电话来的时候，我刚写完报告。',cell:'past-before',cam:'ven-ais',dir:'venir de → 之前'},
+ {fr:'Ils avaient déjà mangé quand nous sommes arrivés.',zh:'我们到的时候，他们已经吃过了。',cell:'past-before',cam:'av-aient',dir:'plus-que-parfait → 之前'},
+ {fr:'Elle était en train de lire quand la lumière s’est éteinte.',zh:'灯灭的时候，她正在读书。',cell:'past-during',cam:'ét-ait',dir:'en train de → 之中'},
+ {fr:'Il pleuvait quand je suis sorti.',zh:'我出门的时候在下雨。',cell:'past-during',cam:'pleuv-ait',dir:'imparfait → 之中'},
+ {fr:'Vous alliez dire quelque chose ?',zh:'您刚才是要说什么吗？',cell:'past-after',cam:'all-iez',dir:'aller + infinitif → 之后'},
+ {fr:'Elle pensait que le train partirait à l’heure.',zh:'她以为火车会准时出发。',cell:'past-after',cam:'parti-r-ait',dir:'conditionnel → 之后'},
+ {fr:'Je viens de Lyon, et je vais à Marseille.',zh:'我从里昂来，要去马赛。',cell:'move',cam:'—',dir:'de + 地名 · à + 地点'}
+];
+var CELLZH={'now-before':'现在 · 之前','now-during':'现在 · 之中','now-after':'现在 · 之后','past-before':'过去 · 之前','past-during':'过去 · 之中','past-after':'过去 · 之后','move':'不是时间结构'};
+var g={queue:[],cur:-1,answered:false,first:{},done:0};
+var cells=Array.prototype.slice.call($('g-map').querySelectorAll('[data-cell]'));
+function pad(n){return (n<10?'0':'')+n}
+function clearMarks(){cells.forEach(function(c){c.classList.remove('correct','wrong','reveal')})}
+function show(){
+ clearMarks();g.answered=false;
+ if(!g.queue.length){g.cur=-1;$('g-sentence').textContent='全部归位。';$('g-zh').textContent='';$('g-feedback').innerHTML='12 句都已放进矩阵。第一次就放对：<b>'+Object.keys(g.first).filter(function(k){return g.first[k]}).length+' / 12</b>。';$('g-progress').textContent='12 / 12';$('g-next').disabled=true;return}
+ g.cur=g.queue[0];var q=Q[g.cur];
+ $('g-sentence').textContent=q.fr;$('g-zh').textContent='';$('g-feedback').innerHTML='';
+ $('g-progress').textContent=pad(g.done+1)+' / 12'+(g.first[g.cur]===false?' · 再来一次':'');
+ $('g-next').disabled=true;
+}
+cells.forEach(function(c){c.addEventListener('click',function(){
+ if(g.cur<0||g.answered)return;g.answered=true;
+ var q=Q[g.cur],ok=c.getAttribute('data-cell')===q.cell;
+ if(!(g.cur in g.first))g.first[g.cur]=ok;
+ c.classList.add(ok?'correct':'wrong');
+ if(!ok){cells.forEach(function(x){if(x.getAttribute('data-cell')===q.cell)x.classList.add('reveal')})}
+ $('g-zh').textContent=q.zh;
+ $('g-feedback').innerHTML=(ok?'<span class="ok">✓ 放对了。</span>':'<span class="no">这一句属于虚线框那一格。</span>')+'<div class="clues"><span class="clue">参照点：'+esc(q.cam)+'</span><span class="clue">方向：'+esc(q.dir)+'</span></div>';
+ g.queue.shift();
+ if(ok){g.done++;var dots=c.querySelector('.dots');var s=document.createElement('span');s.textContent=pad(g.cur+1);dots.appendChild(s);
+  var li=document.createElement('li');li.innerHTML='<span lang="fr">'+esc(q.fr)+'</span> → '+esc(CELLZH[q.cell]);$('g-placed').appendChild(li)}
+ else{g.queue.push(g.cur)}
+ $('g-next').disabled=false;$('g-next').textContent=g.queue.length?'下一句 →':'查看结果';
+}) });
+$('g-next').addEventListener('click',show);
+function reset(){g.queue=Q.map(function(_,i){return i});g.first={};g.done=0;cells.forEach(function(c){c.querySelector('.dots').innerHTML=''});$('g-placed').innerHTML='';$('g-next').textContent='下一句 →';show()}
+$('g-reset').addEventListener('click',reset);
+reset();
+})();
+</script>
+</body>
+</html>

@@ -6,9 +6,20 @@
     <atom:link href="https://edu.helloalexap.com/french/daily/feed.xml" rel="self" type="application/rss+xml"/>
     <description>每天从一个法语词形进入：辨认、拆解，再放回句子里读。</description>
     <language>zh-Hans</language>
-    <lastBuildDate>Tue, 20 Oct 2026 08:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 08:00:00 +0800</lastBuildDate>
 <!-- Keep the newest 30 items, newest first. The full archive is the list page (index.html). -->
 <!-- items:start -->
+    <item>
+      <title>N° 08 · j’allais partir</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-21-j-allais-partir/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-21-j-allais-partir/</guid>
+      <pubDate>Wed, 21 Oct 2026 08:00:00 +0800</pubDate>
+      <description>参照点与方向：venir de、en train de、aller 和六个时态放进同一张矩阵，参照点移到过去时一律换上 -ais 词尾。</description>
+      <category>参照点与方向</category>
+      <category>venir de / être en train de / aller + infinitif</category>
+      <category>-ais 词尾 = 过去参照点</category>
+      <category>passé composé / plus-que-parfait</category>
+    </item>
     <item>
       <title>N° 07 · dont</title>
       <link>https://edu.helloalexap.com/french/daily/2026-10-20-dont/</link>
