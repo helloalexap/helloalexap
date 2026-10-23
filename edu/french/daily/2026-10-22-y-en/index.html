@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Atelier de français · 22 octobre 2026 · y / en</title>
+<meta name="description" content="Leçon 09 · y 与 en：两个被压缩的介词短语。y 接住 à，en 接住 de；与 lui、le / la / les、dont 放进同一张地图，阅读时把代词展开回原来的成分。">
+<style>
+:root{color-scheme:light;--bg:#edf1f6;--paper:#fff;--ink:#182432;--muted:#526477;--line:#d2dbe5;--blue:#2855bd;--gold:#ad7500;--green:#087b61;--rose:#aa315f;--purple:#6548b6;--slate:#6a7a8c;--bad:#ad293b;--ok:#087b61;--sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;--mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;--serif:Georgia,"Times New Roman",serif;--to:var(--green);--from:var(--purple);--direct:var(--slate);--person:var(--gold)}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#101721;--paper:#1a2532;--ink:#eaf0f7;--muted:#b5c4d4;--line:#39485b;--blue:#9bb8ff;--gold:#ffca65;--green:#7be0c4;--rose:#ff9dc4;--purple:#c0acff;--slate:#a9b8c8;--bad:#ff9ba7;--ok:#7be0c4}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);padding:16px 15px 64px}
+button{font:inherit;cursor:pointer;touch-action:manipulation;color:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+h1,h2,h3,p{margin:0}a{color:var(--blue)}
+.wrap{max-width:1130px;margin:auto;display:flex;flex-direction:column;gap:34px}
+.eyebrow{font:700 .72rem/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}.helper{color:var(--muted);font-size:.92rem}
+.badge{border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.79rem;color:var(--muted);display:inline-flex;background:var(--paper)}
+.section{display:grid;gap:17px;scroll-margin-top:18px}
+.sec-head{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:8px}
+h2{font-size:clamp(1.5rem,3.5vw,2.15rem);line-height:1.3;letter-spacing:-.025em}
+h3{font-size:1.1rem;line-height:1.4}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;display:grid;align-content:start;gap:12px;min-width:0}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cards.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rule{border-left:4px solid var(--c,var(--blue));padding:9px 14px;background:color-mix(in srgb,var(--c,var(--blue)) 7%,var(--paper));border-radius:0 9px 9px 0}
+.fr-line{font-size:1.06rem;line-height:1.8}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+details summary{cursor:pointer;font-weight:650;min-height:30px}
+details[open]{padding-bottom:14px}details p{margin-top:8px}
+
+/* tiles */
+.tiles{display:inline-flex;flex-wrap:wrap;align-items:stretch;gap:4px;vertical-align:middle}
+.t{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:4px 9px;border-radius:6px;border-bottom:3px solid var(--c);background:color-mix(in srgb,var(--c) 13%,var(--paper));color:var(--ink);font:700 1rem/1.35 var(--mono);white-space:nowrap}
+.t.big{font-size:clamp(1.15rem,3vw,1.6rem);min-height:50px;padding:7px 12px}
+.t.to{--c:var(--to)}.t.from{--c:var(--from)}.t.direct{--c:var(--direct)}.t.person{--c:var(--person)}
+.t.phrase{--c:var(--line);background:transparent;border:1px dashed var(--line);border-bottom:1px dashed var(--line);font-weight:500}
+.t.v{--c:var(--blue)}.t.w{--c:var(--line);background:transparent;border:1px solid var(--line);border-bottom-width:3px;font-weight:600}
+.t.n{--c:var(--rose);font-weight:600}.t.l{--c:var(--line);background:transparent;border:0;font-weight:500;color:var(--muted)}
+.t.s,.t.tl{--c:transparent;background:transparent;border:0;font-weight:500;color:var(--muted);padding-left:2px;padding-right:2px}
+.key{display:flex;flex-wrap:wrap;gap:8px 14px}.key span{font-size:.83rem;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:3px;background:var(--c);display:inline-block}
+
+/* hero */
+.hero{display:grid;gap:18px}
+.topbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{border:1px solid var(--line);border-radius:20px;background:var(--paper);padding:6px 11px;text-decoration:none;font-size:.78rem;color:var(--muted)}
+.hero h1{font:italic 500 clamp(2.8rem,8.5vw,5.2rem)/1.08 var(--serif);letter-spacing:-.025em}
+.hero h1 .to{color:var(--to)}.hero h1 .from{color:var(--from)}
+.press{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.press .card{gap:10px}
+.press .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.press .arrow{font:700 1.2rem var(--mono);color:var(--muted)}
+.press .cap{font-size:.88rem;color:var(--muted)}
+.subhead{font-size:1.08rem;color:var(--muted);max-width:78ch}
+
+/* reading */
+.reading{font-size:20px;line-height:2.05;font-weight:470;max-width:72ch}
+.reading p{margin:0 0 16px}
+.reading .q{display:block;padding-left:14px;border-left:3px solid var(--line);margin:4px 0}
+.reading .pn{border-radius:4px;padding:0 2px}
+.reading .xp{display:none;font:600 .78rem/1.3 var(--mono);border-radius:4px;padding:1px 5px;margin:0 2px;vertical-align:2px;white-space:nowrap}
+.mark-on .pn[data-k="to"]{background:color-mix(in srgb,var(--to) 20%,transparent);box-shadow:inset 0 -2px var(--to)}
+.mark-on .pn[data-k="from"]{background:color-mix(in srgb,var(--from) 20%,transparent);box-shadow:inset 0 -2px var(--from)}
+.mark-on .pn[data-k="person"]{background:color-mix(in srgb,var(--person) 20%,transparent);box-shadow:inset 0 -2px var(--person)}
+.mark-on .pn[data-k="fixed"]{outline:1.5px dashed var(--muted);outline-offset:1px}
+.unpack-on .xp{display:inline}
+.xp[data-k="to"]{background:color-mix(in srgb,var(--to) 14%,var(--paper));color:var(--to)}
+.xp[data-k="from"]{background:color-mix(in srgb,var(--from) 14%,var(--paper));color:var(--from)}
+.xp[data-k="person"]{background:color-mix(in srgb,var(--person) 16%,var(--paper));color:var(--gold)}
+.xp[data-k="fixed"]{background:var(--bg);color:var(--muted)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+.pick{border:1.5px solid var(--line);border-radius:9px;background:var(--paper);min-height:46px;padding:9px 13px;line-height:1.3;font-weight:600}
+.pick[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,var(--paper));box-shadow:inset 0 0 0 1px var(--blue)}
+
+/* map */
+.map{display:grid;grid-template-columns:120px repeat(3,minmax(0,1fr));gap:8px}
+.mh{font:700 .74rem/1.4 var(--mono);letter-spacing:.06em;color:var(--muted);padding:6px 4px;display:flex;align-items:flex-end;justify-content:center;text-align:center}
+.mh .tiles{margin-right:6px}
+.mrow{font:700 .8rem/1.45 var(--mono);display:flex;flex-direction:column;justify-content:center;padding:10px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.mrow small{font-weight:500;color:var(--muted)}
+.mcell{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:7px;align-content:start;min-width:0}
+.mcell.empty{background:transparent;border-style:dashed;color:var(--muted);font-size:.85rem}
+.mcell .fr{font-size:1rem;line-height:1.55}
+.mcell .from-phr{font-size:.82rem;color:var(--muted)}
+.mcell .colname{display:none;font:700 .7rem var(--mono);color:var(--muted);letter-spacing:.06em}
+.mcell.c-to{border-top:4px solid var(--to)}.mcell.c-from{border-top:4px solid var(--from)}.mcell.c-direct{border-top:4px solid var(--direct)}.mcell.c-person{border-top:4px solid var(--person)}
+b.to{color:var(--to)}b.from{color:var(--from)}b.direct{color:var(--direct)}b.person{color:var(--gold)}
+
+/* ladder */
+.ladder{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ladder .gt{color:var(--muted);font:700 .9rem var(--mono)}
+.rail{display:grid;gap:8px}
+.rail-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.rail-row .lbl{font:700 .74rem var(--mono);color:var(--muted)}
+
+/* builder */
+.builder{display:grid;gap:16px}
+.control{display:grid;gap:7px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.output{padding:18px;border-radius:12px;background:color-mix(in srgb,var(--blue) 5%,var(--paper));border:1px dashed var(--line);display:grid;gap:10px;min-height:170px}
+.out-sentence{font:700 clamp(1.25rem,3.6vw,1.75rem)/1.45 var(--sans)}
+.orig{font-size:.95rem;color:var(--muted)}
+
+/* game */
+.q-box{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;display:grid;gap:12px}
+.q-ctx{font-size:1.05rem;line-height:1.8}
+.q-ctx .pn{font-weight:800;border-radius:4px;padding:0 3px;background:color-mix(in srgb,var(--gold) 26%,transparent);box-shadow:inset 0 -2px var(--gold)}
+.q-ask{font-size:.95rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.opt{min-height:52px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);padding:9px 10px;font:600 1rem/1.35 var(--sans);text-align:center}
+.opt.correct{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,var(--paper))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--paper))}
+.opt.reveal{border-color:var(--ok);border-style:dashed}
+.feedback{min-height:24px;font-size:.95rem;display:grid;gap:6px}
+.feedback .ok{color:var(--ok);font-weight:700}.feedback .no{color:var(--bad);font-weight:700}
+.unpacked{font-size:1.02rem;line-height:1.7;padding:9px 12px;border-radius:9px;background:var(--bg)}
+.unpacked b{color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.action{min-height:48px;border:0;border-radius:9px;padding:10px 16px;font-weight:700;background:var(--blue);color:#fff}
+.action:disabled{opacity:.45;cursor:default}
+.action.secondary{background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.progress{font:700 .8rem var(--mono);color:var(--muted)}
+
+.anchor{display:flex;gap:12px;align-items:flex-start}
+.anchor .n{font:700 .85rem var(--mono);color:var(--gold);min-width:24px;padding-top:3px}
+.links{display:grid;gap:8px}
+.links a{display:flex;justify-content:space-between;gap:12px;align-items:baseline;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 14px;background:var(--paper)}
+.links a span{color:var(--muted);font-size:.88rem;text-align:right}
+.links a i{font-family:var(--serif);font-size:1.08rem}
+.foot{border-top:1px solid var(--line);padding-top:17px;color:var(--muted);font-size:.9rem}
+
+@media(max-width:760px){
+ body{padding:12px 12px 58px}.wrap{gap:28px}
+ .cards,.cards.three,.press{grid-template-columns:1fr}
+ .card{padding:17px}
+ .reading{font-size:20px;line-height:2.05;font-weight:500}
+ .map{grid-template-columns:1fr;gap:6px}
+ .map .mh{display:none}
+ .mrow{flex-direction:row;gap:8px;align-items:baseline;margin-top:10px}
+ .mcell .colname{display:block}
+ .mcell.empty{display:none}
+ .rail-row{grid-template-columns:1fr;gap:4px}
+ .opts{grid-template-columns:1fr}
+ .pills .pick{flex:1 1 auto}
+ .nav a{font-size:.74rem;padding:6px 9px}
+}
+@media(max-width:360px){.reading{font-size:19px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><style>.ll-crumb{max-width:1130px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;font:500 .74rem/1.6 var(--mono,ui-monospace,Menlo,Consolas,monospace);letter-spacing:.06em;color:var(--muted,#667)}.ll-crumb a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line,#ccd)}.ll-crumb a:hover{color:var(--ink,inherit)}.ll-crumb span{opacity:.6}</style><nav class="ll-crumb" aria-label="Site"><a href="https://helloalexap.com/">helloalexap</a><span>/</span><a href="../../../">Learning Lab</a><span>/</span><a href="../../">French</a><span>/</span><a href="../">Daily</a></nav>
+<main class="wrap">
+
+<header class="hero" id="top">
+ <div class="topbar"><span class="eyebrow">Atelier de français · Leçon 09</span><span class="badge">22 octobre 2026 · A2 → B1 · Pronoms</span></div>
+ <nav class="nav" aria-label="课程章节"><a href="#lecture">01 阅读</a><a href="#carte">02 介词地图</a><a href="#place">03 位置</a><a href="#atelier">04 移动台</a><a href="#tri">05 展开</a><a href="#bords">06 边界</a><a href="#liens">07 连接</a></nav>
+ <p class="eyebrow">LA PHRASE DU JOUR · 今日句式</p>
+ <h1 lang="fr">J’<span class="to">y</span> vais.<br>J’<span class="from">en</span> viens.</h1>
+ <div class="press">
+  <div class="card"><div class="row"><span class="tiles"><span class="t phrase big">à la librairie</span></span><span class="arrow" aria-hidden="true">→</span><span class="tiles"><span class="t to big">y</span></span></div><p class="cap">去处、所在：<span lang="fr">Je vais <b>à la librairie</b>. → J’<b class="to">y</b> vais.</span> 我去（那儿）。</p></div>
+  <div class="card"><div class="row"><span class="tiles"><span class="t phrase big">de la librairie</span></span><span class="arrow" aria-hidden="true">→</span><span class="tiles"><span class="t from big">en</span></span></div><p class="cap">来处：<span lang="fr">Je viens <b>de la librairie</b>. → J’<b class="from">en</b> viens.</span> 我（从那儿）回来。</p></div>
+ </div>
+ <p class="subhead"><b>y</b> 和 <b>en</b> 是两个被压缩的介词短语：<b>y</b> 接住 <b>à …</b>，<b>en</b> 接住 <b>de …</b>。决定用哪一个的，不是名词本身，而是它前面的介词。阅读时的任务，就是把代词展开回原来的那一段。</p>
+ <div class="key"><span><i class="sw" style="--c:var(--to)"></i>à → y</span><span><i class="sw" style="--c:var(--from)"></i>de → en</span><span><i class="sw" style="--c:var(--person)"></i>à + 人 → lui / leur</span><span><i class="sw" style="--c:var(--direct)"></i>无介词 → le / la / les</span><span><i class="sw" style="--c:var(--blue)"></i>变位动词</span></div>
+</header>
+
+<section class="section" id="lecture">
+ <div class="sec-head"><p class="eyebrow">01 · Lecture · 先读故事</p><h2>Le carnet bleu</h2><p class="muted">先读一遍。然后打开「标出代词」，再打开「展开」：每个代词旁边会出现它压缩掉的那一段。</p></div>
+ <div class="card">
+  <div class="reading" id="story" lang="fr">
+   <p>Quand Léa a rouvert la petite librairie de son grand-père, elle a trouvé, derrière une étagère, une boîte pleine de carnets. Il <span class="pn" data-k="fixed">y</span><span class="xp" data-k="fixed">il y a 的一部分</span> <span class="pn" data-k="from">en</span><span class="xp" data-k="from">de carnets</span> avait vingt-sept, mais aucun ne portait de nom. Sur le couvercle, quelqu’un avait écrit : « Les histoires qu’on n’a jamais racontées. »</p>
+   <p>Elle a pensé à une voisine qui venait souvent autrefois. Elle <span class="pn" data-k="person">lui</span><span class="xp" data-k="person">à la voisine</span> a téléphoné.<span class="q">« Vous vous souvenez de cette boîte ? »</span><span class="q">« Bien sûr. Votre grand-père <span class="pn" data-k="from">en</span><span class="xp" data-k="from">de cette boîte</span> parlait souvent. Il voulait <span class="pn" data-k="from">en</span><span class="xp" data-k="from">de ces carnets</span> faire une petite exposition, mais il n’<span class="pn" data-k="from">en</span><span class="xp" data-k="from">de la faire</span> a jamais eu le temps. »</span></p>
+   <p>Le lendemain, Léa est retournée à la librairie. Elle <span class="pn" data-k="to">y</span><span class="xp" data-k="to">à la librairie</span> a invité quelques habitants du quartier. Chacun a choisi un carnet et <span class="pn" data-k="from">en</span><span class="xp" data-k="from">du carnet</span> a lu une page.<span class="q">« Vous voulez <span class="pn" data-k="from">en</span><span class="xp" data-k="from">de ces carnets</span> garder un ? » a-t-elle demandé.</span><span class="q">« Non, a répondu une dame, mais j’aimerais <span class="pn" data-k="to">y</span><span class="xp" data-k="to">à la librairie</span> revenir demain. »</span></p>
+  </div>
+  <div class="toggles">
+   <button type="button" class="pick" id="t-mark" aria-pressed="false" aria-controls="story">标出代词</button>
+   <button type="button" class="pick" id="t-unpack" aria-pressed="false" aria-controls="story">展开：代词 → 原来的成分</button>
+  </div>
+  <div class="key"><span><i class="sw" style="--c:var(--to)"></i>y = à …</span><span><i class="sw" style="--c:var(--from)"></i>en = de …</span><span><i class="sw" style="--c:var(--person)"></i>lui = à + 人</span><span>虚线框 = 固定结构 il y a 里的 y</span></div>
+ </div>
+ <details><summary>译文</summary>
+  <p>莱娅重新打开祖父的小书店时，在一个书架后面发现了一盒笔记本。一共二十七本，都没有署名。盒盖上有人写着：「那些从未被讲述的故事。」</p>
+  <p>她想起一位过去常来店里的邻居，给她打了电话。「您还记得这个盒子吗？」「当然。您祖父常常说起它。他想用这些笔记本办一个小展览，可一直没有时间。」</p>
+  <p>第二天，莱娅回到书店，请了几位街坊过来。每人选一本笔记本，读其中一页。「你们想留一本吗？」她问。「不用了，」一位女士说，「不过我明天还想再来这里。」</p>
+ </details>
+ <details><summary>同一个 en，三次指向三样东西</summary>
+  <p><span lang="fr">Votre grand-père <b>en</b> parlait</span> → parler <b>de cette boîte</b>；<span lang="fr">Il voulait <b>en</b> faire une exposition</span> → faire une exposition <b>de ces carnets</b>；<span lang="fr">il n’<b>en</b> a jamais eu le temps</span> → avoir le temps <b>de la faire</b>。en 只告诉你「这里压缩了一个 de …」；具体是什么，要回到上下文里找。</p>
+ </details>
+</section>
+
+<section class="section" id="carte">
+ <div class="sec-head"><p class="eyebrow">02 · Carte des prépositions · 介词地图</p><h2>先问介词，再找代词</h2><p class="muted">三列是补语前面的介词，几行是补语的类型。同一个名词换一个动词，就会落进另一列。</p></div>
+ <div class="map" role="table" aria-label="介词与代词对照">
+  <div class="mh" role="columnheader"></div>
+  <div class="mh" role="columnheader"><span class="tiles"><span class="t direct sm">—</span></span>无介词</div>
+  <div class="mh" role="columnheader"><span class="tiles"><span class="t to sm">à</span></span>介词 à</div>
+  <div class="mh" role="columnheader"><span class="tiles"><span class="t from sm">de</span></span>介词 de</div>
+
+  <div class="mrow" role="rowheader">地点<small>lieu</small></div>
+  <div class="mcell empty" role="cell">—</div>
+  <div class="mcell c-to" role="cell"><span class="colname">à …</span><span class="fr" lang="fr">J’<b class="to">y</b> vais.</span><span class="from-phr">aller <b>à</b> la librairie</span></div>
+  <div class="mcell c-from" role="cell"><span class="colname">de …</span><span class="fr" lang="fr">J’<b class="from">en</b> viens.</span><span class="from-phr">venir <b>de</b> la librairie</span></div>
+
+  <div class="mrow" role="rowheader">事物<small>chose, idée</small></div>
+  <div class="mcell c-direct" role="cell"><span class="colname">无介词</span><span class="fr" lang="fr">Je <b class="direct">les</b> ai retrouvées.</span><span class="from-phr">retrouver les affiches</span></div>
+  <div class="mcell c-to" role="cell"><span class="colname">à …</span><span class="fr" lang="fr">J’<b class="to">y</b> pense.</span><span class="from-phr">penser <b>à</b> ce projet</span></div>
+  <div class="mcell c-from" role="cell"><span class="colname">de …</span><span class="fr" lang="fr">J’<b class="from">en</b> parle.</span><span class="from-phr">parler <b>de</b> ce projet</span></div>
+
+  <div class="mrow" role="rowheader">数量<small>quantité</small></div>
+  <div class="mcell empty" role="cell">—</div>
+  <div class="mcell empty" role="cell">—</div>
+  <div class="mcell c-from" role="cell"><span class="colname">de …</span><span class="fr" lang="fr">J’<b class="from">en</b> ai trois.</span><span class="from-phr">avoir trois carnets · 数字留下</span></div>
+
+  <div class="mrow" role="rowheader">人<small>personne</small></div>
+  <div class="mcell c-direct" role="cell"><span class="colname">无介词</span><span class="fr" lang="fr">Je <b class="direct">la</b> connais.</span><span class="from-phr">connaître la libraire</span></div>
+  <div class="mcell c-person" role="cell"><span class="colname">à …</span><span class="fr" lang="fr">Je <b class="person">lui</b> parle.</span><span class="from-phr">parler <b>à</b> la libraire · 但 penser à elle</span></div>
+  <div class="mcell c-from" role="cell"><span class="colname">de …</span><span class="fr" lang="fr">Je parle <b class="from">d’elle</b>.</span><span class="from-phr">parler <b>de</b> la libraire · 指人多用 de + elle</span></div>
+
+  <div class="mrow" role="rowheader">关系从句<small>N° 07</small></div>
+  <div class="mcell c-direct" role="cell"><span class="colname">无介词</span><span class="fr" lang="fr">le carnet <b class="direct">que</b> je lis</span></div>
+  <div class="mcell c-to" role="cell"><span class="colname">à …</span><span class="fr" lang="fr">la librairie <b class="to">où</b> je retourne<br>le projet <b class="to">auquel</b> je pense</span></div>
+  <div class="mcell c-from" role="cell"><span class="colname">de …</span><span class="fr" lang="fr">le carnet <b class="from">dont</b> je parle</span></div>
+ </div>
+ <div class="rule" style="--c:var(--from)"><b>de 这一列最整齐：</b>普通句子里是 <b>en</b>，关系从句里是 <b>dont</b>（第 07 期），代词式动词里是 <b>s’en</b>（第 05 期 <i lang="fr">s’en souvenaient</i>）。三者接住的是同一个 de。</div>
+</section>
+
+<section class="section" id="place">
+ <div class="sec-head"><p class="eyebrow">03 · La place · 代词站在哪里</p><h2>贴在它所属的动词前面</h2><p class="muted">代词总是靠在「它补充的那个动词」左边：一般是变位动词或助动词；有不定式时，是不定式。</p></div>
+ <div class="rail">
+  <div class="rail-row"><span class="lbl">présent</span><span class="tiles"><span class="t s">Elle</span><span class="t from">en</span><span class="t v">parle</span></span></div>
+  <div class="rail-row"><span class="lbl">passé composé</span><span class="tiles"><span class="t s">Elle</span><span class="t from">en</span><span class="t v">a</span><span class="t w">parlé</span></span></div>
+  <div class="rail-row"><span class="lbl">négation</span><span class="tiles"><span class="t s">Elle</span><span class="t n">n’</span><span class="t from">en</span><span class="t v">parle</span><span class="t n">pas</span></span></div>
+  <div class="rail-row"><span class="lbl">aller + inf · N° 08</span><span class="tiles"><span class="t s">Elle</span><span class="t v">va</span><span class="t from">en</span><span class="t w">parler</span></span></div>
+  <div class="rail-row"><span class="lbl">venir de + inf · N° 08</span><span class="tiles"><span class="t s">Elle</span><span class="t v">vient</span><span class="t l">d’</span><span class="t from">en</span><span class="t w">parler</span></span></div>
+ </div>
+ <div class="cards">
+  <div class="card"><h3>两个代词同时出现</h3>
+   <div class="ladder" aria-label="代词顺序"><span class="tiles"><span class="t sm direct">me te se nous vous</span></span><span class="gt">›</span><span class="tiles"><span class="t sm direct">le la les</span></span><span class="gt">›</span><span class="tiles"><span class="t sm person">lui leur</span></span><span class="gt">›</span><span class="tiles"><span class="t sm to">y</span></span><span class="gt">›</span><span class="tiles"><span class="t sm from">en</span></span></div>
+   <p class="fr-line" lang="fr">Je <b class="person">lui</b> <b class="from">en</b> ai parlé. · Il <b class="to">y</b> <b class="from">en</b> a trois. · Je m’<b class="from">en</b> souviens.</p>
+   <p class="helper">辨认时记一条就够：<b>en 永远在最后</b>，y 紧挨在它前面。</p></div>
+  <div class="card"><h3>les 会留下痕迹，en 不会</h3>
+   <p class="fr-line" lang="fr">Je <b class="direct">les</b> ai retrouv<b class="direct">ées</b>.（les affiches）<br>J’<b class="from">en</b> ai trouvé trois.</p>
+   <p class="helper">前置的 le / la / les 让过去分词配合，词尾 -e / -s 透露出它指的是什么；en 一般不触发配合。读到 <i lang="fr">retrouvées</i>，就知道被找回的是阴性复数的东西。</p></div>
+ </div>
+</section>
+
+<section class="section" id="atelier">
+ <div class="sec-head"><p class="eyebrow">04 · Atelier des déplacements · 移动台</p><h2>七种关系 × 六种环境</h2><p class="muted">先选关系，再换环境。代词本身不变，只换站位。</p></div>
+ <div class="card builder" id="builder">
+  <div class="control"><p class="eyebrow">① 关系</p><div class="pills" data-group="rel">
+   <button type="button" class="pick" data-v="penser" aria-pressed="true">penser à ce projet</button>
+   <button type="button" class="pick" data-v="parler" aria-pressed="false">parler de ce projet</button>
+   <button type="button" class="pick" data-v="retourner" aria-pressed="false">retourner à la librairie</button>
+   <button type="button" class="pick" data-v="acheter" aria-pressed="false">acheter trois carnets</button>
+   <button type="button" class="pick" data-v="retrouver" aria-pressed="false">retrouver les affiches</button>
+   <button type="button" class="pick" data-v="parlerA" aria-pressed="false">parler à la libraire</button>
+   <button type="button" class="pick" data-v="souvenir" aria-pressed="false">se souvenir de cette soirée</button>
+  </div></div>
+  <div class="control"><p class="eyebrow">② 环境</p><div class="pills" data-group="form">
+   <button type="button" class="pick" data-v="pres" aria-pressed="true">présent</button>
+   <button type="button" class="pick" data-v="pc" aria-pressed="false">passé composé</button>
+   <button type="button" class="pick" data-v="pqp" aria-pressed="false">plus-que-parfait</button>
+   <button type="button" class="pick" data-v="aller" aria-pressed="false">aller + inf</button>
+   <button type="button" class="pick" data-v="venir" aria-pressed="false">venir de + inf</button>
+   <button type="button" class="pick" data-v="neg" aria-pressed="false">négation</button>
+  </div></div>
+  <div class="output" aria-live="polite">
+   <p class="orig" id="b-orig" lang="fr"></p>
+   <span class="tiles" id="b-tiles"></span>
+   <p class="out-sentence" id="b-sentence" lang="fr"></p>
+   <p class="helper" id="b-note"></p>
+  </div>
+ </div>
+ <details><summary>全部 42 句</summary><div id="b-all"></div></details>
+</section>
+
+<section class="section" id="tri">
+ <div class="sec-head"><p class="eyebrow">05 · Décomposeur · 展开</p><h2>代词里压缩了什么？</h2><p class="muted">读一小段对话，选出高亮代词所代表的那一段。选完会显示展开后的整句。答错的会排到后面再出现。</p></div>
+ <div class="q-box" aria-live="polite">
+  <div class="actions" style="justify-content:space-between"><span class="progress" id="g-progress"></span><span class="progress" id="g-score"></span></div>
+  <p class="q-ctx" id="g-ctx" lang="fr"></p>
+  <p class="q-ask" id="g-ask"></p>
+  <div class="opts" id="g-opts"></div>
+  <div class="feedback" id="g-feedback"></div>
+  <div class="actions"><button type="button" class="action" id="g-next" disabled>下一句 →</button><button type="button" class="action secondary" id="g-reset">重新开始</button></div>
+ </div>
+ <details><summary>全部 10 句与答案</summary><div id="g-all"></div></details>
+</section>
+
+<section class="section" id="bords">
+ <div class="sec-head"><p class="eyebrow">06 · Les bords · 边界</p><h2>地图之外的四种情况</h2></div>
+ <div class="cards">
+  <div class="card"><h3>à + 人：通常不用 y</h3><p class="fr-line" lang="fr">Je pense <b>à Léa</b>. → Je pense <b class="person">à elle</b>.<br>Je parle <b>à Léa</b>. → Je <b class="person">lui</b> parle.</p><p class="helper">penser à、tenir à 这类动词保留 à + 重读代词；parler à、téléphoner à 用 lui / leur。区别由动词决定。</p></div>
+  <div class="card"><h3>de + 人：多用 de + 重读代词</h3><p class="fr-line" lang="fr">Je parle <b>de Léa</b>. → Je parle <b class="from">d’elle</b>.</p><p class="helper">指人时，<i lang="fr">j’en parle</i> 也能听到，但 <i lang="fr">je parle d’elle</i> 更清楚。</p></div>
+  <div class="card"><h3>il y a 里的 y 是固定的</h3><p class="fr-line" lang="fr">Il y a des carnets. → Il <b>y</b> <b class="from">en</b> a vingt-sept.</p><p class="helper">这个 y 不展开成任何地点；它和 il、avoir 一起组成「有」。真正被压缩的是 en。</p></div>
+  <div class="card"><h3>en + 数量：数字留在原处</h3><p class="fr-line" lang="fr">J’ai trois carnets. → J’<b class="from">en</b> ai trois.<br>Je n’ai pas de carnet. → Je n’<b class="from">en</b> ai pas.</p><p class="helper">en 接住名词，数量词留下；否定时数量消失，en 照样在。</p></div>
+ </div>
+</section>
+
+<section class="section" id="liens">
+ <div class="sec-head"><p class="eyebrow">07 · Connexions · 连接</p><h2>两个很小的词，来自「那里」</h2></div>
+ <div class="cards">
+  <div class="card"><h3>从空间到语法</h3><p>法语 <b>y</b> 与拉丁语 <i lang="la">ibi</i>（在那里）有历史关联，<b>en</b> 来自 <i lang="la">inde</i>（从那里）。一个指向「那里」，一个指向「从那里来」，正好对应第 08 期 <i lang="fr">aller</i> 的去处与 <i lang="fr">venir de</i> 的来处。后来它们离开空间，接住了一切 à … 和 de …。</p></div>
+  <div class="card"><h3>意大利语的同一对</h3><p class="fr-line"><span lang="it">Ci vado.</span> = <span lang="fr">J’y vais.</span><br><span lang="it">Ne ho tre.</span> = <span lang="fr">J’en ai trois.</span></p><p class="helper">意大利语的 ci 和 ne 几乎一一对应法语的 y 和 en。</p></div>
+ </div>
+ <div class="card"><h3>三个带走的锚点</h3>
+  <div class="anchor"><span class="n">01</span><p><b>看到 y，补一个 à；看到 en，补一个 de。</b>再到上下文里找那个名词。</p></div>
+  <div class="anchor"><span class="n">02</span><p><b>人另走一条路。</b>à + 人 多是 lui / leur，或 à elle；de + 人 多是 d’elle。</p></div>
+  <div class="anchor"><span class="n">03</span><p><b>代词贴在它补充的动词前面。</b>有不定式时，看不定式。</p></div>
+ </div>
+ <div class="links">
+  <a href="../2026-10-18-s-en-souvenaient/"><i lang="fr">s’en souvenaient</i><span>N° 05 · 代词槽里的 en</span></a>
+  <a href="../2026-10-20-dont/"><i lang="fr">dont</i><span>N° 07 · 关系从句里的 de</span></a>
+  <a href="../2026-10-21-j-allais-partir/"><i lang="fr">j’allais partir</i><span>N° 08 · aller 与 venir de，去处与来处</span></a>
+ </div>
+</section>
+
+<section class="section" id="memo">
+ <div class="card">
+  <p class="eyebrow">FICHE MÉMO · 归档信息</p>
+  <p><b>Lesson:</b> 09 · y / en — Two Compressed Prepositions<br><b>Date:</b> 2026-10-22<br><b>Focus:</b> y = à + 地点／事物；en = de + 事物／数量；lui / leur 与 à + 人；le / la / les 与过去分词配合；代词位置；en · dont · s’en<br><b>Suggested tags:</b> Français · A2–B1 · Recognition · Pronoms</p>
+ </div>
+ <footer class="foot">Atelier de français · Leçon 09 · 22 octobre 2026 · <a href="#top">↑ 返回顶部</a></footer>
+</section>
+
+</main>
+<script type="application/json" id="forms">{"penser": {"lab": "penser à ce projet", "orig": "Elle pense à ce projet.", "exp": "à ce projet", "pr": "y", "kind": "to", "forms": {"pres": [["Elle", "s"], ["y", "p"], ["pense", "v"]], "pc": [["Elle", "s"], ["y", "p"], ["a", "v"], ["pensé", "w"]], "pqp": [["Elle", "s"], ["y", "p"], ["avait", "v"], ["pensé", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["y", "p"], ["penser", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["d’", "l"], ["y", "p"], ["penser", "w"]], "neg": [["Elle", "s"], ["n’", "n"], ["y", "p"], ["pense", "v"], ["pas", "n"]]}}, "parler": {"lab": "parler de ce projet", "orig": "Elle parle de ce projet.", "exp": "de ce projet", "pr": "en", "kind": "from", "forms": {"pres": [["Elle", "s"], ["en", "p"], ["parle", "v"]], "pc": [["Elle", "s"], ["en", "p"], ["a", "v"], ["parlé", "w"]], "pqp": [["Elle", "s"], ["en", "p"], ["avait", "v"], ["parlé", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["en", "p"], ["parler", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["d’", "l"], ["en", "p"], ["parler", "w"]], "neg": [["Elle", "s"], ["n’", "n"], ["en", "p"], ["parle", "v"], ["pas", "n"]]}}, "retourner": {"lab": "retourner à la librairie", "orig": "Elle retourne à la librairie.", "exp": "à la librairie", "pr": "y", "kind": "to", "forms": {"pres": [["Elle", "s"], ["y", "p"], ["retourne", "v"]], "pc": [["Elle", "s"], ["y", "p"], ["est", "v"], ["retournée", "w"]], "pqp": [["Elle", "s"], ["y", "p"], ["était", "v"], ["retournée", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["y", "p"], ["retourner", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["d’", "l"], ["y", "p"], ["retourner", "w"]], "neg": [["Elle", "s"], ["n’", "n"], ["y", "p"], ["retourne", "v"], ["pas", "n"]]}}, "acheter": {"lab": "acheter trois carnets", "orig": "Elle achète trois carnets.", "exp": "(de) carnets · trois 留下", "pr": "en", "kind": "from", "forms": {"pres": [["Elle", "s"], ["en", "p"], ["achète", "v"], ["trois", "t"]], "pc": [["Elle", "s"], ["en", "p"], ["a", "v"], ["acheté", "w"], ["trois", "t"]], "pqp": [["Elle", "s"], ["en", "p"], ["avait", "v"], ["acheté", "w"], ["trois", "t"]], "aller": [["Elle", "s"], ["va", "v"], ["en", "p"], ["acheter", "w"], ["trois", "t"]], "venir": [["Elle", "s"], ["vient", "v"], ["d’", "l"], ["en", "p"], ["acheter", "w"], ["trois", "t"]], "neg": [["Elle", "s"], ["n’", "n"], ["en", "p"], ["achète", "v"], ["pas", "n"]]}}, "retrouver": {"lab": "retrouver les affiches", "orig": "Elle retrouve les affiches.", "exp": "les affiches（阴性复数）", "pr": "les", "kind": "direct", "forms": {"pres": [["Elle", "s"], ["les", "p"], ["retrouve", "v"]], "pc": [["Elle", "s"], ["les", "p"], ["a", "v"], ["retrouvées", "w"]], "pqp": [["Elle", "s"], ["les", "p"], ["avait", "v"], ["retrouvées", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["les", "p"], ["retrouver", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["de", "l"], ["les", "p"], ["retrouver", "w"]], "neg": [["Elle", "s"], ["ne", "n"], ["les", "p"], ["retrouve", "v"], ["pas", "n"]]}}, "parlerA": {"lab": "parler à la libraire", "orig": "Elle parle à la libraire.", "exp": "à la libraire（人）", "pr": "lui", "kind": "person", "forms": {"pres": [["Elle", "s"], ["lui", "p"], ["parle", "v"]], "pc": [["Elle", "s"], ["lui", "p"], ["a", "v"], ["parlé", "w"]], "pqp": [["Elle", "s"], ["lui", "p"], ["avait", "v"], ["parlé", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["lui", "p"], ["parler", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["de", "l"], ["lui", "p"], ["parler", "w"]], "neg": [["Elle", "s"], ["ne", "n"], ["lui", "p"], ["parle", "v"], ["pas", "n"]]}}, "souvenir": {"lab": "se souvenir de cette soirée", "orig": "Elle se souvient de cette soirée.", "exp": "de cette soirée", "pr": "s’en", "kind": "from", "forms": {"pres": [["Elle", "s"], ["s’en", "p"], ["souvient", "v"]], "pc": [["Elle", "s"], ["s’en", "p"], ["est", "v"], ["souvenue", "w"]], "pqp": [["Elle", "s"], ["s’en", "p"], ["était", "v"], ["souvenue", "w"]], "aller": [["Elle", "s"], ["va", "v"], ["s’en", "p"], ["souvenir", "w"]], "venir": [["Elle", "s"], ["vient", "v"], ["de", "l"], ["s’en", "p"], ["souvenir", "w"]], "neg": [["Elle", "s"], ["ne", "n"], ["s’en", "p"], ["souvient", "v"], ["pas", "n"]]}}}</script>
+<script>
+(function(){'use strict';
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function each(list,fn){Array.prototype.forEach.call(list,fn)}
+
+/* reading */
+var story=$('story');
+[['t-mark','mark-on'],['t-unpack','unpack-on']].forEach(function(p){var b=$(p[0]);b.addEventListener('click',function(){var on=story.classList.toggle(p[1]);b.setAttribute('aria-pressed',String(on))})});
+
+/* builder */
+var D=JSON.parse($('forms').textContent);
+var FN={pres:'présent',pc:'passé composé',pqp:'plus-que-parfait',aller:'aller + infinitif',venir:'venir de + infinitif',neg:'négation'};
+var NOTE={pres:'代词在变位动词前。',pc:'代词在助动词前，不在过去分词前。',pqp:'代词在助动词（imparfait）前；参照点在过去。',aller:'代词离开 va，贴在它所属的不定式前。',venir:'代词贴在不定式前；de 遇到元音写成 d’。',neg:'ne … pas 包住「代词 + 动词」这一块。'};
+var CLS={to:'to',from:'from',direct:'direct',person:'person'};
+var st={rel:'penser',form:'pres'};
+function sentence(T){var out='';T.forEach(function(x,i){if(i===0){out=x[0];return}var prev=T[i-1][0];out+=(/’$/.test(prev)?'':' ')+x[0]});return out+'.'}
+function tiles(T,kind){return T.map(function(x){var r=x[1];var c=r==='p'?CLS[kind]:r==='t'?'tl':r;return '<span class="t '+c+'">'+esc(x[0])+'</span>'}).join('')}
+function render(){
+ var r=D[st.rel],T=r.forms[st.form];
+ $('b-orig').innerHTML='原句：'+esc(r.orig)+' → <b class="'+CLS[r.kind]+'">'+esc(r.pr)+'</b> = '+esc(r.exp);
+ $('b-tiles').innerHTML=tiles(T,r.kind);
+ $('b-sentence').textContent=sentence(T);
+ $('b-note').textContent=FN[st.form]+' · '+NOTE[st.form]+(st.rel==='retrouver'&&(st.form==='pc'||st.form==='pqp')?' retrouvées 与前置的 les（les affiches）配合。':'')+(st.rel==='souvenir'&&(st.form==='pc'||st.form==='pqp')?' se souvenir 用 être，souvenue 与主语 elle 配合。':'')+(st.rel==='retourner'&&(st.form==='pc'||st.form==='pqp')?' retourner 用 être，retournée 与主语 elle 配合。':'');
+}
+each($('builder').querySelectorAll('[data-group]'),function(g){var key=g.getAttribute('data-group');each(g.querySelectorAll('button'),function(b){b.addEventListener('click',function(){st[key]=b.getAttribute('data-v');each(g.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',String(x===b))});render()})})});
+render();
+var all='';for(var k in D){all+='<p><b>'+esc(D[k].lab)+'</b>：'+['pres','pc','pqp','aller','venir','neg'].map(function(f){return '<span lang="fr">'+esc(sentence(D[k].forms[f]))+'</span>'}).join(' · ')+'</p>'}
+$('b-all').innerHTML=all;
+
+/* game: unpack the highlighted pronoun */
+var Q=[
+ {ctx:'— Tu vas à la librairie ?<br>— Oui, j’<span class="pn">y</span> vais.',ask:'y = ?',opts:['à la librairie','de la librairie','la librairie'],a:0,full:'Je vais <b>à la librairie</b>.',why:'aller à + 地点 → y。'},
+ {ctx:'— Tu viens de la librairie ?<br>— Oui, j’<span class="pn">en</span> viens.',ask:'en = ?',opts:['à la librairie','de la librairie','des livres'],a:1,full:'Je viens <b>de la librairie</b>.',why:'venir de + 地点 → en：来处。'},
+ {ctx:'— Elle a parlé de l’exposition ?<br>— Oui, elle <span class="pn">en</span> a parlé hier.',ask:'en = ?',opts:['l’exposition','à l’exposition','de l’exposition'],a:2,full:'Elle a parlé <b>de l’exposition</b> hier.',why:'parler de + 事物 → en；en 在助动词 a 前。'},
+ {ctx:'— Il reste des carnets ?<br>— Oui, il <span class="pn">en</span> reste cinq.',ask:'en = ?',opts:['les carnets','(de) carnets，cinq 留下','aux carnets'],a:1,full:'Il reste <b>cinq carnets</b>.',why:'en 接住被计数的名词，数字 cinq 留在原处。'},
+ {ctx:'— Tu as retrouvé les affiches ?<br>— Oui, je <span class="pn">les</span> ai retrouvées.',ask:'les = ?',opts:['les affiches','des affiches','aux affiches'],a:0,full:'J’ai retrouvé <b>les affiches</b>.',why:'无介词的确定宾语 → les；retrouvées 的 -es 透露它是阴性复数。'},
+ {ctx:'— Tu as parlé à la libraire ?<br>— Oui, je <span class="pn">lui</span> ai parlé.',ask:'lui = ?',opts:['de la libraire','à la libraire','la libraire'],a:1,full:'J’ai parlé <b>à la libraire</b>.',why:'parler à + 人 → lui。'},
+ {ctx:'Léa a montré le carnet bleu à sa voisine. Elle le <span class="pn">lui</span> a montré.',ask:'lui = ?',opts:['le carnet bleu','à sa voisine','de sa voisine'],a:1,full:'Elle a montré le carnet bleu <b>à sa voisine</b>.',why:'le = le carnet bleu，lui = à sa voisine；顺序 le › lui。'},
+ {ctx:'— Tu te souviens de cette soirée ?<br>— Je m’<span class="pn">en</span> souviens très bien.',ask:'en = ?',opts:['de cette soirée','à cette soirée','cette soirée'],a:0,full:'Je me souviens très bien <b>de cette soirée</b>.',why:'se souvenir de → s’en souvenir（第 05 期）；me 在 en 前。'},
+ {ctx:'— Combien de carnets y a-t-il dans la boîte ?<br>— Il y <span class="pn">en</span> a vingt-sept.',ask:'en = ?',opts:['(de) carnets，vingt-sept 留下','de la boîte','les carnets'],a:0,full:'Il y a <b>vingt-sept carnets</b>.',why:'y 属于固定结构 il y a；被压缩的是 en。'},
+ {ctx:'— Tu vas parler de ton idée à Léa ?<br>— Oui, je vais lui <span class="pn">en</span> parler ce soir.',ask:'en = ?',opts:['à Léa','ton idée','de ton idée'],a:2,full:'Je vais parler <b>de ton idée</b> à Léa ce soir.',why:'en = de ton idée，lui = à Léa；两个代词都贴在不定式 parler 前（第 08 期）。'}
+];
+var g={queue:[],cur:-1,answered:false,first:{},done:0};
+function pad(n){return (n<10?'0':'')+n}
+function show(){
+ g.answered=false;$('g-feedback').innerHTML='';$('g-next').disabled=true;
+ if(!g.queue.length){g.cur=-1;var ok=Object.keys(g.first).filter(function(k){return g.first[k]}).length;$('g-progress').textContent='10 / 10';$('g-ctx').textContent='全部展开完成。';$('g-ask').textContent='';$('g-opts').innerHTML='';$('g-feedback').innerHTML='<span>第一次就选对：<b>'+ok+' / 10</b></span>';return}
+ g.cur=g.queue[0];var q=Q[g.cur];
+ $('g-progress').textContent=pad(g.done+1)+' / 10'+(g.first[g.cur]===false?' · 再来一次':'');
+ $('g-ctx').innerHTML=q.ctx;$('g-ask').textContent=q.ask;
+ $('g-opts').innerHTML=q.opts.map(function(o,i){return '<button type="button" class="opt" lang="fr" data-i="'+i+'">'+esc(o)+'</button>'}).join('');
+ each($('g-opts').querySelectorAll('.opt'),function(b){b.addEventListener('click',function(){answer(b)})});
+}
+function answer(b){
+ if(g.answered)return;g.answered=true;var q=Q[g.cur],i=+b.getAttribute('data-i'),ok=i===q.a;
+ if(!(g.cur in g.first))g.first[g.cur]=ok;
+ b.classList.add(ok?'correct':'wrong');
+ if(!ok)each($('g-opts').querySelectorAll('.opt'),function(x){if(+x.getAttribute('data-i')===q.a)x.classList.add('reveal')});
+ $('g-feedback').innerHTML=(ok?'<span class="ok">✓ 展开正确。</span>':'<span class="no">答案是虚线框那一项。</span>')+'<span class="unpacked" lang="fr">'+q.full+'</span><span class="helper">'+esc(q.why)+'</span>';
+ g.queue.shift();if(ok)g.done++;else g.queue.push(g.cur);
+ $('g-next').disabled=false;$('g-next').textContent=g.queue.length?'下一句 →':'查看结果';
+}
+$('g-next').addEventListener('click',show);
+function reset(){g.queue=Q.map(function(_,i){return i});g.first={};g.done=0;$('g-next').textContent='下一句 →';show()}
+$('g-reset').addEventListener('click',reset);
+$('g-all').innerHTML=Q.map(function(q,i){return '<p><b>'+pad(i+1)+'</b> <span lang="fr">'+q.ctx.replace(/<br>/g,' ')+'</span> → <span lang="fr">'+q.full+'</span></p>'}).join('');
+reset();
+})();
+</script>
+</body>
+</html>

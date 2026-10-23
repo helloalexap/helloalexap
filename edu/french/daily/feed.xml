@@ -6,9 +6,20 @@
     <atom:link href="https://edu.helloalexap.com/french/daily/feed.xml" rel="self" type="application/rss+xml"/>
     <description>每天从一个法语词形进入：辨认、拆解，再放回句子里读。</description>
     <language>zh-Hans</language>
-    <lastBuildDate>Wed, 21 Oct 2026 08:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 08:00:00 +0800</lastBuildDate>
 <!-- Keep the newest 30 items, newest first. The full archive is the list page (index.html). -->
 <!-- items:start -->
+    <item>
+      <title>N° 09 · y / en</title>
+      <link>https://edu.helloalexap.com/french/daily/2026-10-22-y-en/</link>
+      <guid isPermaLink="true">https://edu.helloalexap.com/french/daily/2026-10-22-y-en/</guid>
+      <pubDate>Thu, 22 Oct 2026 08:00:00 +0800</pubDate>
+      <description>y 和 en 是两个被压缩的介词短语：y 接住 à，en 接住 de；阅读时把代词展开回原来的成分。</description>
+      <category>y = à + 地点／事物</category>
+      <category>en = de + 事物／数量</category>
+      <category>lui / leur 与 à + 人</category>
+      <category>en · dont · s’en</category>
+    </item>
     <item>
       <title>N° 08 · j’allais partir</title>
       <link>https://edu.helloalexap.com/french/daily/2026-10-21-j-allais-partir/</link>
