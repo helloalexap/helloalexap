@@ -1,0 +1,7 @@
+# Lets helloalexap.com read the latest-issue data (edu.helloalexap.com serves this folder).
+/french/daily/feed.xml
+  Access-Control-Allow-Origin: https://helloalexap.com
+/latin/grammar/feed.xml
+  Access-Control-Allow-Origin: https://helloalexap.com
+/chess/series.json
+  Access-Control-Allow-Origin: https://helloalexap.com
